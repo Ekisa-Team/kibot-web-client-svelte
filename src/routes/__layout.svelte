@@ -1,45 +1,18 @@
 <script lang="ts">
-	import Header from '$lib/header/Header.svelte';
+	import Footer from '$lib/footer/Footer.svelte';
+	import Navbar from '$lib/navbar/Navbar.svelte';
+	import Sidebar from '$lib/sidebar/Sidebar.svelte';
+	import 'flowbite/dist/flowbite.css';
 	import '../app.css';
 </script>
 
-<Header />
+<Navbar />
 
-<main>
-	<slot />
-</main>
+<Sidebar />
 
-<footer>
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-</footer>
-
-<style>
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 1024px;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
-	}
-</style>
+<div class="relative pt-16 w-full max-w-screen-2xl mx-auto pl-64">
+	<main class="p-4 md:p-6">
+		<slot />
+	</main>
+	<Footer />
+</div>
