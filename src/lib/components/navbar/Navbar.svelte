@@ -1,5 +1,5 @@
 <script>
-	import Logo from '$lib/logo/Logo.svelte';
+	import Logo from '@components/logo/Logo.svelte';
 	import { MenuAlt2, Moon } from '@steeze-ui/heroicons';
 	import { Icon } from '@steeze-ui/svelte-icon';
 </script>

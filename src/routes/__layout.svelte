@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Footer from '$lib/footer/Footer.svelte';
-	import Navbar from '$lib/navbar/Navbar.svelte';
-	import Sidebar from '$lib/sidebar/Sidebar.svelte';
+	import Footer from '@components/footer/Footer.svelte';
+	import Navbar from '@components/navbar/Navbar.svelte';
+	import Sidebar from '@components/sidebar/Sidebar.svelte';
+	import '@theme/styles.css';
 	import 'flowbite/dist/flowbite.css';
-	import '../app.css';
 </script>
 
 <style lang="postcss">

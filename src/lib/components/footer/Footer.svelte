@@ -1,5 +1,5 @@
 <script>
-	import Logo from '$lib/logo/Logo.svelte';
+	import Logo from '@components/logo/Logo.svelte';
 
 	const currentYear = new Date().getFullYear();
 </script>
