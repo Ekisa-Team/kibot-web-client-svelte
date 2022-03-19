@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Footer from '@components/footer/Footer.svelte';
-	import Navbar from '@components/navbar/Navbar.svelte';
-	import Sidebar from '@components/sidebar/Sidebar.svelte';
-	import '@theme/styles.css';
+	import Footer from '$components/footer/Footer.svelte';
+	import Navbar from '$components/navbar/Navbar.svelte';
+	import Sidebar from '$components/sidebar/Sidebar.svelte';
+	import '$theme/styles.css';
 	import 'flowbite/dist/flowbite.css';
 </script>
 

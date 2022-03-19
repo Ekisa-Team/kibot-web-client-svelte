@@ -4,5 +4,3 @@
 <svelte:head>
 	<title>Messaging providers</title>
 </svelte:head>
-
-<div />

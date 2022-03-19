@@ -5,7 +5,7 @@
 
 /* components */
 @import './tailwindcss/components.css';
-@import './02-components/button.css';
+/* @import './02-components/button.css'; */
 
 /* utilities */
 @import './tailwindcss/utilities.css';
