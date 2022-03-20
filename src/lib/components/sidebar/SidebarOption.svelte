@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import type { SidebarItem } from './sidebar';
 
 	export let item: SidebarItem;
@@ -16,15 +17,21 @@
 	a:hover {
 		@apply bg-gray-100;
 	}
-
 	a:hover > div {
+		@apply text-blue-700;
+	}
+
+	a.active {
+		@apply bg-gray-100;
+	}
+	a.active > div {
 		@apply text-blue-700;
 	}
 </style>
 
 <li>
 	<!-- option -->
-	<a href={item.path}>
+	<a href={item.path} class:active={$page.url.pathname.includes(item.path)}>
 		<div class="min-w-[25px] text-2xl text-black {item.icon}" />
 
 		{#if showName}
