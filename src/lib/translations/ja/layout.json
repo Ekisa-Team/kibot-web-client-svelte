@@ -1,0 +1,17 @@
+{
+  "sidebar": {
+    "messagingProviders": "メッセージングプロバイダー",
+    "applications": "アプリケーション",
+    "chatbots": "チャットボット",
+    "messages": "メッセージ",
+    "templates": "テンプレート",
+    "channels": "チャネル",
+    "webhooks": "Webhooks",
+    "documentation": "ドキュメンテーション",
+    "help": "ヘルプ"
+  },
+  "footer": {
+    "documentation": "ドキュメンテーション",
+    "help": "ヘルプ"
+  }
+}

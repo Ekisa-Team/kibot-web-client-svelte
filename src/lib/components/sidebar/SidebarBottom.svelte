@@ -1,41 +1,62 @@
-<div class="mt-auto flex h-full items-center justify-center">
-  <button
-    id="dropdownTopButton"
-    data-dropdown-toggle="dropdownTop"
-    data-dropdown-placement="top"
-    class="btn btn-default">
-    <div class="i-emojione:flag-for-united-states text-xl" />
-  </button>
+<script lang="ts">
+  import { browser } from '$app/env';
+  import { loadTranslations } from '$lib/translations';
+  import { getItem, LocalStorageItem, setItem } from '$lib/utils/local-storage';
+  import { Menu, MenuButton, MenuItem, MenuItems } from '@rgossiaux/svelte-headlessui';
 
-  <!-- Dropdown menu -->
-  <div
-    id="dropdownTop"
-    class="z-10 hidden w-44 list-none divide-y divide-gray-100 rounded bg-white text-base shadow dark:bg-gray-700">
-    <ul class="py-1" aria-labelledby="dropdownTopButton">
-      <li>
-        <a
-          href="#"
-          class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-          >Dashboard</a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-          >Settings</a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-          >Earnings</a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-          >Sign out</a>
-      </li>
-    </ul>
-  </div>
+  const countryFlags: Record<'en' | 'es' | 'ja', string> = {
+    en: 'i-emojione:flag-for-united-states',
+    es: 'i-emojione:flag-for-colombia',
+    ja: 'i-emojione:flag-for-japan'
+  };
+
+  let currentCountryFlag =
+    countryFlags[(browser && getItem<'en' | 'es' | 'ja'>(LocalStorageItem.Language)) || 'en'];
+
+  async function handleLangChange(lang: 'en' | 'es' | 'ja') {
+    await loadTranslations(lang);
+    setItem(LocalStorageItem.Language, lang);
+    currentCountryFlag = countryFlags[lang];
+    window.location.reload();
+  }
+</script>
+
+<div class="flex h-full items-center justify-center">
+  <Menu class="relative">
+    <MenuButton class="btn">
+      <div class="{currentCountryFlag} text-xl" />
+    </MenuButton>
+    <MenuItems class="dropdown dropdown-top-right">
+      <MenuItem let:active>
+        <button
+          href="/account-settings"
+          class="dropdown-item whitespace-nowrap"
+          class:dropdown-item-active={active}
+          on:click={() => handleLangChange('en')}>
+          <div class="{countryFlags['en']} text-xl" />
+          <span class="ml-1.5 text-sm">English (US)</span>
+        </button>
+      </MenuItem>
+      <MenuItem let:active>
+        <button
+          href="/account-settings"
+          class="dropdown-item whitespace-nowrap"
+          class:dropdown-item-active={active}
+          on:click={() => handleLangChange('es')}>
+          <div class="{countryFlags['es']} text-xl" />
+          <span class="ml-1.5 text-sm">Español</span>
+        </button>
+      </MenuItem>
+      <MenuItem let:active>
+        <button
+          href="/account-settings"
+          class="dropdown-item whitespace-nowrap"
+          class:dropdown-item-active={active}
+          on:click={() => handleLangChange('ja')}>
+          <div class="{countryFlags['ja']} text-xl" />
+          <span class="ml-1.5 text-sm">日本</span>
+        </button>
+      </MenuItem>
+    </MenuItems>
+  </Menu>
 </div>

@@ -1,6 +1,7 @@
-export type SessionStorageItem = {
-  SidebarStatus: 'app::sidebar::status';
-};
+export enum SessionStorageItem {
+  Language = 'app::lang',
+  SidebarStatus = 'app::sidebar::status'
+}
 
 function getItem<T>(item: SessionStorageItem, shouldParse = true): T | null {
   const data = sessionStorage.getItem(item.toString());
@@ -17,7 +18,7 @@ function removeItem(item: SessionStorageItem): void {
 }
 
 function clear(): void {
-  localStorage.clear();
+  sessionStorage.clear();
 }
 
 export { getItem, setItem, removeItem, clear };
