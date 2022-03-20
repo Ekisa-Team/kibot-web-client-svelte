@@ -1,6 +1,7 @@
 <script lang="ts">
   import { t } from '$lib/translations';
   import { sidebarState, type SidbarState } from '$stores/sidebar';
+  import SidebarBottom from './SidebarBottom.svelte';
   import SidebarOption from './SidebarOption.svelte';
 
   type SidebarItem = {
@@ -115,6 +116,8 @@
       </ul>
     {/each}
   </nav>
+
+  <SidebarBottom />
 </aside>
 
 <style lang="postcss">

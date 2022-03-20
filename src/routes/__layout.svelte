@@ -6,7 +6,6 @@
   import { loadTranslations, locale } from '$lib/translations';
   import { getItem, LocalStorageItem } from '$lib/utils/local-storage';
   import '$theme/styles.css';
-  import 'flowbite/dist/flowbite.css';
   import 'uno.css';
 
   export const load: import('@sveltejs/kit').Load = async ({ url }) => {

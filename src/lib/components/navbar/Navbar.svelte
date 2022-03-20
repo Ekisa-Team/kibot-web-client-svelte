@@ -17,14 +17,8 @@
   <div class="content-wrapper">
     <!-- left -->
     <div class="flex items-center">
-      <button
-        type="button"
-        data-toggle-dark="light"
-        class="toggle-dark-state-example mr-2 flex items-center rounded-lg border border-gray-200 bg-white p-2 text-xs font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        on:click={toggleSidebar}
-      >
+      <button type="button" class="btn btn-default" on:click={toggleSidebar}>
         <div class="i-heroicons-outline:menu-alt-1 text-xl" />
-        <span class="hidden">Toggle dark mode</span>
       </button>
 
       <Logo />
@@ -32,13 +26,8 @@
 
     <!-- right -->
     <div class="flex items-center">
-      <button
-        type="button"
-        data-toggle-dark="light"
-        class="toggle-dark-state-example mr-2 flex items-center rounded-lg border border-gray-200 bg-white p-2 text-xs font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-      >
+      <button type="button" class="btn btn-default">
         <div class="i-heroicons-outline:moon text-xl" />
-        <span class="hidden">Toggle dark mode</span>
       </button>
     </div>
   </div>
