@@ -4,6 +4,7 @@
 	import Sidebar from '$components/sidebar/Sidebar.svelte';
 	import '$theme/styles.css';
 	import 'flowbite/dist/flowbite.css';
+	import 'uno.css';
 </script>
 
 <style lang="postcss">

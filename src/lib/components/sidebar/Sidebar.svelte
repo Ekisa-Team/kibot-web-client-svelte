@@ -32,12 +32,27 @@
 
 <style lang="postcss">
 	aside {
-		@apply bg-gray-50;
+		@apply bg-white;
 		@apply border-r border-gray-200;
 		@apply fixed top-0 left-0;
 		@apply pt-16;
-		@apply h-full;
+		@apply h-full w-full;
 		@apply z-20;
+		@apply max-w-[4.1rem];
+		transition: max-width 50ms ease-in;
+	}
+
+	aside.click-mode {
+		transition-delay: 0ms;
+	}
+
+	aside.hover-mode {
+		transition-delay: 0ms;
+	}
+
+	aside.open {
+		@apply max-w-[16rem];
+		transition: max-width 300ms ease-out;
 	}
 
 	ul.with-separator {
@@ -47,12 +62,14 @@
 </style>
 
 <aside
-	class:w-64={currentState.isOpen}
+	class:open={currentState.isOpen}
+	class:click-mode={currentState.lastEventType === 'click'}
+	class:hover-mode={currentState.lastEventType === 'hover'}
 	aria-label="Sidebar"
 	on:mouseenter={handleMouseEnter}
 	on:mouseleave={handleMouseLeave}>
 	<!-- wrapper -->
-	<div class="overflow-y-auto rounded py-4 px-3">
+	<nav class="overflow-y-auto overflow-x-hidden rounded py-4 px-3">
 		<!-- list -->
 		{#each itemsLists as list, i}
 			<ul class:with-separator={i > 0}>
@@ -62,5 +79,5 @@
 				{/each}
 			</ul>
 		{/each}
-	</div>
+	</nav>
 </aside>

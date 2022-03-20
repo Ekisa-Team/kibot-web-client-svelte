@@ -1,33 +1,34 @@
 <script lang="ts">
-	import { Icon } from '@steeze-ui/svelte-icon';
 	import type { SidebarItem } from './sidebar';
 
 	export let item: SidebarItem;
 	export let showName = true;
-
-	let optionId: string;
-	$: optionId = `option-${item.key}`;
 </script>
 
-<style>
+<style lang="postcss">
 	a {
 		@apply flex items-center;
 		@apply rounded-lg;
 		@apply p-2;
-		@apply text-base font-normal text-gray-900;
+		@apply whitespace-nowrap text-gray-600;
 	}
+
 	a:hover {
-		@apply bg-gray-200;
+		@apply bg-gray-100;
+	}
+
+	a:hover > div {
+		@apply text-blue-700;
 	}
 </style>
 
 <li>
 	<!-- option -->
-	<a href={item.path} data-tooltip-target={optionId} data-tooltip-placement="right">
-		<Icon src={item.icon} theme={item.iconTheme} size="25" class="text-gray-500" />
+	<a href={item.path}>
+		<div class="min-w-[25px] text-2xl text-black {item.icon}" />
 
 		{#if showName}
-			<span class="ml-3">{item.name}</span>
+			<span class="ml-3 text-sm">{item.name}</span>
 		{/if}
 	</a>
 </li>
