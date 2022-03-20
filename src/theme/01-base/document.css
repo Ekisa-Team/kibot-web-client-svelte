@@ -1,8 +1,8 @@
 html,
 body {
-	@apply h-full;
+  @apply h-full;
 }
 
 body {
-	@apply bg-gray-100;
+  @apply bg-gray-100;
 }

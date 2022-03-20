@@ -1,0 +1,17 @@
+{
+  "sidebar": {
+    "messagingProviders": "Proveedores de mensajería",
+    "applications": "Aplicaciones",
+    "chatbots": "Chatbots",
+    "messages": "Mensajes",
+    "templates": "Plantillas",
+    "channels": "Canales",
+    "webhooks": "Webhooks",
+    "documentation": "Documentación",
+    "help": "Ayuda"
+  },
+  "footer": {
+    "documentation": "Documentación",
+    "help": "Ayuda"
+  }
+}
