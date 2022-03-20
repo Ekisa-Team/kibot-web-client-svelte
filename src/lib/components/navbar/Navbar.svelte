@@ -1,6 +1,7 @@
 <script lang="ts">
   import Logo from '$components/logo/Logo.svelte';
   import { sidebarState } from '$stores/sidebar';
+  import NavbarThemePicker from './NavbarThemePicker.svelte';
 
   const toggleSidebar = () => {
     sidebarState.update((state) => {
@@ -26,9 +27,7 @@
 
     <!-- right -->
     <div class="flex items-center">
-      <button type="button" class="btn btn-default">
-        <div class="i-heroicons-outline:moon text-xl" />
-      </button>
+      <NavbarThemePicker />
     </div>
   </div>
 </nav>

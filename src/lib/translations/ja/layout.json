@@ -1,4 +1,11 @@
 {
+  "navbar": {
+    "themePicker": {
+      "system": "デバイステーマを使用する",
+      "light": "軽いテーマ",
+      "dark": "暗いテーマ"
+    }
+  },
   "sidebar": {
     "messagingProviders": "メッセージングプロバイダー",
     "applications": "アプリケーション",

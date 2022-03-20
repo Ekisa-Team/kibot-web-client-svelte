@@ -1,4 +1,11 @@
 {
+  "navbar": {
+    "themePicker": {
+      "system": "Usar tema del dispositivo",
+      "light": "Tema claro",
+      "dark": "Tema oscuro"
+    }
+  },
   "sidebar": {
     "messagingProviders": "Proveedores de mensajería",
     "applications": "Aplicaciones",

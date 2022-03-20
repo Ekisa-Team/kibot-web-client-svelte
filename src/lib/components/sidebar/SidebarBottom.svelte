@@ -23,9 +23,11 @@
 
 <div class="flex h-full items-center justify-center">
   <Menu class="relative">
+    <!-- menu button -->
     <MenuButton class="btn">
       <div class="{currentCountryFlag} text-xl" />
     </MenuButton>
+    <!-- menu items -->
     <MenuItems class="dropdown dropdown-top-right">
       <MenuItem let:active>
         <button
