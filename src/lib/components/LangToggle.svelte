@@ -10,6 +10,9 @@
     ListboxOptions
   } from '@rgossiaux/svelte-headlessui';
 
+  export let showCountryFlag = true;
+  export let showLanguage = true;
+
   const languages: Datalist<SupportedLanguage>[] = [
     {
       value: 'en',
@@ -47,9 +50,14 @@
 
 <Listbox value={selectedLanguage} on:change={handleLanguageChange} let:open class="relative">
   <!-- menu button -->
-  <ListboxButton class="btn btn-default">
-    <div class={selectedLanguage.icon} />
-    <span class="ml-2">{selectedLanguage.text}</span>
+  <ListboxButton class="btn btn-default space-x-2 whitespace-nowrap">
+    {#if showCountryFlag}
+      <div class={selectedLanguage.icon} />
+    {/if}
+
+    {#if showLanguage}
+      <span>{selectedLanguage.text}</span>
+    {/if}
   </ListboxButton>
 
   <!-- menu items -->

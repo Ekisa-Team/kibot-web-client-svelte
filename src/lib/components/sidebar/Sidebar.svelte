@@ -112,7 +112,7 @@
   </nav>
 
   <div class="bottom-options">
-    <LangToggle />
+    <LangToggle showLanguage={currentState.isOpen} />
   </div>
 </aside>
 

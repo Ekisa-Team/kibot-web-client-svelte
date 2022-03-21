@@ -12,6 +12,9 @@
     Transition
   } from '@rgossiaux/svelte-headlessui';
 
+  export let showThemeIcon = true;
+  export let showThemeName = true;
+
   const themes: Datalist<Theme>[] = [
     {
       value: Theme.Light,
@@ -40,9 +43,14 @@
 
 <Listbox value={selectedTheme} on:change={handleThemeChange} let:open class="relative">
   <!-- menu button -->
-  <ListboxButton class="btn btn-default">
-    <div class={selectedTheme.icon} />
-    <span class="ml-1.5">{selectedTheme.text}</span>
+  <ListboxButton class="btn btn-default space-x-2">
+    {#if showThemeIcon}
+      <div class={selectedTheme.icon} />
+    {/if}
+
+    {#if showThemeName}
+      <span>{selectedTheme.text}</span>
+    {/if}
   </ListboxButton>
 
   <!-- transition -->
