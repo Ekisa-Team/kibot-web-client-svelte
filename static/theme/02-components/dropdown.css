@@ -28,12 +28,9 @@
 }
 
 .dropdown-item {
+  @apply cursor-pointer;
   @apply flex items-center;
   @apply px-3 py-2;
   @apply text-primary;
   @apply w-full;
-}
-
-.dropdown-item-active {
-  @apply bg-secondary;
 }
