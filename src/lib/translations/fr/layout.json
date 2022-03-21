@@ -1,0 +1,24 @@
+{
+  "navbar": {
+    "themePicker": {
+      "light": "Légère",
+      "dark": "Sombre",
+      "system": "Système"
+    }
+  },
+  "sidebar": {
+    "messagingProviders": "Fournisseurs de messagerie",
+    "applications": "Applications",
+    "chatbots": "Chatbots",
+    "messages": "Messages",
+    "templates": "Modèles",
+    "channels": "Chaînes",
+    "webhooks": "Webhooks",
+    "documentation": "Documentation",
+    "help": "Aider"
+  },
+  "footer": {
+    "documentation": "Documentation",
+    "help": "Aider"
+  }
+}

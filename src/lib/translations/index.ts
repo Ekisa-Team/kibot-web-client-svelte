@@ -6,6 +6,7 @@ const config: import('sveltekit-i18n').Config = {
   translations: {
     en: { lang },
     es: { lang },
+    fr: { lang },
     ja: { lang }
   },
   loaders: [
@@ -18,6 +19,11 @@ const config: import('sveltekit-i18n').Config = {
       locale: 'es',
       key: 'layout',
       loader: async () => (await import('./es/layout.json')).default
+    },
+    {
+      locale: 'fr',
+      key: 'layout',
+      loader: async () => (await import('./fr/layout.json')).default
     },
     {
       locale: 'ja',

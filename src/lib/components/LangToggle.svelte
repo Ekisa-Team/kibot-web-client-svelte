@@ -18,8 +18,13 @@
     },
     {
       value: 'es',
-      text: 'Español',
+      text: 'Español (CO)',
       icon: 'i-emojione:flag-for-colombia text-xl'
+    },
+    {
+      value: 'fr',
+      text: 'Français',
+      icon: 'i-emojione:flag-for-france text-xl'
     },
     {
       value: 'ja',
