@@ -1,0 +1,36 @@
+html {
+  --color-bg-primary: theme('colors.slate.50');
+  --color-bg-secondary: theme('colors.gray.100');
+  --color-bg-accent: theme('colors.white');
+
+  --color-bg-navbar: theme('colors.white');
+  --color-bg-sidebar: theme('colors.white');
+  --color-bg-footer: theme('colors.white');
+
+  --color-text-primary: theme('colors.slate.700');
+  --color-text-heading: theme('colors.black');
+
+  --color-border-accent: theme('colors.slate.200');
+}
+
+html.dark {
+  --color-bg-primary: theme('colors.slate.900');
+  --color-bg-secondary: theme('colors.slate.700');
+  --color-bg-accent: theme('colors.slate.800');
+
+  --color-bg-navbar: theme('colors.slate.900');
+  --color-bg-sidebar: theme('colors.slate.900');
+  --color-bg-footer: theme('colors.slate.800');
+
+  --color-text-primary: theme('colors.slate.300');
+  --color-text-heading: theme('colors.white');
+
+  --color-border-accent: theme('colors.slate.800');
+
+  color-scheme: dark;
+}
+
+html {
+  @apply bg-primary;
+  @apply text-primary;
+}

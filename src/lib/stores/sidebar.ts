@@ -1,5 +1,5 @@
 import { browser } from '$app/env';
-import { getItem, LocalStorageItem, setItem } from '$utils/local-storage';
+import { getItem, LocalStorageItem, setItem } from '$lib/utils/local-storage';
 import { writable } from 'svelte/store';
 
 export type SidbarState = {

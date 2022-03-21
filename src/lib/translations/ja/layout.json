@@ -1,9 +1,9 @@
 {
   "navbar": {
     "themePicker": {
-      "system": "デバイステーマを使用する",
-      "light": "軽いテーマ",
-      "dark": "暗いテーマ"
+      "light": "ライト",
+      "dark": "暗い",
+      "system": "システム"
     }
   },
   "sidebar": {

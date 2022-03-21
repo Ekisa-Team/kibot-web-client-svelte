@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Logo from '$components/logo/Logo.svelte';
-  import { sidebarState } from '$stores/sidebar';
+  import Logo from '$lib/components/logo/Logo.svelte';
+  import { sidebarState } from '$lib/stores/sidebar';
   import NavbarThemePicker from './NavbarThemePicker.svelte';
 
   const toggleSidebar = () => {
@@ -34,13 +34,14 @@
 
 <style lang="postcss">
   nav {
-    @apply bg-white;
-    @apply border-b border-gray-200;
+    @apply bg-navbar;
+    @apply border-b border-accent;
     @apply fixed top-0 left-0 right-0;
     @apply px-2 py-3 sm:px-4;
     @apply rounded;
     @apply w-full;
     @apply z-30;
+    @apply bg-opacity-75;
   }
 
   .content-wrapper {

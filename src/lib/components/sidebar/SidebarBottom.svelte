@@ -21,10 +21,10 @@
   }
 </script>
 
-<div class="flex h-full items-center justify-center">
+<div class="absolute bottom-0 flex w-full items-center justify-center py-4">
   <Menu class="relative">
     <!-- menu button -->
-    <MenuButton class="btn">
+    <MenuButton class="btn btn-default">
       <div class="{currentCountryFlag} text-xl" />
     </MenuButton>
     <!-- menu items -->

@@ -9,14 +9,8 @@
     "paths": {
       "$lib": ["src/lib"],
       "$lib/*": ["src/lib/*"],
-      "$components": ["src/lib/components"],
-      "$components/*": ["src/lib/components/*"],
-      "$utils": ["src/lib/utils"],
-      "$utils/*": ["src/lib/utils/*"],
-      "$stores": ["src/stores"],
-      "$stores/*": ["src/stores/*"],
-      "$theme": ["src/theme"],
-      "$theme/*": ["src/theme/*"]
+      "$theme": ["static/theme"],
+      "$theme/*": ["static/theme/*"]
     }
   }
 }

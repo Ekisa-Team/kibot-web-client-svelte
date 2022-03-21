@@ -1,5 +1,5 @@
 <script>
-  import Logo from '$components/logo/Logo.svelte';
+  import Logo from '$lib/components/logo/Logo.svelte';
   import { t } from '$lib/translations';
   const currentYear = new Date().getFullYear();
 </script>
@@ -27,9 +27,7 @@
   <span class="copyright-text">
     © {currentYear}
 
-    <a
-      href="https://github.com/Ekisa-Team/chatbots-web-client"
-      class="hover:underline">
+    <a href="https://github.com/Ekisa-Team/chatbots-web-client" class="hover:underline">
       EkisaChatbots
     </a>
 
@@ -44,7 +42,7 @@
   }
 
   .content-wrapper {
-    @apply bg-white;
+    @apply bg-footer;
     @apply flex items-center justify-between;
     @apply p-4;
     @apply rounded-lg;
@@ -53,7 +51,7 @@
 
   ul {
     @apply flex flex-wrap items-center;
-    @apply text-sm text-gray-500;
+    @apply text-sm text-primary;
   }
 
   ul > li > a {

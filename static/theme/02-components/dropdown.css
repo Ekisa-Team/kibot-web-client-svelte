@@ -1,13 +1,13 @@
 .dropdown {
   @apply absolute;
-  @apply bg-white;
-  @apply divide-y divide-gray-100;
-  @apply py-1;
+  @apply bg-accent;
+  @apply focus:outline-none;
+  @apply overflow-hidden;
+  @apply py-1.5;
   @apply ring-1 ring-black ring-opacity-5;
   @apply rounded-xl;
-  @apply shadow-md;
+  @apply shadow-lg;
   @apply z-10;
-  @apply focus:outline-none;
   inset: calc(100% + 20px) auto auto 0;
 }
 
@@ -30,10 +30,10 @@
 .dropdown-item {
   @apply flex items-center;
   @apply px-3 py-2;
-  @apply text-gray-700;
+  @apply text-primary;
   @apply w-full;
 }
 
 .dropdown-item-active {
-  @apply bg-gray-100;
+  @apply bg-secondary;
 }

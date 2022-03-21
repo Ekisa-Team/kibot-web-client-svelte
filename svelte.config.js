@@ -33,10 +33,7 @@ const config = {
       resolve: {
         alias: {
           $lib: path.resolve('./src/lib'),
-          $components: path.resolve('./src/lib/components'),
-          $utils: path.resolve('./src/lib/utils'),
-          $stores: path.resolve('./src/stores'),
-          $theme: path.resolve('./src/theme')
+          $theme: path.resolve('./static/theme')
         }
       }
     }

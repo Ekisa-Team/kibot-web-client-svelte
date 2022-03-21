@@ -1,9 +1,9 @@
 {
   "navbar": {
     "themePicker": {
-      "system": "Use device theme",
-      "light": "Light theme",
-      "dark": "Dark theme"
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
     }
   },
   "sidebar": {

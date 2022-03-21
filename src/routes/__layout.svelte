@@ -1,13 +1,15 @@
 <script context="module" lang="ts">
   import { browser } from '$app/env';
-  import Footer from '$components/footer/Footer.svelte';
-  import Navbar from '$components/navbar/Navbar.svelte';
-  import Sidebar from '$components/sidebar/Sidebar.svelte';
+  import Footer from '$lib/components/footer/Footer.svelte';
+  import Navbar from '$lib/components/navbar/Navbar.svelte';
+  import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
+  import { appTheme } from '$lib/stores/app-theme';
   import { loadTranslations, locale } from '$lib/translations';
   import { getItem, LocalStorageItem } from '$lib/utils/local-storage';
   import '$theme/styles.css';
   import 'uno.css';
 
+  // i18n
   export const load: import('@sveltejs/kit').Load = async ({ url }) => {
     const { pathname } = url;
 
@@ -21,6 +23,15 @@
 
     return {};
   };
+
+  // Application theme
+  appTheme.subscribe((v) => {
+    console.log(v);
+    if (document.documentElement) {
+      document.documentElement.className = '';
+      document.documentElement.classList.add(v);
+    }
+  });
 </script>
 
 <Navbar />

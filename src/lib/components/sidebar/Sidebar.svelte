@@ -1,17 +1,11 @@
 <script lang="ts">
+  import { sidebarState, type SidbarState } from '$lib/stores/sidebar';
   import { t } from '$lib/translations';
-  import { sidebarState, type SidbarState } from '$stores/sidebar';
+  import type { Menu } from '../../types/menu.type';
   import SidebarBottom from './SidebarBottom.svelte';
-  import SidebarOption from './SidebarOption.svelte';
+  import SidebarItem from './SidebarItem.svelte';
 
-  type SidebarItem = {
-    key: number;
-    path: string;
-    name: string;
-    icon: string;
-  };
-
-  const itemsLists: SidebarItem[][] = [
+  const itemsLists: Menu = [
     [
       {
         key: 1,
@@ -108,10 +102,10 @@
   <nav class="overflow-y-auto overflow-x-hidden rounded py-4 px-3">
     <!-- list -->
     {#each itemsLists as list, i}
-      <ul class:with-separator={i > 0}>
+      <ul class:with-separator={i > 0} class="space-y-1">
         <!-- option -->
         {#each list as item}
-          <SidebarOption item={item} showName={currentState.isOpen} />
+          <SidebarItem item={item} showName={currentState.isOpen} />
         {/each}
       </ul>
     {/each}
@@ -122,8 +116,8 @@
 
 <style lang="postcss">
   aside {
-    @apply bg-white;
-    @apply border-r border-gray-200;
+    @apply bg-sidebar;
+    @apply border-r border-accent;
     @apply fixed top-0 left-0;
     @apply pt-16;
     @apply h-full w-full;
@@ -147,6 +141,6 @@
 
   ul.with-separator {
     @apply mt-4 pt-4;
-    @apply border-t border-gray-200;
+    @apply border-t border-accent;
   }
 </style>

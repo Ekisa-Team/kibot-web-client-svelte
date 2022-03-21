@@ -1,14 +1,17 @@
-<script>
+<script lang="ts">
+  import { appTheme } from '$lib/stores/app-theme';
   import { t } from '$lib/translations';
   import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@rgossiaux/svelte-headlessui';
 
-  const handleThemeChange = () => {};
+  const handleThemeChange = (theme: import('$lib/types/theme.type').Theme) => {
+    appTheme.update(() => theme);
+  };
 </script>
 
 <Menu let:open class="relative">
   <!-- menu button -->
-  <MenuButton class="btn">
-    <div class="i-ph:alien-duotone text-xl" />
+  <MenuButton class="btn btn-default">
+    <div class="i-carbon:screen text-xl" />
   </MenuButton>
 
   <!-- transition -->
@@ -21,15 +24,15 @@
     leaveFrom="transform scale-100 opacity-100"
     leaveTo="transform scale-95 opacity-0">
     <!-- menu items -->
-    <MenuItems class="dropdown dropdown-bottom-left">
+    <MenuItems class="dropdown dropdown-bottom-left w-40">
       <MenuItem let:active>
         <button
           href="/account-settings"
           class="dropdown-item whitespace-nowrap"
           class:dropdown-item-active={active}
-          on:click={() => handleThemeChange()}>
-          <div class="i-ph:alien-duotone text-xl" />
-          <span class="ml-1.5 text-sm">{$t('layout.navbar.themePicker.system')}</span>
+          on:click={() => handleThemeChange('light')}>
+          <div class="i-carbon:light text-xl" />
+          <span class="ml-3 text-sm font-semibold">{$t('layout.navbar.themePicker.light')}</span>
         </button>
       </MenuItem>
       <MenuItem let:active>
@@ -37,9 +40,9 @@
           href="/account-settings"
           class="dropdown-item whitespace-nowrap"
           class:dropdown-item-active={active}
-          on:click={() => handleThemeChange()}>
-          <div class="i-ph:sun-dim-duotone text-xl" />
-          <span class="ml-1.5 text-sm">{$t('layout.navbar.themePicker.light')}</span>
+          on:click={() => handleThemeChange('dark')}>
+          <div class="i-carbon:moon text-xl" />
+          <span class="ml-3 text-sm font-semibold">{$t('layout.navbar.themePicker.dark')}</span>
         </button>
       </MenuItem>
       <MenuItem let:active>
@@ -47,9 +50,9 @@
           href="/account-settings"
           class="dropdown-item whitespace-nowrap"
           class:dropdown-item-active={active}
-          on:click={() => handleThemeChange()}>
-          <div class="i-ph:cloud-moon-duotone text-xl" />
-          <span class="ml-1.5 text-sm">{$t('layout.navbar.themePicker.dark')}</span>
+          on:click={() => handleThemeChange('system')}>
+          <div class="i-carbon:screen text-xl" />
+          <span class="ml-3 text-sm font-semibold">{$t('layout.navbar.themePicker.system')}</span>
         </button>
       </MenuItem>
     </MenuItems>
