@@ -34,3 +34,12 @@
   @apply text-primary;
   @apply w-full;
 }
+
+.dropdown-item-active {
+  @apply bg-secondary;
+}
+
+.dropdown-item-selected {
+  @apply bg-secondary;
+  @apply text-blue-500;
+}

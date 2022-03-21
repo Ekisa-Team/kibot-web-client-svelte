@@ -3,6 +3,7 @@
   import { getTheme } from '$lib/services/theme';
   import { appTheme } from '$lib/stores/app-theme';
   import { t } from '$lib/translations';
+  import type { Datalist } from '$lib/types/datalist';
   import {
     Listbox,
     ListboxButton,
@@ -11,7 +12,7 @@
     Transition
   } from '@rgossiaux/svelte-headlessui';
 
-  const themes = [
+  const themes: Datalist<Theme>[] = [
     {
       value: Theme.Light,
       text: $t('layout.navbar.themePicker.light'),
@@ -29,9 +30,9 @@
     }
   ];
 
-  let selectedTheme = themes.find((t) => t.value === getTheme()) || themes[0];
+  let selectedTheme: Datalist<Theme> = themes.find((t) => t.value === getTheme()) || themes[0];
 
-  const handleThemeChange = (event: CustomEvent<any>) => {
+  const handleThemeChange = (event: CustomEvent<Datalist<Theme>>) => {
     selectedTheme = event.detail;
     appTheme.update(() => selectedTheme.value);
   };
@@ -41,7 +42,7 @@
   <!-- menu button -->
   <ListboxButton class="btn btn-default">
     <div class={selectedTheme.icon} />
-    <span class="ml-2">{selectedTheme.text}</span>
+    <span class="ml-1.5">{selectedTheme.text}</span>
   </ListboxButton>
 
   <!-- transition -->
@@ -57,7 +58,10 @@
     <ListboxOptions class="dropdown dropdown-bottom-left w-40">
       {#each themes as theme}
         <ListboxOption value={theme} let:active let:selected>
-          <div class="dropdown-item whitespace-nowrap" class:active class:selected>
+          <div
+            class="dropdown-item whitespace-nowrap"
+            class:dropdown-item-active={active}
+            class:dropdown-item-selected={selected}>
             <div class={theme.icon} />
             <span class="ml-3 text-sm font-semibold">{theme.text}</span>
           </div>
@@ -66,13 +70,3 @@
     </ListboxOptions>
   </Transition>
 </Listbox>
-
-<style>
-  .active {
-    @apply bg-secondary;
-  }
-  .selected {
-    @apply bg-secondary;
-    @apply text-blue-500;
-  }
-</style>

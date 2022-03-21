@@ -1,8 +1,8 @@
 <script lang="ts">
+  import LangToggle from '$lib/components/LangToggle.svelte';
   import { sidebarState, type SidbarState } from '$lib/stores/sidebar';
   import { t } from '$lib/translations';
   import type { Menu } from '../../types/menu';
-  import SidebarBottom from './SidebarBottom.svelte';
   import SidebarItem from './SidebarItem.svelte';
 
   const itemsLists: Menu = [
@@ -111,7 +111,9 @@
     {/each}
   </nav>
 
-  <SidebarBottom />
+  <div class="bottom-options">
+    <LangToggle />
+  </div>
 </aside>
 
 <style lang="postcss">
@@ -142,5 +144,11 @@
   ul.with-separator {
     @apply mt-4 pt-4;
     @apply border-t border-accent;
+  }
+
+  .bottom-options {
+    @apply absolute bottom-0;
+    @apply flex w-full items-center justify-center;
+    @apply py-4;
   }
 </style>
