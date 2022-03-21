@@ -6,6 +6,7 @@
 
 /* components */
 @import './tailwindcss/components.css';
+@import './02-components/badge.css';
 @import './02-components/button.css';
 @import './02-components/dropdown.css';
 

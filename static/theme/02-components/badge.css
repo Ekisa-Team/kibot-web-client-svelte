@@ -1,0 +1,7 @@
+.badge-green {
+  @apply mr-2 rounded bg-green-100 px-2.5 py-0.5 text-xs font-semibold text-green-800 dark:bg-green-200 dark:text-green-900;
+}
+
+.badge-red {
+  @apply mr-2 rounded bg-red-100 px-2.5 py-0.5 text-xs font-semibold text-red-800 dark:bg-red-200 dark:text-red-900;
+}

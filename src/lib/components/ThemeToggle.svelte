@@ -64,7 +64,7 @@
     leaveTo="transform scale-95 opacity-0">
     <!-- menu items -->
     <ListboxOptions class="dropdown dropdown-bottom-left w-40">
-      {#each themes as theme}
+      {#each themes as theme (theme.value)}
         <ListboxOption value={theme} let:active let:selected>
           <div
             class="dropdown-item whitespace-nowrap"

@@ -62,7 +62,7 @@
 
   <!-- menu items -->
   <ListboxOptions class="dropdown dropdown-top-right">
-    {#each languages as lang}
+    {#each languages as lang (lang.value)}
       <ListboxOption value={lang} let:active let:selected>
         <div
           class="dropdown-item whitespace-nowrap"
