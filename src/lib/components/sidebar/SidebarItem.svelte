@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import type { MenuItem } from '../../types/menu.type';
+  import type { MenuItem } from '../../types/menu';
 
   export let item: MenuItem;
   export let showName = true;

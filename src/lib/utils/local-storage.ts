@@ -1,5 +1,6 @@
 export enum LocalStorageItem {
   Language = 'app::lang',
+  Theme = 'app::theme',
   SidebarStatus = 'app::sidebar::status'
 }
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Logo from '$lib/components/logo/Logo.svelte';
+  import Logo from '$lib/components/Logo.svelte';
   import { sidebarState } from '$lib/stores/sidebar';
-  import NavbarThemePicker from './NavbarThemePicker.svelte';
+  import ThemeToggle from './ThemeToggle.svelte';
 
   const toggleSidebar = () => {
     sidebarState.update((state) => {
@@ -27,7 +27,7 @@
 
     <!-- right -->
     <div class="flex items-center">
-      <NavbarThemePicker />
+      <ThemeToggle />
     </div>
   </div>
 </nav>

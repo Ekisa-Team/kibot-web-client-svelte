@@ -1,7 +1,7 @@
 <script lang="ts">
   import { sidebarState, type SidbarState } from '$lib/stores/sidebar';
   import { t } from '$lib/translations';
-  import type { Menu } from '../../types/menu.type';
+  import type { Menu } from '../../types/menu';
   import SidebarBottom from './SidebarBottom.svelte';
   import SidebarItem from './SidebarItem.svelte';
 

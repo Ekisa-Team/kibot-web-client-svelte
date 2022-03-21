@@ -28,5 +28,3 @@ const config: import('sveltekit-i18n').Config = {
 };
 
 export const { t, locale, locales, loading, loadTranslations } = new i18n(config);
-console.log(locales.get());
-loading.subscribe(($loading) => $loading && console.log('Loading translations...'));

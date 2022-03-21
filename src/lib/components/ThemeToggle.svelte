@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { Theme } from '$lib/enums/theme';
   import { appTheme } from '$lib/stores/app-theme';
   import { t } from '$lib/translations';
   import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@rgossiaux/svelte-headlessui';
 
-  const handleThemeChange = (theme: import('$lib/types/theme.type').Theme) => {
+  const handleThemeChange = (theme: import('$lib/enums/theme').Theme) => {
     appTheme.update(() => theme);
   };
 </script>
@@ -30,7 +31,7 @@
           href="/account-settings"
           class="dropdown-item whitespace-nowrap"
           class:dropdown-item-active={active}
-          on:click={() => handleThemeChange('light')}>
+          on:click={() => handleThemeChange(Theme.Light)}>
           <div class="i-carbon:light text-xl" />
           <span class="ml-3 text-sm font-semibold">{$t('layout.navbar.themePicker.light')}</span>
         </button>
@@ -40,7 +41,7 @@
           href="/account-settings"
           class="dropdown-item whitespace-nowrap"
           class:dropdown-item-active={active}
-          on:click={() => handleThemeChange('dark')}>
+          on:click={() => handleThemeChange(Theme.Dark)}>
           <div class="i-carbon:moon text-xl" />
           <span class="ml-3 text-sm font-semibold">{$t('layout.navbar.themePicker.dark')}</span>
         </button>
@@ -50,7 +51,7 @@
           href="/account-settings"
           class="dropdown-item whitespace-nowrap"
           class:dropdown-item-active={active}
-          on:click={() => handleThemeChange('system')}>
+          on:click={() => handleThemeChange(Theme.System)}>
           <div class="i-carbon:screen text-xl" />
           <span class="ml-3 text-sm font-semibold">{$t('layout.navbar.themePicker.system')}</span>
         </button>
