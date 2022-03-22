@@ -15,9 +15,13 @@
 
 <nav>
   <!-- left -->
-  <div class="flex items-center">
+  <div class="flex items-center space-x-3">
     <button type="button" class="btn btn-secondary" on:click={toggleSidebar}>
-      <div class="i-heroicons-outline:menu-alt-1 text-xl" />
+      {#if $sidebarState.isOpen}
+        <div class="i-fxemoji:ballottscriptx animate-ping text-xl" />
+      {:else}
+        <div class="i-fxemoji:hamburger text-xl" />
+      {/if}
     </button>
 
     <Logo />

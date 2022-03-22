@@ -12,7 +12,7 @@
   @apply rounded-lg;
   @apply select-none;
   @apply text-center font-medium;
-  @apply focus:ring-2 focus:ring-blue-300 focus:ring-offset-2;
+  @apply focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:dark:ring-blue-700;
 }
 
 .btn-sm {

@@ -38,8 +38,9 @@
 <style lang="postcss">
   footer {
     grid-area: footer;
+    @apply container mx-auto;
     @apply flex-shrink-0;
-    @apply md:px-6 md:py-8;
+    @apply px-4 py-8;
   }
 
   .content-wrapper {

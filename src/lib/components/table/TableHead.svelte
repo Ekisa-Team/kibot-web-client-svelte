@@ -4,12 +4,12 @@
   export let columns: TableColumns = [];
 </script>
 
-<thead class="bg-gray-100 dark:bg-gray-700">
+<thead class="bg-zinc-200 dark:bg-zinc-700">
   <tr>
     {#each columns as col}
       <th
         scope="col"
-        class="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider text-gray-700 dark:text-gray-400">
+        class="py-3 px-6 text-left text-xs font-medium uppercase tracking-wider text-zinc-700 dark:text-zinc-400">
         {#if col.icon}
           <div class={col.icon} />
         {/if}
