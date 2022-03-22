@@ -50,7 +50,7 @@
 
 <Listbox value={selectedLanguage} on:change={handleLanguageChange} let:open class="relative">
   <!-- menu button -->
-  <ListboxButton class="btn btn-default space-x-2 whitespace-nowrap">
+  <ListboxButton class="btn btn-secondary space-x-2 whitespace-nowrap">
     {#if showCountryFlag}
       <div class={selectedLanguage.icon} />
     {/if}

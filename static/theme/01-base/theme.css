@@ -14,18 +14,18 @@ html {
 }
 
 html.dark {
-  --color-bg-primary: theme('colors.slate.900');
-  --color-bg-secondary: theme('colors.slate.700');
-  --color-bg-accent: theme('colors.slate.800');
+  --color-bg-primary: theme('colors.zinc.900');
+  --color-bg-secondary: theme('colors.zinc.700');
+  --color-bg-accent: theme('colors.zinc.800');
 
-  --color-bg-navbar: theme('colors.slate.900');
-  --color-bg-sidebar: theme('colors.slate.900');
-  --color-bg-footer: theme('colors.slate.800');
+  --color-bg-navbar: theme('colors.zinc.900');
+  --color-bg-sidebar: theme('colors.zinc.900');
+  --color-bg-footer: theme('colors.zinc.800');
 
-  --color-text-primary: theme('colors.slate.300');
+  --color-text-primary: theme('colors.zinc.300');
   --color-text-heading: theme('colors.white');
 
-  --color-border-accent: theme('colors.slate.800');
+  --color-border-accent: theme('colors.zinc.800');
 
   color-scheme: dark;
 }

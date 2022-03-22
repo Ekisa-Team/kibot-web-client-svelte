@@ -40,6 +40,5 @@
 }
 
 .dropdown-item-selected {
-  @apply bg-secondary;
   @apply text-blue-500;
 }

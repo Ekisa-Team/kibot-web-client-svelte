@@ -43,7 +43,7 @@
 
 <Listbox value={selectedTheme} on:change={handleThemeChange} let:open class="relative">
   <!-- menu button -->
-  <ListboxButton class="btn btn-default space-x-2">
+  <ListboxButton class="btn btn-secondary space-x-2">
     {#if showThemeIcon}
       <div class={selectedTheme.icon} />
     {/if}

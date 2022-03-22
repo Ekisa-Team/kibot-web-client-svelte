@@ -18,7 +18,7 @@
   <div class="content-wrapper">
     <!-- left -->
     <div class="flex items-center">
-      <button type="button" class="btn btn-default" on:click={toggleSidebar}>
+      <button type="button" class="btn btn-secondary" on:click={toggleSidebar}>
         <div class="i-heroicons-outline:menu-alt-1 text-xl" />
       </button>
 
