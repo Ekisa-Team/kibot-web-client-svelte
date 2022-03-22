@@ -19,7 +19,7 @@
 
     <!-- text -->
     {#if showName}
-      <span class="ml-3 text-sm">{item.name}</span>
+      <span class="ml-[1.1rem] text-sm">{item.name}</span>
     {/if}
   </a>
 </li>

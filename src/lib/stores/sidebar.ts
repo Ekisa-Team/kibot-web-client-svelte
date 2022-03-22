@@ -19,7 +19,20 @@ const initialValue: SidbarState = browser
 export const sidebarState = writable<SidbarState>(initialValue);
 
 sidebarState.subscribe((state) => {
-  if (browser && state.lastEventType === 'click') {
+  if (!browser) return;
+
+  const element = document.documentElement;
+
+  element.classList.remove('sidebar-collapsed');
+  element.classList.remove('sidebar-opened');
+
+  if (state.isOpen) {
+    element.classList.add('sidebar-opened');
+  } else {
+    element.classList.add('sidebar-collapsed');
+  }
+
+  if (state.lastEventType === 'click') {
     setItem(LocalStorageItem.SidebarStatus, state);
   }
 });

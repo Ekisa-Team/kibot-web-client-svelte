@@ -37,6 +37,7 @@
 
 <style lang="postcss">
   footer {
+    grid-area: footer;
     @apply flex-shrink-0;
     @apply md:px-6 md:py-8;
   }

@@ -1,4 +1,11 @@
+:root {
+}
+
 html {
+  --size-navbar-height: 60px;
+  --size-sidebar-width: 16rem;
+  --size-footer-height: 160px;
+
   --color-bg-primary: theme('colors.slate.50');
   --color-bg-secondary: theme('colors.gray.100');
   --color-bg-accent: theme('colors.white');

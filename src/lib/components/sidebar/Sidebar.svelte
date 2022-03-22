@@ -89,43 +89,87 @@
       isOpen: false
     }));
   };
+
+  const handleOverlayClick = () => {
+    sidebarState.update(() => ({
+      lastEventType: 'click',
+      isOpen: false
+    }));
+  };
 </script>
 
 <aside
-  class:open={currentState.isOpen}
+  aria-label="Sidebar"
   class:click-mode={currentState.lastEventType === 'click'}
   class:hover-mode={currentState.lastEventType === 'hover'}
-  aria-label="Sidebar"
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}>
-  <!-- wrapper -->
-  <nav class="overflow-y-auto overflow-x-hidden rounded py-4 px-3">
-    <!-- list -->
-    {#each itemsLists as list, i}
-      <ul class:with-separator={i > 0} class="space-y-1">
-        <!-- option -->
-        {#each list as item}
-          <SidebarItem item={item} showName={currentState.isOpen} />
-        {/each}
-      </ul>
-    {/each}
-  </nav>
+  <!-- overlay -->
+  {#if currentState.isOpen}
+    <button class="overlay" on:click={handleOverlayClick} />
+  {/if}
 
-  <div class="bottom-options">
-    <LangToggle showLanguage={currentState.isOpen} />
+  <!-- wrapper -->
+  <div class="wrapper">
+    <!-- nav -->
+    <nav class="overflow-y-auto overflow-x-hidden rounded py-4 px-3">
+      <!-- list -->
+      {#each itemsLists as list, i}
+        <ul class:with-separator={i > 0} class="space-y-1">
+          <!-- option -->
+          {#each list as item}
+            <SidebarItem item={item} showName={true} />
+          {/each}
+        </ul>
+      {/each}
+    </nav>
+
+    <!-- bottom options -->
+    <div class="bottom-options">
+      <LangToggle showLanguage={currentState.isOpen} />
+    </div>
   </div>
 </aside>
 
 <style lang="postcss">
+  :global(html.sidebar-collapsed) {
+    --size-sidebar-width: 16rem;
+  }
+
+  :global(html.sidebar-opened) {
+    --size-sidebar-width: 16rem;
+  }
+
   aside {
+    grid-area: sidebar;
+    transition: width 100ms ease-out, transform 100ms ease-in;
+    @apply fixed;
     @apply bg-sidebar;
     @apply border-r border-accent;
-    @apply fixed top-0 left-0;
-    @apply pt-16;
-    @apply h-full w-full;
     @apply z-20;
-    @apply max-w-[4.1rem];
-    transition: max-width 50ms ease-in;
+    @apply left-0;
+    @apply top-0;
+    @apply h-full;
+  }
+
+  :global(.sidebar-collapsed) aside {
+    transform: translateX(calc(var(--size-sidebar-width) * -1 - 7px));
+  }
+
+  :global(.sidebar-opened) aside {
+    transform: translateX(0);
+  }
+
+  @media only screen and (min-width: theme('screens.md')) {
+    :global(html.sidebar-collapsed) {
+      --size-sidebar-width: 4rem;
+    }
+
+    aside {
+      width: var(--size-sidebar-width);
+      @apply relative;
+      transform: translateX(0) !important;
+    }
   }
 
   aside.click-mode {
@@ -133,12 +177,28 @@
   }
 
   aside.hover-mode {
-    transition-delay: 0ms;
+    transition-delay: 300ms;
   }
 
-  aside.open {
-    @apply max-w-[16rem];
-    transition: max-width 300ms ease-out;
+  .overlay {
+    @apply bg-black bg-opacity-20 backdrop-blur-sm;
+    @apply cursor-default;
+    @apply fixed;
+    @apply h-full w-screen;
+    @apply z-50;
+    left: calc(var(--size-sidebar-width) + 7px);
+  }
+
+  @media only screen and (min-width: theme('screens.md')) {
+    .overlay {
+      @apply hidden;
+    }
+  }
+
+  .wrapper {
+    @apply sticky;
+    top: var(--size-navbar-height);
+    height: calc(100vh - var(--size-navbar-height));
   }
 
   ul.with-separator {

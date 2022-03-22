@@ -6,7 +6,7 @@
   @apply py-1.5;
   @apply ring-1 ring-black ring-opacity-5;
   @apply rounded-xl;
-  @apply shadow-lg;
+  @apply shadow-2xl;
   @apply z-10;
   inset: calc(100% + 20px) auto auto 0;
 }

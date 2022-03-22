@@ -16,23 +16,40 @@
   setupTheming();
 </script>
 
-<Navbar />
-
-<Sidebar />
-
-<div class="content-wrapper">
-  <main class="flex-1 p-4 md:p-6">
+<div class="layout">
+  <Navbar />
+  <Sidebar />
+  <main class="container mx-auto">
     <slot />
   </main>
   <Footer />
 </div>
 
 <style lang="postcss">
-  .content-wrapper {
-    @apply flex flex-col;
-    @apply mx-auto max-w-screen-2xl pl-64;
-    @apply pt-16;
-    @apply relative;
-    @apply h-full w-full;
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--size-navbar-height) 1fr var(--size-footer-height);
+    gap: 0;
+    grid-template-areas:
+      'navbar'
+      'main'
+      'footer';
+    height: 100vh;
+  }
+
+  @media only screen and (min-width: theme('screens.md')) {
+    .layout {
+      grid-template-columns: min-content 1fr;
+      grid-template-areas:
+        'navbar navbar'
+        'sidebar main'
+        'sidebar footer';
+    }
+  }
+
+  main {
+    grid-area: main;
+    @apply p-4 md:p-6;
   }
 </style>
