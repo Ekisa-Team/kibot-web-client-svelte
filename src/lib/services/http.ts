@@ -1,9 +1,11 @@
-async function get<T>(url: string): Promise<T> {
+import type { ResponseWrapper } from '$lib/models/response-wrapper';
+
+async function get<T>(url: string): Promise<ResponseWrapper<T>> {
   const result = await fetch(url);
   return result.json();
 }
 
-async function post<T>(url: string, body: T): Promise<T> {
+async function post<T>(url: string, body: T): Promise<ResponseWrapper<T>> {
   const result = await fetch(url, {
     body: JSON.stringify(body),
     method: 'POST',
@@ -15,7 +17,7 @@ async function post<T>(url: string, body: T): Promise<T> {
   return result.json();
 }
 
-async function put<T>(url: string, body: T): Promise<T> {
+async function put<T>(url: string, body: T): Promise<ResponseWrapper<T>> {
   const result = await fetch(url, {
     body: JSON.stringify(body),
     method: 'PUT',
@@ -27,7 +29,7 @@ async function put<T>(url: string, body: T): Promise<T> {
   return result.json();
 }
 
-async function patch<T>(url: string, body: T): Promise<T> {
+async function patch<T>(url: string, body: T): Promise<ResponseWrapper<T>> {
   const result = await fetch(url, {
     body: JSON.stringify(body),
     method: 'PATCH',
@@ -39,7 +41,7 @@ async function patch<T>(url: string, body: T): Promise<T> {
   return result.json();
 }
 
-async function del<T>(url: string): Promise<T> {
+async function del<T>(url: string): Promise<ResponseWrapper<T>> {
   const result = await fetch(url, { method: 'DELETE' });
   return result.json();
 }
