@@ -17,7 +17,7 @@
   <!-- left -->
   <div class="flex items-center space-x-3">
     <button type="button" class="btn btn-secondary" on:click={toggleSidebar}>
-      {#if $sidebarState.isOpen}
+      {#if $sidebarState.isOpen && $sidebarState.lastEventType === 'hover'}
         <div class="i-fxemoji:ballottscriptx animate-ping text-xl" />
       {:else}
         <div class="i-fxemoji:hamburger text-xl" />
