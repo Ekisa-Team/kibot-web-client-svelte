@@ -27,9 +27,7 @@
   <span class="copyright-text">
     © {currentYear}
 
-    <a href="https://github.com/Ekisa-Team/chatbots-web-client" class="hover:underline">
-      EkisaChatbots
-    </a>
+    <a href="https://github.com/Ekisa-Team/chatbots-web-client" class="hover:underline"> Kibot </a>
 
     . All rights reserved.
   </span>
