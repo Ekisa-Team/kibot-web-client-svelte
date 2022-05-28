@@ -1,6 +1,6 @@
 <script lang="ts">
   import Logo from '$lib/components/Logo.svelte';
-  import { sidebarState } from '$lib/stores/sidebar';
+  import { sidebarState } from '$lib/components/sidebar/store';
   import ThemeToggle from './ThemeToggle.svelte';
 
   const toggleSidebar = () => {
@@ -16,7 +16,7 @@
 <nav>
   <!-- left -->
   <div class="flex items-center space-x-3">
-    <button type="button" class="btn btn-secondary" on:click={toggleSidebar}>
+    <button type="button" class="btn btn-secondary btn-fit" on:click={toggleSidebar}>
       {#if $sidebarState.isOpen && $sidebarState.lastEventType === 'hover'}
         <div class="i-fxemoji:ballottscriptx animate-ping text-xl" />
       {:else}

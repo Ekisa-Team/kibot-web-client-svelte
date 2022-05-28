@@ -4,7 +4,8 @@
   @apply focus:ring-2;
   @apply focus:z-10;
   @apply h-10;
-  @apply inline-flex items-center;
+  @apply min-w-[80px];
+  @apply inline-flex items-center justify-center;
   @apply leading-none;
   @apply outline-none;
   @apply py-2 px-3;
@@ -24,15 +25,20 @@
   @apply h-8;
   @apply text-sm;
 }
-
 .btn-lg {
   @apply h-12;
   @apply text-base;
 }
-
 .btn-xl {
   @apply h-14;
   @apply text-lg;
+}
+
+.btn-fit {
+  @apply min-w-fit;
+}
+.btn-full {
+  @apply w-full;
 }
 
 .btn-primary {

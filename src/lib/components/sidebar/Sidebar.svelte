@@ -1,6 +1,6 @@
 <script lang="ts">
   import LangToggle from '$lib/components/LangToggle.svelte';
-  import { sidebarState, type SidbarState } from '$lib/stores/sidebar';
+  import { sidebarState, type SidbarState } from '$lib/components/sidebar/store';
   import { t } from '$lib/translations';
   import type { Menu } from '../../types/menu';
   import SidebarItem from './SidebarItem.svelte';
@@ -9,56 +9,32 @@
     [
       {
         key: 1,
-        path: 'messaging-providers',
-        name: $t('layout.sidebar.messagingProviders'),
-        icon: 'i-ph:plugs-connected-thin'
-      },
-      {
-        key: 2,
-        path: 'applications',
-        name: $t('layout.sidebar.applications'),
-        icon: 'i-ph:terminal-window-thin'
-      },
-      {
-        key: 3,
-        path: 'chatbots',
-        name: $t('layout.sidebar.chatbots'),
-        icon: 'i-ph:robot-thin'
-      },
-      {
-        key: 4,
-        path: 'messages',
-        name: $t('layout.sidebar.messages'),
-        icon: 'i-ph:chat-centered-dots-thin'
-      },
-      {
-        key: 5,
-        path: 'templates',
-        name: $t('layout.sidebar.templates'),
-        icon: 'i-ph:stack-thin'
-      },
-      {
-        key: 6,
         path: 'channels',
         name: $t('layout.sidebar.channels'),
         icon: 'i-ph:line-segments-thin'
       },
       {
-        key: 7,
-        path: 'webhooks',
-        name: $t('layout.sidebar.webhooks'),
-        icon: 'i-ph:anchor-thin'
+        key: 2,
+        path: 'messages',
+        name: $t('layout.sidebar.messages'),
+        icon: 'i-ph:chat-centered-dots-thin'
+      },
+      {
+        key: 3,
+        path: 'templates',
+        name: $t('layout.sidebar.templates'),
+        icon: 'i-ph:stack-thin'
       }
     ],
     [
       {
-        key: 8,
+        key: 4,
         path: 'documentation',
         name: $t('layout.sidebar.documentation'),
         icon: 'i-ph:scroll-thin'
       },
       {
-        key: 9,
+        key: 5,
         path: 'help',
         name: $t('layout.sidebar.help'),
         icon: 'i-ph:lifebuoy-thin'

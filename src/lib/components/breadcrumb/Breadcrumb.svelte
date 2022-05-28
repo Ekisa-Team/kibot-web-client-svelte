@@ -4,12 +4,12 @@
   export let items: BreadcrumbItems = [];
 </script>
 
-<nav aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb" class="bg-gradient-to-r from-red-900/10 to-red-50/0 px-2">
   <ol>
     {#each items as { path, icon, text }, i}
       <li>
         {#if i < items.length - 1}
-          <a href={path} class="font-normal">
+          <a href={path} class="font-semibold">
             {#if i > 0}
               <div class="i-mdi:slash-forward" />
             {/if}

@@ -3,7 +3,6 @@
   import type { BreadcrumbItems } from '$lib/components/breadcrumb/types';
   import Footer from '$lib/components/Footer.svelte';
   import Navbar from '$lib/components/Navbar.svelte';
-  import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
   import { setupTheming } from '$lib/services/theme';
   import { setupTranslations } from '$lib/services/translate';
   import '$lib/theme/styles.css';
@@ -19,14 +18,12 @@
 
   const breadcrumbItems: BreadcrumbItems = [
     { icon: 'i-fa-solid:terminal', text: 'Applications', path: '/applications' },
-    { text: 'Chatbots', path: '/chatbots' },
-    { text: 'Messages' }
+    { text: 'Chatbots', path: '/chatbots' }
   ];
 </script>
 
 <div class="layout">
   <Navbar />
-  <Sidebar />
   <main class="container mx-auto">
     <Breadcrumb items={breadcrumbItems} />
     <slot />
@@ -45,16 +42,6 @@
       'main'
       'footer';
     height: 100vh;
-  }
-
-  @media only screen and (min-width: theme('screens.md')) {
-    .layout {
-      grid-template-columns: min-content 1fr;
-      grid-template-areas:
-        'navbar navbar'
-        'sidebar main'
-        'sidebar footer';
-    }
   }
 
   main {

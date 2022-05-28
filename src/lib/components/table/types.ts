@@ -12,4 +12,4 @@ type TableCell = {
 type TableRow = Array<TableCell>;
 
 export type TableColumns = Array<TableColumn>;
-export type TableDataSource = Array<unknown>;
+export type TableDataSource = Array<TableRow>;

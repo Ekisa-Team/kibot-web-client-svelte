@@ -32,8 +32,7 @@ const config = {
       ],
       resolve: {
         alias: {
-          $lib: path.resolve('./src/lib'),
-          $theme: path.resolve('./static/theme')
+          $lib: path.resolve('./src/lib')
         }
       }
     }
