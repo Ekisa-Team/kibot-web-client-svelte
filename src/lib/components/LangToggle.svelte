@@ -1,6 +1,6 @@
 <script lang="ts">
   import { loadTranslations, locale } from '$lib/translations';
-  import type { Datalist } from '$lib/types/datalist';
+  import type { Datalist, DataListItem } from '$lib/types/datalist';
   import type { SupportedLanguage } from '$lib/types/supported-language';
   import { LocalStorageItem, setItem } from '$lib/utils/local-storage';
   import {
@@ -13,7 +13,7 @@
   export let showCountryFlag = true;
   export let showLanguage = true;
 
-  const languages: Datalist<SupportedLanguage>[] = [
+  const languages: Datalist<SupportedLanguage> = [
     {
       value: 'en',
       text: 'English (US)',
@@ -36,10 +36,10 @@
     }
   ];
 
-  let selectedLanguage: Datalist<SupportedLanguage> =
+  let selectedLanguage: DataListItem<SupportedLanguage> =
     languages.find((l) => l.value === locale.get()) || languages[0];
 
-  async function handleLanguageChange({ detail }: CustomEvent<Datalist<SupportedLanguage>>) {
+  async function handleLanguageChange({ detail }: CustomEvent<DataListItem<SupportedLanguage>>) {
     selectedLanguage = detail;
     await loadTranslations(detail.value);
     setItem(LocalStorageItem.Language, detail.value);
@@ -50,7 +50,7 @@
 
 <Listbox value={selectedLanguage} on:change={handleLanguageChange} let:open class="relative">
   <!-- menu button -->
-  <ListboxButton class="btn btn-secondary space-x-2 whitespace-nowrap">
+  <ListboxButton class="btn btn-secondary btn-fit space-x-2 whitespace-nowrap">
     {#if showCountryFlag}
       <div class={selectedLanguage.icon} />
     {/if}

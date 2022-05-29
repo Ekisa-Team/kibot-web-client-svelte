@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { messagingProvidersStore } from './store';
+  import { messagingProvidersStore } from '../../lib/stores/store';
 </script>
 
 <svelte:head>

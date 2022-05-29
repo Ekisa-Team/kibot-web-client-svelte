@@ -1,0 +1,104 @@
+/* form */
+.form {
+  @apply shadow;
+  @apply rounded-xl;
+  @apply py-8 px-4;
+  @apply bg-accent;
+}
+
+.form-item {
+}
+
+.form-actions {
+  @apply flex items-center;
+  @apply mt-12 space-x-4;
+}
+.form-actions-start {
+  @apply justify-start;
+}
+.form-actions-center {
+  @apply justify-center;
+}
+.form-actions-end {
+  @apply justify-end;
+}
+
+.form-group {
+  @apply grid gap-x-12 gap-y-4;
+  @apply grid-cols-1;
+}
+
+@media screen and (min-width: theme('screens.md')) {
+  .form-cols-1 {
+    @apply grid grid-cols-1;
+  }
+  .form-cols-2 {
+    @apply grid grid-cols-2;
+  }
+  .form-cols-3 {
+    @apply grid grid-cols-3;
+  }
+  .form-cols-4 {
+    @apply grid grid-cols-4;
+  }
+  .form-cols-5 {
+    @apply grid grid-cols-5;
+  }
+  .form-cols-6 {
+    @apply grid grid-cols-6;
+  }
+  .form-cols-7 {
+    @apply grid grid-cols-7;
+  }
+  .form-cols-8 {
+    @apply grid grid-cols-8;
+  }
+  .form-cols-9 {
+    @apply grid grid-cols-9;
+  }
+  .form-cols-10 {
+    @apply grid grid-cols-10;
+  }
+  .form-cols-11 {
+    @apply grid grid-cols-11;
+  }
+  .form-cols-12 {
+    @apply grid grid-cols-12;
+  }
+}
+
+/* Valid */
+.form.valid label {
+  @apply text-green-700;
+}
+.form.valid .field {
+  @apply bg-green-50;
+  @apply border-green-600;
+}
+.form.valid .checkbox,
+.form.valid .radio {
+  @apply border-green-600;
+}
+.form.valid .validation-item {
+  @apply text-green-600;
+  @apply text-sm;
+  @apply mt-1 p-0;
+}
+
+/* Invalid */
+.form.invalid label {
+  @apply text-red-700;
+}
+.form.invalid .field {
+  @apply bg-red-50;
+  @apply border-red-600;
+}
+.form.invalid .checkbox,
+.form.invalid .radio {
+  @apply border-red-600;
+}
+.form.invalid .validation-item {
+  @apply text-red-600;
+  @apply text-sm;
+  @apply mt-1 p-0;
+}

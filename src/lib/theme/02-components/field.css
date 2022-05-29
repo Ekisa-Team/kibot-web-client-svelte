@@ -1,0 +1,16 @@
+.field {
+  @apply block;
+  @apply border-current;
+  @apply h-9;
+  @apply leading-tight;
+  @apply outline-none;
+  @apply py-2 px-3;
+  @apply rounded;
+  @apply shadow;
+  @apply w-full;
+  @apply bg-secondary;
+}
+
+.field:focus {
+  @apply ring-2 ring-blue-500;
+}

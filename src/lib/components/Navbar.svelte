@@ -42,7 +42,7 @@
     @apply px-2.5;
     @apply rounded;
     @apply w-full;
-    @apply z-30;
+    @apply z-10;
     @apply bg-opacity-75;
     @apply flex flex-wrap items-center justify-between;
     height: var(--size-navbar-height);

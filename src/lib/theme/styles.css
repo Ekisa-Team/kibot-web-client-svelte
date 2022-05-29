@@ -1,5 +1,6 @@
 /* base */
 @import './tailwindcss/base.css';
+@import './01-base/font.css';
 @import './01-base/theme.css';
 @import './01-base/document.css';
 @import './01-base/heading.css';
@@ -9,6 +10,9 @@
 @import './02-components/badge.css';
 @import './02-components/button.css';
 @import './02-components/dropdown.css';
+@import './02-components/form.css';
+@import './02-components/field.css';
+@import './02-components/boolean.css';
 
 /* utilities */
 @import './tailwindcss/utilities.css';

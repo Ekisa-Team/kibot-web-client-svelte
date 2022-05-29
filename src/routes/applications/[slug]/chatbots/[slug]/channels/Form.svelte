@@ -1,0 +1,191 @@
+<script lang="ts">
+  import Alert from '$lib/components/Alert.svelte';
+  import Clipboard from '$lib/components/Clipboard.svelte';
+  import Modal from '$lib/components/Modal.svelte';
+  import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
+  import type { Channel } from '$lib/models/app/channel';
+  import type { MessagingProvider } from '$lib/models/app/messaging-provider';
+  import type { Datalist } from '$lib/types/datalist';
+  import { nameof } from '$lib/utils/nameof';
+  import { createEventDispatcher } from 'svelte';
+  import * as sf from 'svelte-forms';
+  import { pattern, required, url } from 'svelte-forms/validators';
+
+  export let channel: Channel;
+  export let messagingProviders: MessagingProvider[];
+
+  const dispatch = createEventDispatcher<Channel>();
+
+  const httpMethods: Datalist<number> = [
+    { value: 0, text: 'POST' },
+    { value: 1, text: 'PUT' }
+  ];
+
+  const platformPhoneNumber = sf.field(
+    nameof<Channel>('platformPhoneNumber'),
+    channel.platformPhoneNumber,
+    [required(), pattern(/^([0-9]{1,2})([0-9]{10,12})$/g)]
+  );
+
+  const platformAccountSid = sf.field(
+    nameof<Channel>('platformAccountSid'),
+    channel.platformAccountSid,
+    [required()]
+  );
+
+  const platformAuthToken = sf.field(
+    nameof<Channel>('platformAuthToken'),
+    channel.platformAuthToken,
+    [required()]
+  );
+
+  const httpMethodCode = sf.field(nameof<Channel>('httpMethodCode'), channel.httpMethodCode, [
+    required()
+  ]);
+
+  const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel.callbackUrl, [
+    required(),
+    url()
+  ]);
+
+  const messagingProviderId = sf.field(
+    nameof<Channel>('messagingProviderId'),
+    channel.messagingProviderId,
+    [required()]
+  );
+
+  const formData = sf.form(
+    platformPhoneNumber,
+    platformAccountSid,
+    platformAuthToken,
+    httpMethodCode,
+    callbackUrl,
+    messagingProviderId
+  );
+
+  let canSave: boolean;
+  $: canSave = $formData.valid;
+
+  let isViewSourceOpen = false;
+
+  const handleSubmit = async () => {
+    if (canSave) {
+      dispatch('save' as any, $formData.summary);
+    }
+  };
+</script>
+
+<form class="form" on:submit|preventDefault={handleSubmit}>
+  <div class="form-group form-cols-2 mt-4 mb-8">
+    <div class="form-item">
+      <label for="platformPhoneNumber">Platform phone number</label>
+      <input
+        type="text"
+        id="platformPhoneNumber"
+        placeholder={`^([0-9]{1,2})([0-9]{10,12})$/g`}
+        bind:value={$platformPhoneNumber.value}
+        class="field" />
+      <ValidatorContainer field={$platformPhoneNumber} />
+    </div>
+
+    <div class="form-item">
+      <label for="platformAccountSid">Platform account SID</label>
+      <input
+        type="text"
+        id="platformAccountSid"
+        bind:value={$platformAccountSid.value}
+        class="field" />
+      <ValidatorContainer field={$platformAccountSid} />
+    </div>
+
+    <div class="form-item">
+      <label for="platformAuthToken">Platform auth token</label>
+      <input
+        type="text"
+        id="platformAuthToken"
+        bind:value={$platformAuthToken.value}
+        class="field" />
+      <ValidatorContainer field={$platformAuthToken} />
+    </div>
+  </div>
+
+  <Alert>
+    La siguiente configuración le permitirá establecer un Endpoint para realizar una petición HTTP <strong
+      class="font-semibold">POST</strong>
+    o <strong class="font-semibold">PUT</strong> y recibir las respuestas del usuario.
+  </Alert>
+  <div class="form-group mt-4 mb-8">
+    <div class="form-item">
+      <label for="httpMethodCode">HTTP method</label>
+      <select id="httpMethodCode" class="field" bind:value={$httpMethodCode.value}>
+        {#each httpMethods as method}
+          <option value={method.value}>{method.text}</option>
+        {/each}
+      </select>
+      <ValidatorContainer field={$httpMethodCode} />
+    </div>
+
+    <div class="form-item">
+      <label for="callbackUrl">Callback URL</label>
+      <input type="text" id="callbackUrl" bind:value={$callbackUrl.value} class="field" />
+      <ValidatorContainer field={$callbackUrl} />
+    </div>
+  </div>
+
+  <div class="form-group mt-4">
+    <div class="form-item">
+      <label for="messagingProviderId">Messaging provider</label>
+      <select id="messagingProviderId" class="field" bind:value={$messagingProviderId.value}>
+        {#each messagingProviders as provider}
+          <option value={provider.id}>{provider.name}</option>
+        {/each}
+      </select>
+      <ValidatorContainer field={$messagingProviderId} />
+    </div>
+  </div>
+
+  <div class="form-actions form-actions-end">
+    <button class="btn btn-secondary" on:click={() => (isViewSourceOpen = true)}>
+      <div class="i-ph:code mr-2 text-2xl" />
+      View source
+    </button>
+    <button class="btn btn-secondary" on:click={() => formData.clear()}>
+      <div class="i-fluent:broom-16-regular mr-2 text-2xl" />
+      Clear
+    </button>
+    <button class="btn btn-secondary" on:click={() => formData.reset()}>
+      <div class="i-ion:arrow-undo-outline mr-2 text-2xl" />
+      Reset
+    </button>
+    <button type="submit" class="btn btn-success" disabled={!canSave}>
+      <div class="i-iconoir:save-floppy-disk mr-2 text-2xl" />
+      Save
+    </button>
+  </div>
+</form>
+
+<Modal bind:isOpen={isViewSourceOpen}>
+  <span slot="title">Source</span>
+  <div slot="content">
+    <pre>
+      {JSON.stringify($formData.summary, null, 2)}
+    </pre>
+
+    <div class="form-actions form-actions-end">
+      <button class="btn btn-secondary" on:click={() => (isViewSourceOpen = false)}>
+        <div class="i-carbon:close mr-2 text-2xl" />
+        Close
+      </button>
+
+      <Clipboard
+        text={JSON.stringify($formData.summary, null, 2)}
+        let:copy
+        on:copy={() => alert('Copied')}>
+        <button class="btn btn-primary" on:click={copy}>
+          <div class="i-carbon:copy mr-2 text-2xl" />
+          Copy
+        </button>
+      </Clipboard>
+    </div>
+  </div>
+</Modal>

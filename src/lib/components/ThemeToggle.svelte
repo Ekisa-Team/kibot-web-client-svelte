@@ -3,7 +3,7 @@
   import { getTheme } from '$lib/services/theme';
   import { appTheme } from '$lib/stores/app-theme';
   import { t } from '$lib/translations';
-  import type { Datalist } from '$lib/types/datalist';
+  import type { Datalist, DataListItem } from '$lib/types/datalist';
   import {
     Listbox,
     ListboxButton,
@@ -15,7 +15,7 @@
   export let showThemeIcon = true;
   export let showThemeName = true;
 
-  const themes: Datalist<Theme>[] = [
+  const themes: Datalist<Theme> = [
     {
       value: Theme.Light,
       text: $t('layout.navbar.themePicker.light'),
@@ -33,9 +33,9 @@
     }
   ];
 
-  let selectedTheme: Datalist<Theme> = themes.find((t) => t.value === getTheme()) || themes[0];
+  let selectedTheme: DataListItem<Theme> = themes.find((t) => t.value === getTheme()) || themes[0];
 
-  const handleThemeChange = (event: CustomEvent<Datalist<Theme>>) => {
+  const handleThemeChange = (event: CustomEvent<DataListItem<Theme>>) => {
     selectedTheme = event.detail;
     appTheme.update(() => selectedTheme.value);
   };

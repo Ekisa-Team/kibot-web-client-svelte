@@ -2,6 +2,10 @@ module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   darkMode: 'class',
   theme: {
+    fontFamily: {
+      default: ['Poppins', 'sans-serif'],
+      retro: ['Major Mono Display', 'monospace']
+    },
     extend: {
       backgroundColor: {
         primary: 'var(--color-bg-primary)',

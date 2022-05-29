@@ -4,7 +4,7 @@
   export let items: BreadcrumbItems = [];
 </script>
 
-<nav aria-label="Breadcrumb" class="bg-gradient-to-r from-red-900/10 to-red-50/0 px-2">
+<nav aria-label="Breadcrumb" class="bg-gradient-to-r from-yellow-200 px-2 dark:from-yellow-800/90">
   <ol>
     {#each items as { path, icon, text }, i}
       <li>

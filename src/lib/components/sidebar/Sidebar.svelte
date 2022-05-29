@@ -122,7 +122,7 @@
     @apply fixed;
     @apply bg-sidebar;
     @apply border-r border-accent;
-    @apply z-20;
+    @apply z-10;
     @apply left-0;
     @apply top-0;
     @apply h-full;

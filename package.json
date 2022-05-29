@@ -39,6 +39,7 @@
   },
   "type": "module",
   "dependencies": {
+    "svelte-forms": "^2.3.1",
     "sveltekit-i18n": "^2.1.1"
   }
 }

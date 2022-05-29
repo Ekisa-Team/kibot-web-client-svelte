@@ -1,8 +1,17 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import type { Channel } from '$lib/models/app/channel';
+  import { messagingProvidersStore } from '$lib/stores/store';
+  import Form from './Form.svelte';
   import { channelsStore } from './store';
 
   const chatbotId = Number($page.params['slug']);
+
+  const data = Promise.all([channelsStore.fetch(chatbotId), messagingProvidersStore.fetch()]);
+
+  const handleSave = (channel: CustomEvent<Channel>) => {
+    console.log(channel.detail);
+  };
 </script>
 
 <svelte:head>
@@ -11,18 +20,13 @@
 
 <h1 class="h3">Channels</h1>
 
-{#await channelsStore.fetch(chatbotId)}
+{#await data}
   <p>Waiting...</p>
 {:then}
-  <div class="grid grid-cols-1 md:grid-cols-3">
-    <div>
-      <pre>{JSON.stringify($channelsStore, null, 2)}</pre>
-
-      <div class="flex items-center mt-4 space-x-2">
-        <button class="btn btn-secondary" disabled>Delete</button>
-      </div>
-    </div>
-  </div>
+  <Form
+    channel={$channelsStore || {}}
+    messagingProviders={$messagingProvidersStore}
+    on:save={handleSave} />
 {:catch error}
   <p>Error: {error}</p>
 {/await}
