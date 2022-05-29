@@ -21,39 +21,15 @@
     { value: 1, text: 'PUT' }
   ];
 
-  const platformPhoneNumber = sf.field(
-    nameof<Channel>('platformPhoneNumber'),
-    channel.platformPhoneNumber,
-    [required(), pattern(/^([0-9]{1,2})([0-9]{10,12})$/g)]
-  );
-
-  const platformAccountSid = sf.field(
-    nameof<Channel>('platformAccountSid'),
-    channel.platformAccountSid,
-    [required()]
-  );
-
-  const platformAuthToken = sf.field(
-    nameof<Channel>('platformAuthToken'),
-    channel.platformAuthToken,
-    [required()]
-  );
-
-  const httpMethodCode = sf.field(nameof<Channel>('httpMethodCode'), channel.httpMethodCode, [
-    required()
-  ]);
-
-  const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel.callbackUrl, [
+  const platformPhoneNumber = sf.field(nameof<Channel>('platformPhoneNumber'), channel.platformPhoneNumber, [
     required(),
-    url()
+    pattern(/^([0-9]{1,2})([0-9]{10,12})$/g)
   ]);
-
-  const messagingProviderId = sf.field(
-    nameof<Channel>('messagingProviderId'),
-    channel.messagingProviderId,
-    [required()]
-  );
-
+  const platformAccountSid = sf.field(nameof<Channel>('platformAccountSid'), channel.platformAccountSid, [required()]);
+  const platformAuthToken = sf.field(nameof<Channel>('platformAuthToken'), channel.platformAuthToken, [required()]);
+  const httpMethodCode = sf.field(nameof<Channel>('httpMethodCode'), channel.httpMethodCode, [required()]);
+  const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel.callbackUrl, [required(), url()]);
+  const messagingProviderId = sf.field(nameof<Channel>('messagingProviderId'), channel.messagingProviderId, [required()]);
   const formData = sf.form(
     platformPhoneNumber,
     platformAccountSid,
@@ -76,7 +52,7 @@
 </script>
 
 <form class="form" on:submit|preventDefault={handleSubmit}>
-  <div class="form-group form-cols-2 mt-4 mb-8">
+  <div class="form-group form-cols-2 mb-8">
     <div class="form-item">
       <label for="platformPhoneNumber">Platform phone number</label>
       <input
@@ -90,28 +66,20 @@
 
     <div class="form-item">
       <label for="platformAccountSid">Platform account SID</label>
-      <input
-        type="text"
-        id="platformAccountSid"
-        bind:value={$platformAccountSid.value}
-        class="field" />
+      <input type="text" id="platformAccountSid" bind:value={$platformAccountSid.value} class="field" />
       <ValidatorContainer field={$platformAccountSid} />
     </div>
 
     <div class="form-item">
       <label for="platformAuthToken">Platform auth token</label>
-      <input
-        type="text"
-        id="platformAuthToken"
-        bind:value={$platformAuthToken.value}
-        class="field" />
+      <input type="text" id="platformAuthToken" bind:value={$platformAuthToken.value} class="field" />
       <ValidatorContainer field={$platformAuthToken} />
     </div>
   </div>
 
   <Alert>
-    La siguiente configuración le permitirá establecer un Endpoint para realizar una petición HTTP <strong
-      class="font-semibold">POST</strong>
+    La siguiente configuración le permitirá establecer un Endpoint para realizar una petición HTTP <strong class="font-semibold"
+      >POST</strong>
     o <strong class="font-semibold">PUT</strong> y recibir las respuestas del usuario.
   </Alert>
   <div class="form-group mt-4 mb-8">
@@ -177,10 +145,7 @@
         Close
       </button>
 
-      <Clipboard
-        text={JSON.stringify($formData.summary, null, 2)}
-        let:copy
-        on:copy={() => alert('Copied')}>
+      <Clipboard text={JSON.stringify($formData.summary, null, 2)} let:copy on:copy={() => alert('Copied')}>
         <button class="btn btn-primary" on:click={copy}>
           <div class="i-carbon:copy mr-2 text-2xl" />
           Copy

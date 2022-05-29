@@ -14,3 +14,9 @@
 .field:focus {
   @apply ring-2 ring-blue-500;
 }
+
+textarea.field {
+  @apply resize-y;
+  @apply min-h-[100px];
+  @apply h-full;
+}

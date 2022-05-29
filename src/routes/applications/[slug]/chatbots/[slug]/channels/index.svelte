@@ -9,8 +9,8 @@
 
   const data = Promise.all([channelsStore.fetch(chatbotId), messagingProvidersStore.fetch()]);
 
-  const handleSave = (channel: CustomEvent<Channel>) => {
-    console.log(channel.detail);
+  const handleSave = (event: CustomEvent<Channel>) => {
+    console.log(event.detail);
   };
 </script>
 
@@ -23,10 +23,7 @@
 {#await data}
   <p>Waiting...</p>
 {:then}
-  <Form
-    channel={$channelsStore || {}}
-    messagingProviders={$messagingProvidersStore}
-    on:save={handleSave} />
+  <Form channel={$channelsStore || {}} messagingProviders={$messagingProvidersStore} on:save={handleSave} />
 {:catch error}
   <p>Error: {error}</p>
 {/await}

@@ -3,9 +3,9 @@
 
   const iconMap = new Map([
     ['info', 'i-mdi:robot-happy'],
-    ['success', 'i-mdi:robot-happy'],
-    ['warning', 'i-mdi:robot-happy'],
-    ['danger', 'i-mdi:robot-happy']
+    ['success', 'i-ph:smiley-fill'],
+    ['warning', 'i-clarity:neutral-face-solid'],
+    ['danger', 'i-raphael:skull']
   ]);
 
   const bgMap = new Map([
@@ -35,9 +35,7 @@
   const text = textMap.get(type);
 </script>
 
-<div
-  role="alert"
-  class="flex w-full items-center rounded-full  bg-gradient-to-r p-2 leading-none {bg}">
+<div role="alert" class="flex w-full items-center rounded-full  bg-gradient-to-r p-2 leading-none {bg}">
   <!-- icon -->
   <span class="mr-3 flex rounded-full px-2 py-1 text-3xl font-bold uppercase text-white {bgAccent}">
     <div class={icon} />

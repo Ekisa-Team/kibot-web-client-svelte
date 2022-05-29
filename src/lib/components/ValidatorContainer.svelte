@@ -9,8 +9,8 @@
     ['between', 'El valor ingresado no está dentro del rango.'],
     ['email', 'El correo electrónico es inválido.'],
     ['url', 'El valor ingresado NO es una URL válida.'],
-    ['min', 'El valor ingresado es inferior al mínimo permitido.'],
-    ['max', 'El valor ingresado es mayor al máximo permitido.']
+    ['min', 'La longitud del valor ingresado es inferior al mínimo permitido.'],
+    ['max', 'La longitud del valor ingresado es mayor al máximo permitido.']
   ]);
 </script>
 
