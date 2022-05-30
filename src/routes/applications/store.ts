@@ -1,5 +1,5 @@
+import { http } from '$lib/core/services/http';
 import type { ClientApplication } from '$lib/models/app/client-application';
-import { http } from '$lib/services/http';
 import { writable } from 'svelte/store';
 
 function createApplicationsStore() {

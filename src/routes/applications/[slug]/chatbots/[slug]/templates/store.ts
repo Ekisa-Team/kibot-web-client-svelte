@@ -1,5 +1,5 @@
+import { http } from '$lib/core/services/http';
 import type { Template } from '$lib/models/app/template';
-import { http } from '$lib/services/http';
 import { writable } from 'svelte/store';
 
 function createTemplatesStore() {

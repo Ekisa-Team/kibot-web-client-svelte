@@ -1,9 +1,9 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import Alert from '$lib/components/Alert.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
   import type { MessagePayload } from '$lib/models/message-payload';
   import { nameof } from '$lib/utils/nameof';
+  import { toast } from '@zerodevx/svelte-toast';
   import * as sf from 'svelte-forms';
   import { max, required } from 'svelte-forms/validators';
   import { messagesStore } from './store';
@@ -17,14 +17,15 @@
   let canSend: boolean;
   $: canSend = $formData.valid;
 
-  let isShowingAlert = false;
-  let errorMessage = '';
-
   const handleSubmit = () => {
     messagesStore
       .sendMessage(chatbotId, $formData.summary as MessagePayload)
-      .then(() => (isShowingAlert = true))
-      .catch((error) => (errorMessage = error));
+      .then(() => {
+        toast.push(`Message was sent to ${$to.value}`);
+      })
+      .catch((error) => {
+        toast.push(error);
+      });
   };
 </script>
 
@@ -35,36 +36,6 @@
 <h1 class="h3">Mensajes</h1>
 
 <form class="form" on:submit|preventDefault={handleSubmit}>
-  {#if isShowingAlert}
-    <div class="mb-6">
-      {#if errorMessage}
-        <Alert type="danger">
-          <div class="flex items-center justify-between">
-            <span>
-              Ocurrió un problema al intentar el mensaje: {errorMessage}
-            </span>
-            <button class="btn btn-secondary" on:click={() => (isShowingAlert = false)}>
-              <div class="i-carbon:close mr-2 text-2xl" />
-              Close
-            </button>
-          </div>
-        </Alert>
-      {:else}
-        <Alert type="success">
-          <div class="flex items-center justify-between">
-            <span>
-              El mensaje fue enviado correctamente al número <strong>{$to.value}</strong>
-            </span>
-            <button class="btn btn-secondary" on:click={() => (isShowingAlert = false)}>
-              <div class="i-carbon:close mr-2 text-2xl" />
-              Close
-            </button>
-          </div>
-        </Alert>
-      {/if}
-    </div>
-  {/if}
-
   <div class="form-group">
     <div class="form-item">
       <label for="to">To</label>

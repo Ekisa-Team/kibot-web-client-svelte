@@ -1,16 +1,10 @@
 <script lang="ts">
+  import { getTheme } from '$lib/core/services/theme';
   import { Theme } from '$lib/enums/theme';
-  import { getTheme } from '$lib/services/theme';
   import { appTheme } from '$lib/stores/app-theme';
   import { t } from '$lib/translations';
   import type { Datalist, DataListItem } from '$lib/types/datalist';
-  import {
-    Listbox,
-    ListboxButton,
-    ListboxOption,
-    ListboxOptions,
-    Transition
-  } from '@rgossiaux/svelte-headlessui';
+  import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@rgossiaux/svelte-headlessui';
 
   export let showThemeIcon = true;
   export let showThemeName = true;

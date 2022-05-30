@@ -3,9 +3,10 @@
   import type { BreadcrumbItems } from '$lib/components/breadcrumb/types';
   import Footer from '$lib/components/Footer.svelte';
   import Navbar from '$lib/components/Navbar.svelte';
-  import { setupTheming } from '$lib/services/theme';
-  import { setupTranslations } from '$lib/services/translate';
+  import { setupTheming } from '$lib/core/services/theme';
+  import { setupTranslations } from '$lib/core/services/translate';
   import '$lib/theme/styles.css';
+  import { SvelteToast } from '@zerodevx/svelte-toast';
   import 'uno.css';
 
   // i18n
@@ -21,6 +22,12 @@
     { text: 'Chatbots', path: '/chatbots' }
   ];
 </script>
+
+<SvelteToast
+  options={{
+    duration: 6000,
+    intro: { y: -64 }
+  }} />
 
 <div class="layout">
   <Navbar />

@@ -1,5 +1,5 @@
+import { http } from '$lib/core/services/http';
 import type { Channel } from '$lib/models/app/channel';
-import { http } from '$lib/services/http';
 import { writable } from 'svelte/store';
 
 function createChannelsStore() {

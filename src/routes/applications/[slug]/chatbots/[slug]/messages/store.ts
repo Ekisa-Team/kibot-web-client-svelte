@@ -1,6 +1,6 @@
+import { http } from '$lib/core/services/http';
 import type { MessagePayload } from '$lib/models/message-payload';
 import type { ResponseWrapper } from '$lib/models/response-wrapper';
-import { http } from '$lib/services/http';
 import { writable } from 'svelte/store';
 
 function createMessagesStore() {

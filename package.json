@@ -39,6 +39,8 @@
   },
   "type": "module",
   "dependencies": {
+    "@types/tailwindcss": "^3.0.10",
+    "@zerodevx/svelte-toast": "^0.7.2",
     "svelte-forms": "^2.3.1",
     "sveltekit-i18n": "^2.1.1"
   }

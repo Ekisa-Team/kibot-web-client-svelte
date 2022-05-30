@@ -1,5 +1,5 @@
+import { http } from '$lib/core/services/http';
 import type { MessagingProvider } from '$lib/models/app/messaging-provider';
-import { http } from '$lib/services/http';
 import { writable } from 'svelte/store';
 
 function createMessagingProvidersStore() {

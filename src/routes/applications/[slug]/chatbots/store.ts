@@ -1,5 +1,5 @@
+import { http } from '$lib/core/services/http';
 import type { Chatbot } from '$lib/models/app/chatbot';
-import { http } from '$lib/services/http';
 import { writable } from 'svelte/store';
 
 function createChatbotsStore() {

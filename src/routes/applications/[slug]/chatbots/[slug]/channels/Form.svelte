@@ -3,6 +3,7 @@
   import Clipboard from '$lib/components/Clipboard.svelte';
   import Modal from '$lib/components/Modal.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
+  import { info } from '$lib/core/services/toasts';
   import type { Channel } from '$lib/models/app/channel';
   import type { MessagingProvider } from '$lib/models/app/messaging-provider';
   import type { Datalist } from '$lib/types/datalist';
@@ -145,7 +146,7 @@
         Close
       </button>
 
-      <Clipboard text={JSON.stringify($formData.summary, null, 2)} let:copy on:copy={() => alert('Copied')}>
+      <Clipboard text={JSON.stringify($formData.summary, null, 2)} let:copy on:copy={() => info('Copied!')}>
         <button class="btn btn-primary" on:click={copy}>
           <div class="i-carbon:copy mr-2 text-2xl" />
           Copy
