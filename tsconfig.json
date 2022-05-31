@@ -8,9 +8,7 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "$lib": ["src/lib"],
-      "$lib/*": ["src/lib/*"],
-      "$theme": ["static/theme"],
-      "$theme/*": ["static/theme/*"]
+      "$lib/*": ["src/lib/*"]
     }
   }
 }

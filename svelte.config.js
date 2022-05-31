@@ -1,7 +1,6 @@
-import adapter from '@sveltejs/adapter-auto';
-import presetIcons from '@unocss/preset-icons';
-import path from 'path';
+import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
+import { presetIcons } from 'unocss';
 import unocss from 'unocss/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -14,7 +13,6 @@ const config = {
     },
     postcss: true
   }),
-
   kit: {
     adapter: adapter(),
     vite: {
@@ -24,17 +22,14 @@ const config = {
             presetIcons({
               prefix: 'i-',
               extraProperties: {
-                display: 'inline-block'
-              }
+                display: 'inline-block',
+                'vertical-align': 'middle'
+              },
+              scale: 1.2
             })
           ]
         })
-      ],
-      resolve: {
-        alias: {
-          $lib: path.resolve('./src/lib')
-        }
-      }
+      ]
     }
   }
 };
