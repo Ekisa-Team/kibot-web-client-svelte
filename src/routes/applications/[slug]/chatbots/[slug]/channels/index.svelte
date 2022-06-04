@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import Tooltip from '$lib/components/Tooltip.svelte';
   import type { Channel } from '$lib/models/app/channel';
   import { messagingProvidersStore } from '$lib/stores/store';
   import { Switch } from '@rgossiaux/svelte-headlessui';
@@ -24,10 +25,19 @@
   <h1 class="h3">Channels</h1>
 
   <div class="flex items-center space-x-3">
-    <label for="isDevModeEnabled">
-      Enable dev mode
-      <div class="i-ph:question-duotone" />
-    </label>
+    <Tooltip offset={[20, -200]}>
+      <label slot="target" for="isDevModeEnabled">
+        Enable dev mode
+        <div class="i-ph:question-duotone" />
+      </label>
+
+      <div slot="content" class="w-64">
+        <span>
+          El modo desarrollo se saltará las validaciones de URL y le permitirá configurar el <strong class="font-semibold"
+            >localhost</strong> como URL de retorno.
+        </span>
+      </div>
+    </Tooltip>
 
     <Switch
       id="isDevModeEnabled"
