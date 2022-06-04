@@ -9,10 +9,10 @@
   ]);
 
   const bgMap = new Map([
-    ['info', 'from-indigo-100 dark:from-indigo-800'],
-    ['success', 'from-green-100 dark:from-green-800'],
-    ['warning', 'from-yellow-100 dark:from-yellow-800'],
-    ['danger', 'from-red-100 dark:from-red-800']
+    ['info', 'from-indigo-100 dark:from-indigo-800 to-transparent'],
+    ['success', 'from-green-100 dark:from-green-800 to-transparent'],
+    ['warning', 'from-yellow-100 dark:from-yellow-800 to-transparent'],
+    ['danger', 'from-red-100 dark:from-red-800 to-transparent']
   ]);
 
   const bgAccentMap = new Map([

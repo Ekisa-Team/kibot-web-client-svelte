@@ -13,6 +13,7 @@
 @import './02-components/form.css';
 @import './02-components/field.css';
 @import './02-components/boolean.css';
+@import './02-components/switch.css';
 
 /* utilities */
 @import './tailwindcss/utilities.css';

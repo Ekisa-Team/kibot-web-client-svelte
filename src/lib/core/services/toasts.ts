@@ -1,30 +1,33 @@
-import { toast } from '@zerodevx/svelte-toast';
+import { toast, type SvelteToastOptions } from '@zerodevx/svelte-toast';
 
-export const info = (message: string) => toast.push(message);
+export const info = (message: string, options?: SvelteToastOptions) => toast.push(message, options);
 
-export const success = (message: string) =>
+export const success = (message: string, options?: SvelteToastOptions) =>
   toast.push(message, {
     theme: {
-      '--toastBackground': 'green',
+      '--toastBackground': '#16a34a',
       '--toastColor': 'white',
-      '--toastBarBackground': 'olive'
-    }
+      '--toastBarBackground': '#14532d'
+    },
+    ...options
   });
 
-export const warning = (message: string) =>
+export const warning = (message: string, options?: SvelteToastOptions) =>
   toast.push(message, {
     theme: {
-      '--toastBackground': 'green',
+      '--toastBackground': '#f97316',
       '--toastColor': 'white',
-      '--toastBarBackground': 'olive'
-    }
+      '--toastBarBackground': '#7c2d12'
+    },
+    ...options
   });
 
-export const failure = (message: string) =>
+export const failure = (message: string, options?: SvelteToastOptions) =>
   toast.push(message, {
     theme: {
-      '--toastBackground': 'green',
+      '--toastBackground': '#e11d48',
       '--toastColor': 'white',
-      '--toastBarBackground': 'olive'
-    }
+      '--toastBarBackground': '#881337'
+    },
+    ...options
   });

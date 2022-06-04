@@ -1,6 +1,7 @@
 <script lang="ts">
   import Alert from '$lib/components/Alert.svelte';
   import Clipboard from '$lib/components/Clipboard.svelte';
+  import HighlightBox from '$lib/components/HighlightBox.svelte';
   import Modal from '$lib/components/Modal.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
   import { info } from '$lib/core/services/toasts';
@@ -14,6 +15,7 @@
 
   export let channel: Channel;
   export let messagingProviders: MessagingProvider[];
+  export let devModeEnabled: boolean;
 
   const dispatch = createEventDispatcher<Channel>();
 
@@ -52,86 +54,88 @@
   };
 </script>
 
-<form class="form" on:submit|preventDefault={handleSubmit}>
-  <div class="form-group form-cols-2 mb-8">
-    <div class="form-item">
-      <label for="platformPhoneNumber">Platform phone number</label>
-      <input
-        type="text"
-        id="platformPhoneNumber"
-        placeholder={`^([0-9]{1,2})([0-9]{10,12})$/g`}
-        bind:value={$platformPhoneNumber.value}
-        class="field" />
-      <ValidatorContainer field={$platformPhoneNumber} />
+<HighlightBox isActive={devModeEnabled} color="yellow">
+  <form class="form" class:highlighted-box={devModeEnabled} on:submit|preventDefault={handleSubmit}>
+    <div class="form-group form-cols-2 mb-8">
+      <div class="form-item">
+        <label for="platformPhoneNumber">Platform phone number</label>
+        <input
+          type="text"
+          id="platformPhoneNumber"
+          placeholder={`^([0-9]{1,2})([0-9]{10,12})$/g`}
+          bind:value={$platformPhoneNumber.value}
+          class="field" />
+        <ValidatorContainer field={$platformPhoneNumber} />
+      </div>
+
+      <div class="form-item">
+        <label for="platformAccountSid">Platform account SID</label>
+        <input type="text" id="platformAccountSid" bind:value={$platformAccountSid.value} class="field" />
+        <ValidatorContainer field={$platformAccountSid} />
+      </div>
+
+      <div class="form-item">
+        <label for="platformAuthToken">Platform auth token</label>
+        <input type="text" id="platformAuthToken" bind:value={$platformAuthToken.value} class="field" />
+        <ValidatorContainer field={$platformAuthToken} />
+      </div>
     </div>
 
-    <div class="form-item">
-      <label for="platformAccountSid">Platform account SID</label>
-      <input type="text" id="platformAccountSid" bind:value={$platformAccountSid.value} class="field" />
-      <ValidatorContainer field={$platformAccountSid} />
+    <Alert>
+      La siguiente configuración le permitirá establecer un Endpoint para realizar una petición HTTP <strong class="font-semibold"
+        >POST</strong>
+      o <strong class="font-semibold">PUT</strong> y recibir las respuestas del usuario.
+    </Alert>
+    <div class="form-group mt-4 mb-8">
+      <div class="form-item">
+        <label for="httpMethodCode">HTTP method</label>
+        <select id="httpMethodCode" class="field" bind:value={$httpMethodCode.value}>
+          {#each httpMethods as method}
+            <option value={method.value}>{method.text}</option>
+          {/each}
+        </select>
+        <ValidatorContainer field={$httpMethodCode} />
+      </div>
+
+      <div class="form-item">
+        <label for="callbackUrl">Callback URL</label>
+        <input type="text" id="callbackUrl" bind:value={$callbackUrl.value} class="field" />
+        <ValidatorContainer field={$callbackUrl} />
+      </div>
     </div>
 
-    <div class="form-item">
-      <label for="platformAuthToken">Platform auth token</label>
-      <input type="text" id="platformAuthToken" bind:value={$platformAuthToken.value} class="field" />
-      <ValidatorContainer field={$platformAuthToken} />
-    </div>
-  </div>
-
-  <Alert>
-    La siguiente configuración le permitirá establecer un Endpoint para realizar una petición HTTP <strong class="font-semibold"
-      >POST</strong>
-    o <strong class="font-semibold">PUT</strong> y recibir las respuestas del usuario.
-  </Alert>
-  <div class="form-group mt-4 mb-8">
-    <div class="form-item">
-      <label for="httpMethodCode">HTTP method</label>
-      <select id="httpMethodCode" class="field" bind:value={$httpMethodCode.value}>
-        {#each httpMethods as method}
-          <option value={method.value}>{method.text}</option>
-        {/each}
-      </select>
-      <ValidatorContainer field={$httpMethodCode} />
+    <div class="form-group mt-4">
+      <div class="form-item">
+        <label for="messagingProviderId">Messaging provider</label>
+        <select id="messagingProviderId" class="field" bind:value={$messagingProviderId.value}>
+          {#each messagingProviders as provider}
+            <option value={provider.id}>{provider.name}</option>
+          {/each}
+        </select>
+        <ValidatorContainer field={$messagingProviderId} />
+      </div>
     </div>
 
-    <div class="form-item">
-      <label for="callbackUrl">Callback URL</label>
-      <input type="text" id="callbackUrl" bind:value={$callbackUrl.value} class="field" />
-      <ValidatorContainer field={$callbackUrl} />
+    <div class="form-actions form-actions-end">
+      <button type="button" class="btn btn-secondary" on:click={() => (isViewSourceOpen = true)}>
+        <div class="i-ph:code mr-2 text-2xl" />
+        View source
+      </button>
+      <button type="button" class="btn btn-secondary" on:click={() => formData.clear()}>
+        <div class="i-fluent:broom-16-regular mr-2 text-2xl" />
+        Clear
+      </button>
+      <button type="button" class="btn btn-secondary" on:click={() => formData.reset()}>
+        <div class="i-ion:arrow-undo-outline mr-2 text-2xl" />
+        Reset
+      </button>
+      <button type="submit" class="btn btn-success" disabled={!canSave}>
+        <div class="i-iconoir:save-floppy-disk mr-2 text-2xl" />
+        Save
+      </button>
     </div>
-  </div>
-
-  <div class="form-group mt-4">
-    <div class="form-item">
-      <label for="messagingProviderId">Messaging provider</label>
-      <select id="messagingProviderId" class="field" bind:value={$messagingProviderId.value}>
-        {#each messagingProviders as provider}
-          <option value={provider.id}>{provider.name}</option>
-        {/each}
-      </select>
-      <ValidatorContainer field={$messagingProviderId} />
-    </div>
-  </div>
-
-  <div class="form-actions form-actions-end">
-    <button class="btn btn-secondary" on:click={() => (isViewSourceOpen = true)}>
-      <div class="i-ph:code mr-2 text-2xl" />
-      View source
-    </button>
-    <button class="btn btn-secondary" on:click={() => formData.clear()}>
-      <div class="i-fluent:broom-16-regular mr-2 text-2xl" />
-      Clear
-    </button>
-    <button class="btn btn-secondary" on:click={() => formData.reset()}>
-      <div class="i-ion:arrow-undo-outline mr-2 text-2xl" />
-      Reset
-    </button>
-    <button type="submit" class="btn btn-success" disabled={!canSave}>
-      <div class="i-iconoir:save-floppy-disk mr-2 text-2xl" />
-      Save
-    </button>
-  </div>
-</form>
+  </form>
+</HighlightBox>
 
 <Modal bind:isOpen={isViewSourceOpen}>
   <span slot="title">Source</span>
@@ -146,7 +150,7 @@
         Close
       </button>
 
-      <Clipboard text={JSON.stringify($formData.summary, null, 2)} let:copy on:copy={() => info('Copied!')}>
+      <Clipboard text={JSON.stringify($formData.summary, null, 2)} let:copy on:copy={() => info('Copied!', { duration: 800 })}>
         <button class="btn btn-primary" on:click={copy}>
           <div class="i-carbon:copy mr-2 text-2xl" />
           Copy

@@ -1,0 +1,33 @@
+.switch {
+  @apply relative;
+  @apply flex items-center;
+  @apply rounded-full;
+  @apply h-7 w-12;
+}
+
+.switch-enabled {
+  @apply bg-blue-500;
+}
+
+.switch-disabled {
+  @apply bg-zinc-300 dark:bg-zinc-500;
+}
+
+.toggle {
+  @apply absolute;
+  @apply inline-block;
+  @apply h-5 w-5;
+  @apply bg-white;
+  @apply rounded-full;
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.toggle-off {
+  transform: translateX(25%);
+  @apply border shadow-md shadow-zinc-400 dark:shadow-zinc-900;
+}
+
+.toggle-on {
+  transform: translateX(115%);
+  @apply border shadow-sm shadow-blue-900;
+}

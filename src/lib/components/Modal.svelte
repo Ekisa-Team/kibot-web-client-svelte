@@ -9,20 +9,7 @@
   } from '@rgossiaux/svelte-headlessui';
 
   export let isOpen = false;
-  export let size:
-    | 'xs'
-    | 'sm'
-    | 'md'
-    | 'lg'
-    | 'xl'
-    | '2xl'
-    | '3xl'
-    | '4xl'
-    | '5xl'
-    | '6xl'
-    | '7xl'
-    | 'full'
-    | null = null;
+  export let size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full' | null = null;
 </script>
 
 <Transition appear show={isOpen}>
@@ -36,7 +23,7 @@
       leave="ease-in duration-200"
       leaveFrom="opacity-100"
       leaveTo="opacity-0">
-      <DialogOverlay class="fixed inset-0 bg-black/50  backdrop-blur-sm" />
+      <DialogOverlay class="fixed inset-0 bg-black/30 backdrop-blur-md  dark:bg-black/80" />
     </TransitionChild>
 
     <!-- content -->
