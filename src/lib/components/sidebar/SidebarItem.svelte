@@ -26,9 +26,10 @@
 
 <style lang="postcss">
   a {
-    @apply flex items-center;
+    @apply min-w-[50px];
+    @apply block;
     @apply rounded-lg;
-    @apply p-2;
+    @apply px-2 py-[0.40rem] pl-[0.6rem];
     @apply whitespace-nowrap text-primary;
   }
 

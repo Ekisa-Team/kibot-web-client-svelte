@@ -15,7 +15,7 @@
 
 <nav>
   <!-- left -->
-  <div class="flex items-center space-x-3">
+  <div class="flex items-center space-x-5">
     <button type="button" class="btn btn-secondary btn-fit" on:click={toggleSidebar}>
       {#if $sidebarState.isOpen && $sidebarState.lastEventType === 'hover'}
         <div class="i-fxemoji:ballottscriptx animate-ping text-xl" />

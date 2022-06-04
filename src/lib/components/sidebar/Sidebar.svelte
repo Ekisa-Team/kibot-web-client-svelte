@@ -109,7 +109,7 @@
 
 <style lang="postcss">
   :global(html.sidebar-collapsed) {
-    --size-sidebar-width: 16rem;
+    --size-sidebar-width: fit-content;
   }
 
   :global(html.sidebar-opened) {
@@ -138,7 +138,7 @@
 
   @media only screen and (min-width: theme('screens.md')) {
     :global(html.sidebar-collapsed) {
-      --size-sidebar-width: 4rem;
+      --size-sidebar-width: 4.52rem;
     }
 
     aside {
