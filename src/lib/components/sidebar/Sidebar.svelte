@@ -47,12 +47,12 @@
           {
             path: 'quiron',
             name: 'Quiron',
-            icon: 'i-ph:campfire-thin'
+            icon: 'i-ph:fire-duotone'
           },
           {
             path: 'tempus',
             name: 'Tempus',
-            icon: 'i-ph:campfire-thin'
+            icon: 'i-ph:fire-duotone'
           }
         ]
       }
