@@ -30,10 +30,10 @@
 </script>
 
 <svelte:head>
-  <title>Mensajes</title>
+  <title>Sandbox</title>
 </svelte:head>
 
-<h1 class="h3">Mensajes</h1>
+<h1 class="h3">Sandbox</h1>
 
 <form class="form" on:submit|preventDefault={handleSubmit}>
   <div class="form-group">

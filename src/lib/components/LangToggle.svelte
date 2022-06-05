@@ -3,12 +3,7 @@
   import type { Datalist, DataListItem } from '$lib/types/datalist';
   import type { SupportedLanguage } from '$lib/types/supported-language';
   import { LocalStorageItem, setItem } from '$lib/utils/local-storage';
-  import {
-    Listbox,
-    ListboxButton,
-    ListboxOption,
-    ListboxOptions
-  } from '@rgossiaux/svelte-headlessui';
+  import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@rgossiaux/svelte-headlessui';
 
   export let showCountryFlag = true;
   export let showLanguage = true;
@@ -36,8 +31,7 @@
     }
   ];
 
-  let selectedLanguage: DataListItem<SupportedLanguage> =
-    languages.find((l) => l.value === locale.get()) || languages[0];
+  let selectedLanguage: DataListItem<SupportedLanguage> = languages.find((l) => l.value === locale.get()) || languages[0];
 
   async function handleLanguageChange({ detail }: CustomEvent<DataListItem<SupportedLanguage>>) {
     selectedLanguage = detail;
@@ -61,13 +55,10 @@
   </ListboxButton>
 
   <!-- menu items -->
-  <ListboxOptions class="dropdown dropdown-top-right">
+  <ListboxOptions class="dropdown dropdown-bottom-left">
     {#each languages as lang (lang.value)}
       <ListboxOption value={lang} let:active let:selected>
-        <div
-          class="dropdown-item whitespace-nowrap"
-          class:dropdown-item-active={active}
-          class:dropdown-item-selected={selected}>
+        <div class="dropdown-item whitespace-nowrap" class:dropdown-item-active={active} class:dropdown-item-selected={selected}>
           <div class={lang.icon} />
           <span class="ml-3 text-sm font-semibold">{lang.text}</span>
         </div>

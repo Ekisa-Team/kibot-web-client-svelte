@@ -1,8 +1,9 @@
 export type MenuItem = {
-  key: number;
-  path: string;
+  path?: string;
   name: string;
   icon: string;
+  isDisclosed?: boolean;
+  children?: Array<MenuItem>;
 };
 
-export type Menu = MenuItem[][];
+export type Menu = MenuItem[];

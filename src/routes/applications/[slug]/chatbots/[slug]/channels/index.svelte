@@ -1,6 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import Tooltip from '$lib/components/Tooltip.svelte';
+  import { failure, success } from '$lib/core/services/toasts';
   import type { Channel } from '$lib/models/app/channel';
   import { messagingProvidersStore } from '$lib/stores/store';
   import { Switch } from '@rgossiaux/svelte-headlessui';
@@ -12,8 +13,27 @@
 
   let isDevModeEnabled = false;
 
+  const handleDisconnect = (event: CustomEvent<Channel['id']>) => {
+    console.log(event.detail);
+
+    channelsStore
+      .delete(chatbotId, event.detail)
+      .then(() => {
+        success('Channel was disconnected successfully');
+      })
+      .catch((error: Error) => failure(error.message));
+  };
+
   const handleSave = (event: CustomEvent<Channel>) => {
     console.log(event.detail);
+    if (event.detail.id) {
+      channelsStore
+        .update(chatbotId, event.detail.id, event.detail)
+        .then(() => {
+          success('Channel was updated successfully');
+        })
+        .catch((error: Error) => failure(error.message));
+    }
   };
 </script>
 
@@ -57,6 +77,7 @@
     channel={$channelsStore}
     messagingProviders={$messagingProvidersStore}
     devModeEnabled={isDevModeEnabled}
+    on:disconnect={handleDisconnect}
     on:save={handleSave} />
 {:catch error}
   <p>Error: {error}</p>

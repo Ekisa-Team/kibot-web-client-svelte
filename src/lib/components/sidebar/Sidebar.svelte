@@ -1,40 +1,69 @@
 <script lang="ts">
-  import LangToggle from '$lib/components/LangToggle.svelte';
-  import { sidebarState, type SidbarState } from '$lib/components/sidebar/store';
+  import { browser } from '$app/env';
   import { t } from '$lib/translations';
-  import type { Menu } from '../../types/menu';
-  import SidebarItem from './SidebarItem.svelte';
+  import type { Menu } from '$lib/types/menu';
+  import SidebarMenu from './SidebarMenu.svelte';
+  import { sidebarStore } from './store';
 
-  const itemsLists: Menu = [
+  const menus: Array<Menu> = [
     [
       {
-        key: 1,
-        path: 'channels',
         name: $t('layout.sidebar.channels'),
-        icon: 'i-ph:line-segments-thin'
+        icon: 'i-ph:line-segments-thin',
+        isDisclosed: false,
+        children: [
+          {
+            path: 'whatsapp',
+            name: 'WhatsApp',
+            icon: 'i-ph:whatsapp-logo-thin'
+          },
+          {
+            path: 'messenger',
+            name: 'Messenger',
+            icon: 'i-ph:messenger-logo-thin'
+          },
+          {
+            path: 'instagram',
+            name: 'Instagram',
+            icon: 'i-ph:instagram-logo-thin'
+          }
+        ]
       },
       {
-        key: 2,
-        path: 'messages',
-        name: $t('layout.sidebar.messages'),
-        icon: 'i-ph:chat-centered-dots-thin'
+        path: 'sandbox',
+        name: 'Sandbox',
+        icon: 'i-ph:cube-thin'
       },
       {
-        key: 3,
         path: 'templates',
         name: $t('layout.sidebar.templates'),
         icon: 'i-ph:stack-thin'
+      },
+      {
+        name: 'Integrations',
+        icon: 'i-ph:plugs-connected-thin',
+        isDisclosed: false,
+        children: [
+          {
+            path: 'quiron',
+            name: 'Quiron',
+            icon: 'i-ph:campfire-thin'
+          },
+          {
+            path: 'tempus',
+            name: 'Tempus',
+            icon: 'i-ph:campfire-thin'
+          }
+        ]
       }
     ],
     [
       {
-        key: 4,
         path: 'documentation',
         name: $t('layout.sidebar.documentation'),
         icon: 'i-ph:scroll-thin'
       },
       {
-        key: 5,
         path: 'help',
         name: $t('layout.sidebar.help'),
         icon: 'i-ph:lifebuoy-thin'
@@ -42,149 +71,98 @@
     ]
   ];
 
-  let currentState: SidbarState;
+  sidebarStore.update((state) => ({ ...state, menus }));
 
-  sidebarState.subscribe((state) => {
-    currentState = state;
+  sidebarStore.subscribe((state) => {
+    if (!browser) return;
+
+    const root = document.documentElement;
+
+    root.classList.remove('sidebar-collapsed');
+    root.classList.remove('sidebar-opened');
+
+    if (state.isOpen) {
+      root.classList.add('sidebar-opened');
+    } else {
+      root.classList.add('sidebar-collapsed');
+    }
   });
 
-  const handleMouseEnter = () => {
-    if (currentState.isOpen) return;
-
-    sidebarState.update(() => ({
-      lastEventType: 'hover',
-      isOpen: true
-    }));
-  };
-
-  const handleMouseLeave = () => {
-    if (currentState.lastEventType === 'click') return;
-
-    sidebarState.update(() => ({
-      lastEventType: 'hover',
-      isOpen: false
-    }));
-  };
-
   const handleOverlayClick = () => {
-    sidebarState.update(() => ({
-      lastEventType: 'click',
-      isOpen: false
-    }));
+    sidebarStore.update((state) => ({ ...state, isOpen: false }));
   };
 </script>
 
-<aside
-  aria-label="Sidebar"
-  class:click-mode={currentState.lastEventType === 'click'}
-  class:hover-mode={currentState.lastEventType === 'hover'}
-  on:mouseenter={handleMouseEnter}
-  on:mouseleave={handleMouseLeave}>
+<aside aria-label="Sidebar">
   <!-- overlay -->
-  {#if currentState.isOpen}
+  {#if $sidebarStore.isOpen}
     <button class="overlay" on:click={handleOverlayClick} />
   {/if}
 
   <!-- wrapper -->
   <div class="wrapper">
     <!-- nav -->
-    <nav class="overflow-y-auto overflow-x-hidden rounded py-4 px-3">
-      <!-- list -->
-      {#each itemsLists as list, i}
-        <ul class:with-separator={i > 0} class="space-y-1">
-          <!-- option -->
-          {#each list as item}
-            <SidebarItem item={item} showName={true} />
-          {/each}
-        </ul>
+    <nav>
+      <!-- menus -->
+      {#each $sidebarStore.menus as menu, index}
+        <SidebarMenu menu={menu} showSeparator={index > 0} />
       {/each}
     </nav>
 
     <!-- bottom options -->
-    <div class="bottom-options">
-      <LangToggle showLanguage={currentState.isOpen} />
-    </div>
+    <div class="bottom-options" />
   </div>
 </aside>
 
 <style lang="postcss">
-  :global(html.sidebar-collapsed) {
-    --size-sidebar-width: fit-content;
+  :global(html.sidebar-collapsed) aside {
+    --size-sidebar-width: 0;
+    transition: width 100ms ease;
   }
 
-  :global(html.sidebar-opened) {
+  :global(html.sidebar-opened) aside {
     --size-sidebar-width: 16rem;
+    transition: width 100ms ease;
   }
 
   aside {
-    grid-area: sidebar;
-    transition: width 100ms ease-out, transform 100ms ease-in;
-    @apply fixed;
     @apply bg-sidebar;
     @apply border-r border-accent;
-    @apply z-10;
-    @apply left-0;
-    @apply top-0;
+    @apply fixed md:relative;
     @apply h-full;
-  }
-
-  :global(.sidebar-collapsed) aside {
-    transform: translateX(calc(var(--size-sidebar-width) * -1 - 7px));
-  }
-
-  :global(.sidebar-opened) aside {
-    transform: translateX(0);
-  }
-
-  @media only screen and (min-width: theme('screens.md')) {
-    :global(html.sidebar-collapsed) {
-      --size-sidebar-width: 4.52rem;
-    }
-
-    aside {
-      width: var(--size-sidebar-width);
-      @apply relative;
-      transform: translateX(0) !important;
-    }
-  }
-
-  aside.click-mode {
-    transition-delay: 0ms;
-  }
-
-  aside.hover-mode {
-    transition-delay: 300ms;
-  }
-
-  .overlay {
-    @apply bg-black bg-opacity-20 backdrop-blur-sm;
-    @apply cursor-default;
-    @apply fixed;
-    @apply h-full w-screen;
-    @apply z-50;
-    left: calc(var(--size-sidebar-width) + 7px);
-  }
-
-  @media only screen and (min-width: theme('screens.md')) {
-    .overlay {
-      @apply hidden;
-    }
+    @apply top-0 left-0;
+    @apply z-10;
+    grid-area: sidebar;
+    width: var(--size-sidebar-width);
+    will-change: width;
   }
 
   .wrapper {
+    @apply overflow-y-auto overflow-x-hidden;
+    @apply rounded;
+    @apply py-4 px-3;
     @apply sticky;
+    @apply flex flex-col;
     top: var(--size-navbar-height);
     height: calc(100vh - var(--size-navbar-height));
   }
 
-  ul.with-separator {
-    @apply mt-4 pt-4;
-    @apply border-t border-accent;
+  nav {
+    @apply overflow-x-hidden;
+  }
+
+  .overlay {
+    @apply bg-black/30 backdrop-blur-sm dark:bg-black/80;
+    @apply cursor-default;
+    @apply fixed md:hidden;
+    @apply h-full w-screen;
+    @apply z-50;
+    left: var(--size-sidebar-width);
   }
 
   .bottom-options {
-    @apply absolute bottom-0;
-    @apply flex w-full items-center justify-center;
-    @apply py-4;
+    @apply flex items-center justify-center;
+    @apply mt-auto;
+    @apply w-full;
   }
 </style>

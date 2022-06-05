@@ -24,14 +24,20 @@
     { value: 1, text: 'PUT' }
   ];
 
-  const platformPhoneNumber = sf.field(nameof<Channel>('platformPhoneNumber'), channel.platformPhoneNumber, [
-    required(),
-    pattern(/^([0-9]{1,2})([0-9]{10,12})$/g)
-  ]);
+  const platformPhoneNumber = sf.field(
+    nameof<Channel>('platformPhoneNumber'),
+    channel.platformPhoneNumber,
+    [required(), pattern(/^([0-9]{1,2})([0-9]{10,12})$/g)],
+    {
+      checkOnInit: true
+    }
+  );
   const platformAccountSid = sf.field(nameof<Channel>('platformAccountSid'), channel.platformAccountSid, [required()]);
   const platformAuthToken = sf.field(nameof<Channel>('platformAuthToken'), channel.platformAuthToken, [required()]);
   const httpMethodCode = sf.field(nameof<Channel>('httpMethodCode'), channel.httpMethodCode, [required()]);
-  const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel.callbackUrl, [required(), url()]);
+  const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel.callbackUrl, [required(), url()], {
+    checkOnInit: false
+  });
   const messagingProviderId = sf.field(nameof<Channel>('messagingProviderId'), channel.messagingProviderId, [required()]);
   const formData = sf.form(
     platformPhoneNumber,
@@ -47,9 +53,13 @@
 
   let isViewSourceOpen = false;
 
+  const handleDisconnect = async () => {
+    dispatch('disconnect' as any, channel.id);
+  };
+
   const handleSubmit = async () => {
     if (canSave) {
-      dispatch('save' as any, $formData.summary);
+      dispatch('save' as any, { ...channel, ...$formData.summary });
     }
   };
 </script>
@@ -128,6 +138,10 @@
       <button type="button" class="btn btn-secondary" on:click={() => formData.reset()}>
         <div class="i-ion:arrow-undo-outline mr-2 text-2xl" />
         Reset
+      </button>
+      <button type="button" class="btn btn-danger" on:click={handleDisconnect}>
+        <div class="i-codicon:debug-disconnect mr-2 text-2xl" />
+        Disconnect
       </button>
       <button type="submit" class="btn btn-success" disabled={!canSave}>
         <div class="i-iconoir:save-floppy-disk mr-2 text-2xl" />

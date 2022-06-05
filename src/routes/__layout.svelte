@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
   import Breadcrumb from '$lib/components/breadcrumb/Breadcrumb.svelte';
   import type { BreadcrumbItems } from '$lib/components/breadcrumb/types';
+  import Breakpoints from '$lib/components/Breakpoints.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import Navbar from '$lib/components/Navbar.svelte';
   import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
@@ -41,6 +42,8 @@
   </main>
   <Footer />
 </div>
+
+<Breakpoints />
 
 <style lang="postcss">
   .layout {

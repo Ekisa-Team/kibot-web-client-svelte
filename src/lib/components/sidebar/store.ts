@@ -1,38 +1,22 @@
-import { browser } from '$app/env';
-import { getItem, LocalStorageItem, setItem } from '$lib/utils/local-storage';
+import type { Menu } from '$lib/types/menu';
 import { writable } from 'svelte/store';
 
 export type SidbarState = {
-  lastEventType: 'click' | 'hover';
+  menus: Array<Menu>;
   isOpen: boolean;
 };
 
-const defaultValue: SidbarState = {
-  lastEventType: 'click',
-  isOpen: true
-};
+function createSidebarStore() {
+  const { subscribe, set, update } = writable<SidbarState>({
+    isOpen: true,
+    menus: []
+  });
 
-const initialValue: SidbarState = browser
-  ? getItem<SidbarState>(LocalStorageItem.SidebarStatus) ?? defaultValue
-  : defaultValue;
+  return {
+    subscribe,
+    set,
+    update
+  };
+}
 
-export const sidebarState = writable<SidbarState>(initialValue);
-
-sidebarState.subscribe((state) => {
-  if (!browser) return;
-
-  const element = document.documentElement;
-
-  element.classList.remove('sidebar-collapsed');
-  element.classList.remove('sidebar-opened');
-
-  if (state.isOpen) {
-    element.classList.add('sidebar-opened');
-  } else {
-    element.classList.add('sidebar-collapsed');
-  }
-
-  if (state.lastEventType === 'click') {
-    setItem(LocalStorageItem.SidebarStatus, state);
-  }
-});
+export const sidebarStore = createSidebarStore();

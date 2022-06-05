@@ -1,15 +1,11 @@
 <script lang="ts">
   import Logo from '$lib/components/Logo.svelte';
-  import { sidebarState } from '$lib/components/sidebar/store';
+  import LangToggle from './LangToggle.svelte';
+  import { sidebarStore } from './sidebar/store';
   import ThemeToggle from './ThemeToggle.svelte';
 
   const toggleSidebar = () => {
-    sidebarState.update((state) => {
-      return {
-        lastEventType: 'click',
-        isOpen: !state.isOpen
-      };
-    });
+    sidebarStore.update((state) => ({ ...state, isOpen: !state.isOpen }));
   };
 </script>
 
@@ -17,8 +13,8 @@
   <!-- left -->
   <div class="flex items-center space-x-5">
     <button type="button" class="btn btn-secondary btn-fit" on:click={toggleSidebar}>
-      {#if $sidebarState.isOpen && $sidebarState.lastEventType === 'hover'}
-        <div class="i-fxemoji:ballottscriptx animate-ping text-xl" />
+      {#if $sidebarStore.isOpen}
+        <div class="i-fxemoji:ballottscriptx text-xl" />
       {:else}
         <div class="i-fxemoji:hamburger text-xl" />
       {/if}
@@ -28,7 +24,8 @@
   </div>
 
   <!-- right -->
-  <div class="flex items-center">
+  <div class="flex items-center space-x-3">
+    <LangToggle showLanguage={false} />
     <ThemeToggle />
   </div>
 </nav>
@@ -42,7 +39,7 @@
     @apply px-2.5;
     @apply rounded;
     @apply w-full;
-    @apply z-10;
+    @apply z-20;
     @apply bg-opacity-75;
     @apply flex flex-wrap items-center justify-between;
     height: var(--size-navbar-height);

@@ -6,6 +6,8 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "$lib": ["src/lib"],
       "$lib/*": ["src/lib/*"]
