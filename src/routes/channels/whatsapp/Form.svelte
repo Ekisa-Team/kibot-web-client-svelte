@@ -126,24 +126,24 @@
       </div>
     </div>
 
-    <div class="form-actions form-actions-end">
-      <button type="button" class="btn btn-secondary" on:click={() => (isViewSourceOpen = true)}>
+    <div class="mt-12 flex flex-col items-center justify-end space-y-3 md:flex-row md:space-y-0 md:space-x-3">
+      <button type="button" class="btn btn-secondary w-full md:w-auto" on:click={() => (isViewSourceOpen = true)}>
         <div class="i-ph:code mr-2 text-2xl" />
         View source
       </button>
-      <button type="button" class="btn btn-secondary" on:click={() => formData.clear()}>
+      <button type="button" class="btn btn-secondary w-full md:w-auto" on:click={() => formData.clear()}>
         <div class="i-fluent:broom-16-regular mr-2 text-2xl" />
         Clear
       </button>
-      <button type="button" class="btn btn-secondary" on:click={() => formData.reset()}>
+      <button type="button" class="btn btn-secondary w-full md:w-auto" on:click={() => formData.reset()}>
         <div class="i-ion:arrow-undo-outline mr-2 text-2xl" />
         Reset
       </button>
-      <button type="button" class="btn btn-danger" on:click={handleDisconnect}>
+      <button type="button" class="btn btn-danger w-full md:w-auto" on:click={handleDisconnect}>
         <div class="i-codicon:debug-disconnect mr-2 text-2xl" />
         Disconnect
       </button>
-      <button type="submit" class="btn btn-success" disabled={!canSave}>
+      <button type="submit" class="btn btn-success w-full md:w-auto" disabled={!canSave}>
         <div class="i-iconoir:save-floppy-disk mr-2 text-2xl" />
         Save
       </button>

@@ -1,43 +1,16 @@
 :root {
+  --size-navbar-height: 60px;
+  --size-footer-height: 160px;
 }
 
 html {
-  --size-navbar-height: 60px;
-  --size-sidebar-width: 16rem;
-  --size-footer-height: 160px;
-
-  --color-bg-primary: theme('colors.slate.50');
-  --color-bg-secondary: theme('colors.gray.100');
-  --color-bg-accent: theme('colors.white');
-
-  --color-bg-navbar: theme('colors.white');
-  --color-bg-sidebar: theme('colors.white');
-  --color-bg-footer: theme('colors.white');
-
-  --color-text-primary: theme('colors.slate.700');
-  --color-text-heading: theme('colors.black');
-
-  --color-border-accent: theme('colors.slate.200');
+  @apply bg-slate-50;
+  @apply text-slate-700;
 }
 
 html.dark {
-  --color-bg-primary: theme('colors.zinc.900');
-  --color-bg-secondary: theme('colors.zinc.700');
-  --color-bg-accent: theme('colors.zinc.800');
-
-  --color-bg-navbar: theme('colors.zinc.900');
-  --color-bg-sidebar: theme('colors.zinc.900');
-  --color-bg-footer: theme('colors.zinc.800');
-
-  --color-text-primary: theme('colors.zinc.300');
-  --color-text-heading: theme('colors.white');
-
-  --color-border-accent: theme('colors.zinc.800');
-
+  @apply bg-zinc-900;
+  @apply text-zinc-300;
+  /* radial-gradient(theme('colors.zinc.900'), theme('colors.zinc.900')) */
   color-scheme: dark;
-}
-
-html {
-  @apply bg-primary;
-  @apply text-primary;
 }

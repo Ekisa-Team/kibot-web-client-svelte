@@ -11,9 +11,8 @@ h5,
 h6,
 .h6 h1,
 .h1 {
-  @apply text-4xl;
+  @apply text-4xl text-black dark:text-white;
   @apply mb-12;
-  @apply text-heading;
 }
 
 h2,

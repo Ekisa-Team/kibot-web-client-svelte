@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { messagingProvidersStore } from '../../lib/stores/store';
+  import { messagingProviderStore } from '../../lib/stores/messaging-provider';
 </script>
 
 <svelte:head>
@@ -8,11 +8,11 @@
 
 <h1 class="h3">Messaging providers</h1>
 
-{#await messagingProvidersStore.fetch()}
+{#await messagingProviderStore.fetch()}
   <p>Waiting...</p>
 {:then}
   <div class="grid grid-cols-1 md:grid-cols-3">
-    {#each $messagingProvidersStore as provider}
+    {#each $messagingProviderStore as provider}
       <div>
         <pre>{JSON.stringify(provider, null, 2)}</pre>
 

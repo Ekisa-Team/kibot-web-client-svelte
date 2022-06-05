@@ -38,7 +38,7 @@
   .tooltip {
     @apply absolute;
     @apply p-2 py-1;
-    @apply bg-accent;
+    @apply bg-white dark:bg-zinc-800;
     @apply border border-zinc-500;
     @apply rounded-lg;
     @apply shadow-2xl;

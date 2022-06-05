@@ -12,7 +12,7 @@
   </summary>
 
   <div
-    class="overflow-hidden rounded-2xl border-l-2 border-dashed border-yellow-500 bg-zinc-200 dark:border-yellow-700 dark:bg-zinc-800">
+    class="overflow-hidden rounded border-l-2 border-dashed border-yellow-500 bg-zinc-200 dark:border-yellow-700 dark:bg-zinc-800">
     <SidebarMenu menu={item.children || []} isNested={true} />
   </div>
 </details>

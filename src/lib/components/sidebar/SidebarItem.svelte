@@ -47,6 +47,11 @@
 
       <!-- text -->
       <span class="ml-[1.1rem] text-sm" class:font-semibold={isParentOpen}>{item.name}</span>
+
+      <!-- badge -->
+      {#if item.badge}
+        <span class="badge badge-{item.badge.type} ml-3">{item.badge.text}</span>
+      {/if}
     </div>
 
     <!-- arrow -->
@@ -66,6 +71,11 @@
 
       <!-- text -->
       <span class="ml-[1.1rem] text-sm" class:font-semibold={isParentOpen}>{item.name}</span>
+
+      <!-- badge -->
+      {#if item.badge}
+        <span class="badge badge-{item.badge.type} ml-3">{item.badge.text}</span>
+      {/if}
     </div>
 
     <!-- arrow -->
@@ -83,11 +93,11 @@
     @apply min-w-[50px];
     @apply rounded-lg;
     @apply px-2 py-[0.40rem] pl-[0.6rem];
-    @apply whitespace-nowrap text-primary;
+    @apply whitespace-nowrap;
   }
 
   .menu-item:hover,
   .menu-item.active {
-    @apply bg-secondary;
+    @apply bg-zinc-300 dark:bg-zinc-700;
   }
 </style>

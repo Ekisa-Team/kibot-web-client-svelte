@@ -1,17 +1,20 @@
 <script lang="ts">
-  import { page } from '$app/stores';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import { failure, success } from '$lib/core/services/toasts';
   import type { Channel } from '$lib/models/app/channel';
-  import { messagingProvidersStore } from '$lib/stores/store';
+  import { chatbotStore } from '$lib/stores/chatbot';
+  import { messagingProviderStore } from '$lib/stores/messaging-provider';
   import { Switch } from '@rgossiaux/svelte-headlessui';
   import Form from './Form.svelte';
   import { channelsStore } from './store';
 
-  const chatbotId = Number($page.params['slug']);
-  const data = Promise.all([channelsStore.fetch(chatbotId), messagingProvidersStore.fetch()]);
+  $: chatbotId = $chatbotStore.selectedChatbot?.id || 0;
 
   let isDevModeEnabled = false;
+
+  const fetchData = (chatbotId: number) => {
+    return Promise.all([channelsStore.fetch(chatbotId), messagingProviderStore.fetch()]);
+  };
 
   const handleDisconnect = (event: CustomEvent<Channel['id']>) => {
     console.log(event.detail);
@@ -38,11 +41,11 @@
 </script>
 
 <svelte:head>
-  <title>Channels</title>
+  <title>WhatsApp Channel</title>
 </svelte:head>
 
-<div class="flex items-start justify-between">
-  <h1 class="h3">Channels</h1>
+<div class="mb-6 flex flex-col items-start justify-between md:flex-row">
+  <h1 class="h3">WhatsApp Channel</h1>
 
   <div class="flex items-center space-x-3">
     <Tooltip offset={[20, -200]}>
@@ -70,12 +73,12 @@
   </div>
 </div>
 
-{#await data}
+{#await fetchData(chatbotId)}
   <p>Waiting...</p>
 {:then}
   <Form
     channel={$channelsStore}
-    messagingProviders={$messagingProvidersStore}
+    messagingProviders={$messagingProviderStore}
     devModeEnabled={isDevModeEnabled}
     on:disconnect={handleDisconnect}
     on:save={handleSave} />

@@ -42,7 +42,7 @@
   }
 
   .content-wrapper {
-    @apply bg-footer;
+    @apply bg-white dark:bg-zinc-900;
     @apply flex items-center justify-between;
     @apply p-4;
     @apply rounded-lg;
@@ -51,7 +51,7 @@
 
   ul {
     @apply flex flex-wrap items-center;
-    @apply text-sm text-primary;
+    @apply text-sm;
   }
 
   ul > li > a {

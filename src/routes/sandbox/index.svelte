@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { page } from '$app/stores';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
   import type { MessagePayload } from '$lib/models/message-payload';
+  import { chatbotStore } from '$lib/stores/chatbot';
   import { nameof } from '$lib/utils/nameof';
   import { toast } from '@zerodevx/svelte-toast';
   import * as sf from 'svelte-forms';
   import { max, required } from 'svelte-forms/validators';
   import { messagesStore } from './store';
 
-  const chatbotId = Number($page.params['slug']);
+  $: chatbotId = $chatbotStore.selectedChatbot?.id || 0;
 
   const to = sf.field(nameof<MessagePayload>('to'), '', [required()]);
   const message = sf.field(nameof<MessagePayload>('message'), '', [required(), max(200)]);

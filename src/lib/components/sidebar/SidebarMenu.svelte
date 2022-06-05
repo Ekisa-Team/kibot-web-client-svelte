@@ -22,7 +22,7 @@
 
 <style lang="postcss">
   ul.with-separator {
-    @apply border-t border-accent;
+    @apply border-t border-zinc-200 dark:border-zinc-800;
     @apply mt-4 pt-4;
   }
 </style>

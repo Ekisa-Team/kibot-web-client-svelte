@@ -1,7 +1,10 @@
 <script lang="ts">
   import { browser } from '$app/env';
+  import { chatbotStore } from '$lib/stores/chatbot';
+  import { clientApplicationStore } from '$lib/stores/client-application';
   import { t } from '$lib/translations';
   import type { Menu } from '$lib/types/menu';
+  import Alert from '../Alert.svelte';
   import SidebarMenu from './SidebarMenu.svelte';
   import { sidebarStore } from './store';
 
@@ -13,44 +16,45 @@
         isDisclosed: false,
         children: [
           {
-            path: 'whatsapp',
+            path: '/channels/whatsapp',
             name: 'WhatsApp',
             icon: 'i-ph:whatsapp-logo-thin'
           },
           {
-            path: 'messenger',
+            path: '/channels/messenger',
             name: 'Messenger',
             icon: 'i-ph:messenger-logo-thin'
           },
           {
-            path: 'instagram',
+            path: '/channels/instagram',
             name: 'Instagram',
             icon: 'i-ph:instagram-logo-thin'
           }
         ]
       },
       {
-        path: 'sandbox',
+        path: '/sandbox',
         name: 'Sandbox',
-        icon: 'i-ph:cube-thin'
+        icon: 'i-ph:codepen-logo-thin'
       },
       {
-        path: 'templates',
+        path: '/templates',
         name: $t('layout.sidebar.templates'),
         icon: 'i-ph:stack-thin'
       },
       {
         name: 'Integrations',
         icon: 'i-ph:plugs-connected-thin',
+        badge: { type: 'success', text: 'New' },
         isDisclosed: false,
         children: [
           {
-            path: 'quiron',
+            path: '/integrations/quiron',
             name: 'Quiron',
             icon: 'i-ph:fire-duotone'
           },
           {
-            path: 'tempus',
+            path: '/integrations/tempus',
             name: 'Tempus',
             icon: 'i-ph:fire-duotone'
           }
@@ -59,12 +63,12 @@
     ],
     [
       {
-        path: 'documentation',
+        path: '/documentation',
         name: $t('layout.sidebar.documentation'),
         icon: 'i-ph:scroll-thin'
       },
       {
-        path: 'help',
+        path: '/help',
         name: $t('layout.sidebar.help'),
         icon: 'i-ph:lifebuoy-thin'
       }
@@ -93,7 +97,7 @@
   };
 </script>
 
-<aside aria-label="Sidebar">
+<aside aria-label="Sidebar" class="bg-white/40 backdrop-blur-md dark:bg-zinc-900/90">
   <!-- overlay -->
   {#if $sidebarStore.isOpen}
     <button class="overlay" on:click={handleOverlayClick} />
@@ -110,7 +114,23 @@
     </nav>
 
     <!-- bottom options -->
-    <div class="bottom-options" />
+    <div class="bottom-options">
+      <span class="badge badge-warning mb-6 inline-block">
+        Parámetros
+        <div class="i-ph:arrow-elbow-right-down" />
+      </span>
+
+      <div class="flex flex-col space-y-2">
+        <Alert type="success">
+          <div slot="icon" class="i-ph:terminal-window-duotone" />
+          <span class="block max-w-[150px] truncate">{$clientApplicationStore.selectedClient?.name}</span>
+        </Alert>
+        <Alert type="warning">
+          <div slot="icon" class="i-ph:robot-fill" />
+          <span class="block max-w-[150px] truncate">{$chatbotStore?.selectedChatbot?.accessKey}</span>
+        </Alert>
+      </div>
+    </div>
   </div>
 </aside>
 
@@ -121,13 +141,12 @@
   }
 
   :global(html.sidebar-opened) aside {
-    --size-sidebar-width: 16rem;
+    --size-sidebar-width: 17rem;
     transition: width 100ms ease;
   }
 
   aside {
-    @apply bg-sidebar;
-    @apply border-r border-accent;
+    @apply border-r border-zinc-200 dark:border-red-500;
     @apply fixed md:relative;
     @apply h-full;
     @apply top-0 left-0;
@@ -161,8 +180,8 @@
   }
 
   .bottom-options {
-    @apply flex items-center justify-center;
     @apply mt-auto;
     @apply w-full;
+    @apply relative;
   }
 </style>

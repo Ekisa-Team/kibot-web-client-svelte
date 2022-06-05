@@ -37,7 +37,7 @@
       class="grid h-full place-items-center">
       <!-- container -->
       <div
-        class="my-8 inline-block transform overflow-hidden rounded-2xl bg-accent p-6 text-left shadow-2xl transition-all"
+        class="my-8 inline-block transform overflow-hidden rounded-2xl bg-white p-6 text-left shadow-2xl transition-all dark:bg-zinc-800"
         class:max-w-xs={size === 'xs'}
         class:max-w-sm={size === 'sm'}
         class:max-w-md={size === 'md'}

@@ -2,7 +2,7 @@ import { http } from '$lib/core/services/http';
 import type { MessagingProvider } from '$lib/models/app/messaging-provider';
 import { writable } from 'svelte/store';
 
-function createMessagingProvidersStore() {
+function createMessagingProviderStore() {
   const { subscribe, set } = writable<MessagingProvider[]>([]);
 
   return {
@@ -16,4 +16,4 @@ function createMessagingProvidersStore() {
   };
 }
 
-export const messagingProvidersStore = createMessagingProvidersStore();
+export const messagingProviderStore = createMessagingProviderStore();

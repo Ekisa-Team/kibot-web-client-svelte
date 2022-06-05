@@ -1,7 +1,9 @@
 export enum LocalStorageItem {
   Language = 'app::lang',
   Theme = 'app::theme',
-  SidebarStatus = 'app::sidebar::status'
+  SidebarStatus = 'app::sidebar::status',
+  SelectedClientApp = 'app::client_app::selected',
+  SelectedChatbot = 'app::chatbot::selected'
 }
 
 function getItem<T>(item: LocalStorageItem, shouldParse = true): T | null {

@@ -3,24 +3,7 @@
   @apply shadow;
   @apply rounded-xl;
   @apply py-8 px-4;
-  @apply bg-accent;
-}
-
-.form-item {
-}
-
-.form-actions {
-  @apply flex items-center;
-  @apply mt-12 space-x-4;
-}
-.form-actions-start {
-  @apply justify-start;
-}
-.form-actions-center {
-  @apply justify-center;
-}
-.form-actions-end {
-  @apply justify-end;
+  @apply bg-white dark:bg-zinc-800;
 }
 
 .form-group {

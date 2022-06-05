@@ -38,7 +38,9 @@
 <div role="alert" class="flex w-full items-center rounded-full  bg-gradient-to-r p-2 leading-none {bg}">
   <!-- icon -->
   <span class="mr-3 flex rounded-full px-2 py-1 text-3xl font-bold uppercase text-white {bgAccent}">
-    <div class={icon} />
+    <slot name="icon">
+      <div class={icon} />
+    </slot>
   </span>
 
   <!-- text -->

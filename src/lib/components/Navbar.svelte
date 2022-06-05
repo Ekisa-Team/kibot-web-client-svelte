@@ -25,6 +25,10 @@
 
   <!-- right -->
   <div class="flex items-center space-x-3">
+    <a href="/applications" class="btn btn-secondary btn-inline btn-fit space-x-2">
+      <div class="i-ph:arrow-circle-left-duotone text-xl text-blue-400" />
+      <span class="hidden md:inline">Regresar</span>
+    </a>
     <LangToggle showLanguage={false} />
     <ThemeToggle />
   </div>
@@ -33,9 +37,9 @@
 <style lang="postcss">
   nav {
     grid-area: navbar;
-    @apply bg-navbar;
+    @apply bg-white/20 backdrop-blur-lg dark:bg-zinc-900/80;
     @apply fixed inset-x-auto top-0;
-    @apply border-b border-accent;
+    @apply border-b border-zinc-200 dark:border-zinc-800;
     @apply px-2.5;
     @apply rounded;
     @apply w-full;

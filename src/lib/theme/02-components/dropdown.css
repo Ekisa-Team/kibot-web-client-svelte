@@ -1,6 +1,6 @@
 .dropdown {
   @apply absolute;
-  @apply bg-accent;
+  @apply bg-white dark:bg-zinc-800;
   @apply focus:outline-none;
   @apply overflow-hidden;
   @apply py-1.5;
@@ -31,12 +31,11 @@
   @apply cursor-pointer;
   @apply flex items-center;
   @apply px-3 py-2;
-  @apply text-primary;
   @apply w-full;
 }
 
 .dropdown-item-active {
-  @apply bg-secondary;
+  @apply bg-zinc-100 dark:bg-zinc-700;
 }
 
 .dropdown-item-selected {
