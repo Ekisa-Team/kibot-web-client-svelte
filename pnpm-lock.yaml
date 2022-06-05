@@ -4,6 +4,7 @@ specifiers:
   '@iconify/json': ^2.1.54
   '@rgossiaux/svelte-headlessui': ^1.0.2
   '@sveltejs/adapter-auto': ^1.0.0-next.50
+  '@sveltejs/adapter-static': ^1.0.0-next.34
   '@sveltejs/kit': ^1.0.0-next.347
   '@types/tailwindcss': ^3.0.10
   '@typescript-eslint/eslint-plugin': ^5.27.0
@@ -36,6 +37,7 @@ devDependencies:
   '@iconify/json': 2.1.54
   '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.48.0
   '@sveltejs/adapter-auto': 1.0.0-next.50
+  '@sveltejs/adapter-static': 1.0.0-next.34
   '@sveltejs/kit': 1.0.0-next.347_svelte@3.48.0
   '@types/tailwindcss': 3.0.10
   '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
@@ -230,6 +232,12 @@ packages:
       '@iarna/toml': 2.2.5
       esbuild: 0.14.42
       set-cookie-parser: 2.4.8
+      tiny-glob: 0.2.9
+    dev: true
+
+  /@sveltejs/adapter-static/1.0.0-next.34:
+    resolution: {integrity: sha512-XjuMhemme5z0L/B2nTZpA6k+RJjF+b6L96ts6gIQ6ixiCzJQSbBqJhrrBYBCaeLAKvdUMoGEmX8m862JhKjRFg==}
+    dependencies:
       tiny-glob: 0.2.9
     dev: true
 

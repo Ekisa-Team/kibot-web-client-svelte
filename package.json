@@ -16,6 +16,7 @@
     "@iconify/json": "^2.1.54",
     "@rgossiaux/svelte-headlessui": "^1.0.2",
     "@sveltejs/adapter-auto": "^1.0.0-next.50",
+    "@sveltejs/adapter-static": "^1.0.0-next.34",
     "@sveltejs/kit": "^1.0.0-next.347",
     "@types/tailwindcss": "^3.0.10",
     "@typescript-eslint/eslint-plugin": "^5.27.0",

@@ -14,7 +14,11 @@ const config = {
     postcss: true
   }),
   kit: {
-    adapter: adapter(),
+    adapter: adapter({
+      pages: 'build',
+      assets: 'build',
+      fallback: null
+    }),
     vite: {
       plugins: [
         unocss({
