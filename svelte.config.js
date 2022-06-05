@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-auto';
 import preprocess from 'svelte-preprocess';
 import { presetIcons } from 'unocss';
 import unocss from 'unocss/vite';
@@ -15,11 +15,6 @@ const config = {
   }),
   kit: {
     adapter: adapter(),
-    prerender: {
-      default: true,
-      onError: 'continue'
-    },
-    trailingSlash: 'always',
     vite: {
       plugins: [
         unocss({
