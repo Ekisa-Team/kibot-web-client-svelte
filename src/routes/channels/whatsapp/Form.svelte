@@ -15,6 +15,7 @@
 
   export let channel: Channel;
   export let messagingProviders: MessagingProvider[];
+  export let isChannelConnected: boolean;
   export let devModeEnabled: boolean;
 
   const dispatch = createEventDispatcher<Channel>();
@@ -145,10 +146,12 @@
         <div class="i-ion:arrow-undo-outline mr-2 text-2xl" />
         Reset
       </button>
-      <button type="button" class="btn btn-red" on:click={handleDisconnect}>
-        <div class="i-codicon:debug-disconnect mr-2 text-2xl" />
-        Disconnect
-      </button>
+      {#if isChannelConnected}
+        <button type="button" class="btn btn-red" on:click={handleDisconnect}>
+          <div class="i-codicon:debug-disconnect mr-2 text-2xl" />
+          Disconnect
+        </button>
+      {/if}
       <button type="submit" class="btn btn-green" disabled={!canSave}>
         <div class="i-iconoir:save-floppy-disk mr-2 text-2xl" />
         Save

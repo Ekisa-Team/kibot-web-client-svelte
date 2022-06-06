@@ -1,28 +1,48 @@
 <script lang="ts">
   import type { Menu } from '$lib/types/menu';
   import SidebarItem from './SidebarItem.svelte';
-  import SidebarItemMenu from './SidebarItemMenu.svelte';
 
   export let menu: Menu;
-  export let showSeparator = false;
-  export let isNested = false;
+  export let hasSeparator: boolean;
 </script>
 
-<ul class:separator={showSeparator} class="space-y-1">
+<ul class="{hasSeparator ? 'border-t ui-border-base mt-4 pt-4' : ''} space-y-1 select-none">
   {#each menu as item}
     <li>
-      {#if item.children}
-        <SidebarItemMenu item={item} />
+      {#if item.type === 'link'}
+        <SidebarItem item={item} />
       {:else}
-        <SidebarItem item={item} showIcon={!isNested} />
+        <details bind:open={item.isDisclosed}>
+          <summary class="cursor-pointer list-none">
+            <SidebarItem item={item} isParent={true} isParentOpen={item.isDisclosed} />
+          </summary>
+
+          <div
+            class="overflow-hidden rounded border-l-2 border-dashed border-yellow-500 bg-zinc-200 dark:border-yellow-700 dark:bg-zinc-800">
+            <svelte:self menu={item.children} />
+          </div>
+        </details>
       {/if}
     </li>
   {/each}
 </ul>
 
 <style lang="postcss">
-  ul.separator {
-    @apply border-t ui-border-base;
-    @apply mt-4 pt-4;
+  details[open] summary + div {
+    animation-name: sweep;
+    animation-duration: 200ms;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes sweep {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>

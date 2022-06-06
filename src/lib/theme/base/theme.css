@@ -10,7 +10,10 @@ html {
 
 html.dark {
   @apply bg-zinc-900;
-  /* background: radial-gradient(theme('colors.indigo.900'), theme('colors.black')); */
   @apply text-zinc-300;
   color-scheme: dark;
+}
+
+html.dark.phantom {
+  background: radial-gradient(theme('colors.indigo.900'), theme('colors.black'));
 }

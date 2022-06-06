@@ -21,8 +21,6 @@ const listenForMediaChanges = () => {
     mediaQuery &&
     mediaQuery.addEventListener('change', () => {
       // Only applies changes if the current theme is "system"
-      console.log('media', getTheme());
-
       if (getTheme() === Theme.System) {
         setTheme(Theme.System);
       }

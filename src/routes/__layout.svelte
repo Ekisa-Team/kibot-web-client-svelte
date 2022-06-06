@@ -8,7 +8,6 @@
   import { setupTheming } from '$lib/core/services/theme';
   import { setupTranslations } from '$lib/core/services/translate';
   import { SvelteToast } from '@zerodevx/svelte-toast';
-
   
   import 'uno.css';
   import '$lib/theme/styles.css';

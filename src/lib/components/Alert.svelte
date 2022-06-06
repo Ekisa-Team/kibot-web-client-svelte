@@ -37,7 +37,7 @@
 
 <div
   role="alert"
-  class="flex flex-col gap-3 p-2 rounded-lg md:(flex-row p-3 rounded-full) w-full items-center bg-gradient-to-r leading-none {bg}">
+  class="flex flex-col gap-3 p-2 rounded-lg md:(flex-row p-4 rounded-full) w-full items-center bg-gradient-to-r leading-none {bg}">
   <!-- icon -->
   <span class="flex rounded-full px-2 py-1 text-3xl font-bold uppercase text-white {bgAccent}">
     <slot name="icon">

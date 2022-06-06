@@ -9,6 +9,7 @@
   import { channelsStore } from './store';
 
   $: chatbotId = $chatbotStore.selectedChatbot?.id || 0;
+  $: isChannelConnected = !!$channelsStore;
 
   let isDevModeEnabled = false;
 
@@ -17,8 +18,6 @@
   };
 
   const handleDisconnect = (event: CustomEvent<Channel['id']>) => {
-    console.log(event.detail);
-
     channelsStore
       .delete(chatbotId, event.detail)
       .then(() => {
@@ -28,7 +27,6 @@
   };
 
   const handleSave = (event: CustomEvent<Channel>) => {
-    console.log(event.detail);
     if (event.detail.id) {
       channelsStore
         .update(chatbotId, event.detail.id, event.detail)
@@ -45,7 +43,16 @@
 </svelte:head>
 
 <div class="mb-6 flex flex-col items-start justify-between md:flex-row">
-  <h1 class="h3">WhatsApp Channel</h1>
+  <h1 class="h3">
+    WhatsApp Channel
+
+    {#if isChannelConnected}
+      <span class="badge badge-green ml-2 align-middle">
+        <div class="i-mdi:checkbox-multiple-outline" />
+        Connected
+      </span>
+    {/if}
+  </h1>
 
   <div class="flex items-center space-x-3">
     <Tooltip offset={[20, -200]}>
@@ -80,6 +87,7 @@
     channel={$channelsStore}
     messagingProviders={$messagingProviderStore}
     devModeEnabled={isDevModeEnabled}
+    isChannelConnected={isChannelConnected}
     on:disconnect={handleDisconnect}
     on:save={handleSave} />
 {:catch error}

@@ -1,4 +1,5 @@
 export type MenuItem = {
+  type: 'link' | 'group';
   path?: string;
   name: string;
   icon: string;

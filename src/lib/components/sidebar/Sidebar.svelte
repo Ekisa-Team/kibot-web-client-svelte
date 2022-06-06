@@ -1,31 +1,33 @@
 <script lang="ts">
   import { browser } from '$app/env';
-  import { chatbotStore } from '$lib/stores/chatbot';
-  import { clientApplicationStore } from '$lib/stores/client-application';
   import { t } from '$lib/translations';
   import type { Menu } from '$lib/types/menu';
-  import Alert from '../Alert.svelte';
+  import SidebarBottom from './SidebarBottom.svelte';
   import SidebarMenu from './SidebarMenu.svelte';
   import { sidebarStore } from './store';
 
   const menus: Array<Menu> = [
     [
       {
+        type: 'group',
         name: $t('layout.sidebar.channels'),
         icon: 'i-ph:line-segments-thin',
         isDisclosed: false,
         children: [
           {
+            type: 'link',
             path: '/channels/whatsapp',
             name: 'WhatsApp',
             icon: 'i-ph:whatsapp-logo-thin'
           },
           {
+            type: 'link',
             path: '/channels/messenger',
             name: 'Messenger',
             icon: 'i-ph:messenger-logo-thin'
           },
           {
+            type: 'link',
             path: '/channels/instagram',
             name: 'Instagram',
             icon: 'i-ph:instagram-logo-thin'
@@ -33,27 +35,32 @@
         ]
       },
       {
+        type: 'link',
         path: '/sandbox',
         name: 'Sandbox',
         icon: 'i-ph:codepen-logo-thin'
       },
       {
+        type: 'link',
         path: '/templates',
         name: $t('layout.sidebar.templates'),
         icon: 'i-ph:stack-thin'
       },
       {
+        type: 'group',
         name: 'Integrations',
         icon: 'i-ph:plugs-connected-thin',
         badge: { color: 'yellow', text: 'Alpha' },
         isDisclosed: false,
         children: [
           {
+            type: 'link',
             path: '/integrations/quiron',
             name: 'Quiron',
             icon: 'i-ph:fire-duotone'
           },
           {
+            type: 'link',
             path: '/integrations/tempus',
             name: 'Tempus',
             icon: 'i-ph:fire-duotone'
@@ -63,11 +70,13 @@
     ],
     [
       {
+        type: 'link',
         path: '/documentation',
         name: $t('layout.sidebar.documentation'),
         icon: 'i-ph:scroll-thin'
       },
       {
+        type: 'link',
         path: '/help',
         name: $t('layout.sidebar.help'),
         icon: 'i-ph:lifebuoy-thin'
@@ -105,32 +114,15 @@
 
   <!-- wrapper -->
   <div class="wrapper">
-    <!-- nav -->
+    <!-- menu -->
     <nav>
-      <!-- menus -->
       {#each $sidebarStore.menus as menu, index}
-        <SidebarMenu menu={menu} showSeparator={index > 0} />
+        <SidebarMenu menu={menu} hasSeparator={index > 0} />
       {/each}
     </nav>
 
     <!-- bottom options -->
-    <div class="bottom-options">
-      <span class="badge badge-yellow mb-6 inline-block whitespace-nowrap">
-        Referencias
-        <div class="i-ph:arrow-elbow-right-down" />
-      </span>
-
-      <div class="flex flex-col space-y-2">
-        <Alert type="success">
-          <div slot="icon" class="i-ph:terminal-window-duotone" />
-          <span class="block max-w-[150px] truncate">{$clientApplicationStore.selectedClient?.name}</span>
-        </Alert>
-        <Alert type="warning">
-          <div slot="icon" class="i-ph:robot-fill" />
-          <span class="block max-w-[150px] truncate">{$chatbotStore?.selectedChatbot?.accessKey}</span>
-        </Alert>
-      </div>
-    </div>
+    <SidebarBottom />
   </div>
 </aside>
 
@@ -167,12 +159,5 @@
 
   .ui-overlay {
     left: var(--size-sidebar-width);
-  }
-
-  .bottom-options {
-    @apply mt-auto;
-    @apply w-full;
-    @apply relative;
-    @apply overflow-hidden;
   }
 </style>
