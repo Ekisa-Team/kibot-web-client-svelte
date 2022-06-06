@@ -7,6 +7,8 @@ export type ResponseWrapper<T> = {
     exceptionMessage?:
       | string
       | {
+          message?: string;
+          stackTrace?: string;
           errors: Record<string, string[]>;
           status: number;
           title: string;

@@ -1,12 +1,13 @@
 <script lang="ts">
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
+  import { failure } from '$lib/core/services/toasts';
   import type { MessagePayload } from '$lib/models/message-payload';
   import { chatbotStore } from '$lib/stores/chatbot';
   import { nameof } from '$lib/utils/nameof';
   import { toast } from '@zerodevx/svelte-toast';
   import * as sf from 'svelte-forms';
   import { max, required } from 'svelte-forms/validators';
-  import { messagesStore } from './store';
+  import { messageStore } from './store';
 
   $: chatbotId = $chatbotStore.selectedChatbot?.id || 0;
 
@@ -17,14 +18,20 @@
   let canSend: boolean;
   $: canSend = $formData.valid;
 
-  const handleSubmit = () => {
-    messagesStore
+  const handleSubmit = async () => {
+    await formData.validate();
+
+    if (!$formData.valid) {
+      return;
+    }
+
+    messageStore
       .sendMessage(chatbotId, $formData.summary as MessagePayload)
       .then(() => {
         toast.push(`Message was sent to ${$to.value}`);
       })
-      .catch((error) => {
-        toast.push(error);
+      .catch((error: Error) => {
+        failure(error.message);
       });
   };
 </script>
@@ -45,7 +52,7 @@
 
     <div class="form-item">
       <label for="message">Message</label>
-      <textarea id="message" bind:value={$message.value} class="field max-h-[200px]" />
+      <textarea id="message" bind:value={$message.value} class="field max-h-[250px]" />
       <div class="flex py-2 text-sm">
         <span class:text-red-400={$message.value.length > 200}>{$message.value.length}</span>
         <span>/200</span>
@@ -55,7 +62,7 @@
   </div>
 
   <div class="actions-group">
-    <button class="btn btn-secondary" on:click={() => formData.clear()}>
+    <button type="button" class="btn btn-secondary" on:click={() => formData.clear()}>
       <div class="i-fluent:broom-16-regular mr-2 text-2xl" />
       Clear
     </button>

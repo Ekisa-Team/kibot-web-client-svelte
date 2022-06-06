@@ -3,18 +3,24 @@ import type { ResponseWrapper } from '$lib/models/response-wrapper';
 const handleResponse = async <T>(response: Response): Promise<ResponseWrapper<T>> => {
   const serviceResponse = (await response.json()) as ResponseWrapper<T>;
 
+  console.log(serviceResponse);
+
   if (!response.ok) {
     const { exceptionMessage } = serviceResponse.exception || {};
 
     let message = 'Some error ocurred.';
 
     if (typeof exceptionMessage === 'object') {
-      const listOfErrors: string[] = [];
-      Object.keys(exceptionMessage.errors).forEach((key) => {
-        listOfErrors.push(`${key}: ${exceptionMessage.errors[key].join('\n')}`);
-      });
+      if (Object.prototype.hasOwnProperty.call(exceptionMessage, 'message')) {
+        message = `${exceptionMessage.type}: ${exceptionMessage.message || ''}`;
+      } else {
+        const listOfErrors: string[] = [];
+        Object.keys(exceptionMessage.errors).forEach((key) =>
+          listOfErrors.push(`${key} => ${exceptionMessage.errors[key].join(' - ')}`)
+        );
 
-      message = `${exceptionMessage.title}\n\n${listOfErrors.join('\n\n')}`;
+        message = `${exceptionMessage.title}: ${listOfErrors.join(',')}`;
+      }
     } else {
       message = exceptionMessage || response.statusText;
     }
@@ -30,7 +36,11 @@ async function get<T>(url: string, httpHeaders?: HeadersInit | undefined): Promi
   return handleResponse(response);
 }
 
-async function post<T>(url: string, body: T, httpHeaders?: HeadersInit | undefined): Promise<ResponseWrapper<T>> {
+async function post<T>(
+  url: string,
+  body: T,
+  httpHeaders?: HeadersInit | undefined
+): Promise<ResponseWrapper<T>> {
   const response = await fetch(url, {
     body: JSON.stringify(body),
     method: 'POST',
@@ -43,7 +53,11 @@ async function post<T>(url: string, body: T, httpHeaders?: HeadersInit | undefin
   return handleResponse(response);
 }
 
-async function put<T>(url: string, body: T, httpHeaders?: HeadersInit | undefined): Promise<ResponseWrapper<T>> {
+async function put<T>(
+  url: string,
+  body: T,
+  httpHeaders?: HeadersInit | undefined
+): Promise<ResponseWrapper<T>> {
   const response = await fetch(url, {
     body: JSON.stringify(body),
     method: 'PUT',
@@ -56,7 +70,11 @@ async function put<T>(url: string, body: T, httpHeaders?: HeadersInit | undefine
   return handleResponse(response);
 }
 
-async function patch<T>(url: string, body: T, httpHeaders?: HeadersInit | undefined): Promise<ResponseWrapper<T>> {
+async function patch<T>(
+  url: string,
+  body: T,
+  httpHeaders?: HeadersInit | undefined
+): Promise<ResponseWrapper<T>> {
   const response = await fetch(url, {
     body: JSON.stringify(body),
     method: 'PATCH',
