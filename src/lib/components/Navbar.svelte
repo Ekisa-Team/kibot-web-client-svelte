@@ -14,9 +14,9 @@
   <div class="flex items-center space-x-5">
     <button type="button" class="btn btn-secondary btn-fit" on:click={toggleSidebar}>
       {#if $sidebarStore.isOpen}
-        <div class="i-fxemoji:ballottscriptx text-xl" />
+        <div class="i-ph:caret-double-left-duotone text-xl" />
       {:else}
-        <div class="i-fxemoji:hamburger text-xl" />
+        <div class="i-icon-park-twotone:hamburger text-xl" />
       {/if}
     </button>
 

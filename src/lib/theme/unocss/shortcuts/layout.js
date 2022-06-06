@@ -18,7 +18,7 @@ export const layoutShortcuts = [
   [
     'ui-sidebar',
     `
-    bg-white/40 dark:bg-zinc-900/90 backdrop-blur-md
+    bg-white/20 dark:(bg-zinc-900/90 md:bg-zinc-900/40) backdrop-blur-lg
     border-r ui-border-base
     fixed md:relative top-0 left-0
     h-full

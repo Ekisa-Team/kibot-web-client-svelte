@@ -3,8 +3,6 @@ import type { ResponseWrapper } from '$lib/models/response-wrapper';
 const handleResponse = async <T>(response: Response): Promise<ResponseWrapper<T>> => {
   const serviceResponse = (await response.json()) as ResponseWrapper<T>;
 
-  console.log(serviceResponse);
-
   if (!response.ok) {
     const { exceptionMessage } = serviceResponse.exception || {};
 
