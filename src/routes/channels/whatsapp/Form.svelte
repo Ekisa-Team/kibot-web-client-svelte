@@ -32,13 +32,19 @@
       checkOnInit: true
     }
   );
-  const platformAccountSid = sf.field(nameof<Channel>('platformAccountSid'), channel.platformAccountSid, [required()]);
-  const platformAuthToken = sf.field(nameof<Channel>('platformAuthToken'), channel.platformAuthToken, [required()]);
+  const platformAccountSid = sf.field(nameof<Channel>('platformAccountSid'), channel.platformAccountSid, [
+    required()
+  ]);
+  const platformAuthToken = sf.field(nameof<Channel>('platformAuthToken'), channel.platformAuthToken, [
+    required()
+  ]);
   const httpMethodCode = sf.field(nameof<Channel>('httpMethodCode'), channel.httpMethodCode, [required()]);
   const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel.callbackUrl, [required(), url()], {
     checkOnInit: false
   });
-  const messagingProviderId = sf.field(nameof<Channel>('messagingProviderId'), channel.messagingProviderId, [required()]);
+  const messagingProviderId = sf.field(nameof<Channel>('messagingProviderId'), channel.messagingProviderId, [
+    required()
+  ]);
   const formData = sf.form(
     platformPhoneNumber,
     platformAccountSid,
@@ -92,8 +98,8 @@
     </div>
 
     <Alert>
-      La siguiente configuración le permitirá establecer un Endpoint para realizar una petición HTTP <strong class="font-semibold"
-        >POST</strong>
+      La siguiente configuración le permitirá establecer un Endpoint para realizar una petición HTTP <strong
+        class="font-semibold">POST</strong>
       o <strong class="font-semibold">PUT</strong> y recibir las respuestas del usuario.
     </Alert>
     <div class="form-group mt-4 mb-8">
@@ -126,24 +132,24 @@
       </div>
     </div>
 
-    <div class="mt-12 flex flex-col items-center justify-end space-y-3 md:flex-row md:space-y-0 md:space-x-3">
-      <button type="button" class="btn btn-secondary w-full md:w-auto" on:click={() => (isViewSourceOpen = true)}>
+    <div class="mt-12 actions-group">
+      <button type="button" class="btn btn-secondary" on:click={() => (isViewSourceOpen = true)}>
         <div class="i-ph:code mr-2 text-2xl" />
         View source
       </button>
-      <button type="button" class="btn btn-secondary w-full md:w-auto" on:click={() => formData.clear()}>
+      <button type="button" class="btn btn-secondary" on:click={() => formData.clear()}>
         <div class="i-fluent:broom-16-regular mr-2 text-2xl" />
         Clear
       </button>
-      <button type="button" class="btn btn-secondary w-full md:w-auto" on:click={() => formData.reset()}>
+      <button type="button" class="btn btn-secondary" on:click={() => formData.reset()}>
         <div class="i-ion:arrow-undo-outline mr-2 text-2xl" />
         Reset
       </button>
-      <button type="button" class="btn btn-danger w-full md:w-auto" on:click={handleDisconnect}>
+      <button type="button" class="btn btn-red" on:click={handleDisconnect}>
         <div class="i-codicon:debug-disconnect mr-2 text-2xl" />
         Disconnect
       </button>
-      <button type="submit" class="btn btn-success w-full md:w-auto" disabled={!canSave}>
+      <button type="submit" class="btn btn-green" disabled={!canSave}>
         <div class="i-iconoir:save-floppy-disk mr-2 text-2xl" />
         Save
       </button>
@@ -158,15 +164,18 @@
       {JSON.stringify($formData.summary, null, 2)}
     </pre>
 
-    <div class="form-actions form-actions-end">
+    <div class="actions-group">
       <button class="btn btn-secondary" on:click={() => (isViewSourceOpen = false)}>
-        <div class="i-carbon:close mr-2 text-2xl" />
+        <div class="i-carbon:close mr-2 lg" />
         Close
       </button>
 
-      <Clipboard text={JSON.stringify($formData.summary, null, 2)} let:copy on:copy={() => info('Copied!', { duration: 800 })}>
-        <button class="btn btn-primary" on:click={copy}>
-          <div class="i-carbon:copy mr-2 text-2xl" />
+      <Clipboard
+        text={JSON.stringify($formData.summary, null, 2)}
+        let:copy
+        on:copy={() => info('Copied!', { duration: 800 })}>
+        <button class="btn btn-blue" on:click={copy}>
+          <div class="i-carbon:copy mr-2 text-lg" />
           Copy
         </button>
       </Clipboard>

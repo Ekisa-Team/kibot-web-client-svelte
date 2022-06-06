@@ -56,8 +56,8 @@
 
       <div slot="content" class="w-64">
         <span>
-          El modo desarrollo se saltará las validaciones de URL y le permitirá configurar el <strong class="font-semibold"
-            >localhost</strong> como URL de retorno.
+          El modo desarrollo se saltará las validaciones de URL y le permitirá configurar el <strong
+            class="font-semibold">localhost</strong> como URL de retorno.
         </span>
       </div>
     </Tooltip>
@@ -66,7 +66,7 @@
       id="isDevModeEnabled"
       checked={isDevModeEnabled}
       on:change={(e) => (isDevModeEnabled = e.detail)}
-      class={isDevModeEnabled ? 'switch switch-enabled' : 'switch switch-disabled'}>
+      class={isDevModeEnabled ? 'switch switch-checked' : 'switch switch-unchecked'}>
       <span class="sr-only">Enable dev mode</span>
       <span class="toggle" class:toggle-on={isDevModeEnabled} class:toggle-off={!isDevModeEnabled} />
     </Switch>

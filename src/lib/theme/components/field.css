@@ -1,0 +1,5 @@
+textarea.field {
+  @apply resize-y;
+  @apply min-h-[100px];
+  @apply h-full;
+}

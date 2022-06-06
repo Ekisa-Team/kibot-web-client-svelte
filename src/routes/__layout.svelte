@@ -7,9 +7,11 @@
   import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
   import { setupTheming } from '$lib/core/services/theme';
   import { setupTranslations } from '$lib/core/services/translate';
-  import '$lib/theme/styles.css';
   import { SvelteToast } from '@zerodevx/svelte-toast';
+
+  
   import 'uno.css';
+  import '$lib/theme/styles.css';
 
   // i18n
   export const load: import('@sveltejs/kit').Load = async ({ url }) => {
@@ -36,7 +38,7 @@
 <div class="layout">
   <Navbar />
   <Sidebar />
-  <main class="container mx-auto">
+  <main class="container mx-auto w-full">
     <Breadcrumb items={breadcrumbItems} />
     <slot />
   </main>
@@ -58,7 +60,7 @@
     height: 100vh;
   }
 
-  @media only screen and (min-width: theme('screens.md')) {
+  @media only screen and (min-width: 768px) {
     .layout {
       grid-template-columns: min-content 1fr;
       grid-template-areas:
@@ -70,6 +72,6 @@
 
   main {
     grid-area: main;
-    @apply p-4 md:p-6;
+    @apply p-4;
   }
 </style>

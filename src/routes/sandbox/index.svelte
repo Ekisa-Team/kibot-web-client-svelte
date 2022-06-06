@@ -54,12 +54,12 @@
     </div>
   </div>
 
-  <div class="form-actions form-actions-end">
+  <div class="actions-group">
     <button class="btn btn-secondary" on:click={() => formData.clear()}>
       <div class="i-fluent:broom-16-regular mr-2 text-2xl" />
       Clear
     </button>
-    <button type="submit" class="btn btn-success" disabled={!canSend}>
+    <button type="submit" class="btn btn-blue" disabled={!canSend}>
       <div class="i-carbon:send-alt mr-2 text-2xl" />
       Send
     </button>

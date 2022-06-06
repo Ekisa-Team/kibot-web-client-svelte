@@ -11,27 +11,18 @@
   const languages: Datalist<SupportedLanguage> = [
     {
       value: 'en',
-      text: 'English (US)',
-      icon: 'i-emojione:flag-for-united-states text-xl'
+      text: 'English',
+      icon: 'i-emojione:flag-for-united-kingdom text-xl'
     },
     {
       value: 'es',
-      text: 'Español (CO)',
+      text: 'Español',
       icon: 'i-emojione:flag-for-colombia text-xl'
-    },
-    {
-      value: 'fr',
-      text: 'Français',
-      icon: 'i-emojione:flag-for-france text-xl'
-    },
-    {
-      value: 'ja',
-      text: '日本',
-      icon: 'i-emojione:flag-for-japan text-xl'
     }
   ];
 
-  let selectedLanguage: DataListItem<SupportedLanguage> = languages.find((l) => l.value === locale.get()) || languages[0];
+  let selectedLanguage: DataListItem<SupportedLanguage> =
+    languages.find((l) => l.value === locale.get()) || languages[0];
 
   async function handleLanguageChange({ detail }: CustomEvent<DataListItem<SupportedLanguage>>) {
     selectedLanguage = detail;
@@ -44,7 +35,7 @@
 
 <Listbox value={selectedLanguage} on:change={handleLanguageChange} let:open class="relative">
   <!-- menu button -->
-  <ListboxButton class="btn btn-secondary btn-fit space-x-2 whitespace-nowrap">
+  <ListboxButton class="btn btn-secondary btn-fit space-x-2">
     {#if showCountryFlag}
       <div class={selectedLanguage.icon} />
     {/if}
@@ -58,7 +49,10 @@
   <ListboxOptions class="dropdown dropdown-bottom-left">
     {#each languages as lang (lang.value)}
       <ListboxOption value={lang} let:active let:selected>
-        <div class="dropdown-item whitespace-nowrap" class:dropdown-item-active={active} class:dropdown-item-selected={selected}>
+        <div
+          class="dropdown-item whitespace-nowrap"
+          class:dropdown-item-active={active}
+          class:dropdown-item-selected={selected}>
           <div class={lang.icon} />
           <span class="ml-3 text-sm font-semibold">{lang.text}</span>
         </div>

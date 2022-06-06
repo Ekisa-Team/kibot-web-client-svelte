@@ -3,7 +3,7 @@ export type MenuItem = {
   name: string;
   icon: string;
   badge?: {
-    type: 'info' | 'success' | 'warning' | 'danger';
+    color: string;
     text: string;
   };
   isDisclosed?: boolean;

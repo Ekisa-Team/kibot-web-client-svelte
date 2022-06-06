@@ -22,12 +22,16 @@
   };
 </script>
 
-<div on:focus={void 0} on:mouseover={handleMouseOver} on:mouseleave={handleMouseLeave} on:mousemove={handleMouseMove}>
+<div
+  on:focus={void 0}
+  on:mouseover={handleMouseOver}
+  on:mouseleave={handleMouseLeave}
+  on:mousemove={handleMouseMove}>
   <slot name="target" />
 </div>
 
 {#if isHovered}
-  <div style="top: {y}px; left: {x}px;" class="tooltip">
+  <div style="top: {y}px; left: {x}px;" class="tooltip bg-white dark:bg-zinc-800">
     <slot name="content">
       {title}
     </slot>
@@ -38,7 +42,6 @@
   .tooltip {
     @apply absolute;
     @apply p-2 py-1;
-    @apply bg-white dark:bg-zinc-800;
     @apply border border-zinc-500;
     @apply rounded-lg;
     @apply shadow-2xl;

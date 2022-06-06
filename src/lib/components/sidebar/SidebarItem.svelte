@@ -36,68 +36,64 @@
 </script>
 
 {#if isParent}
-  <div href={item.path} class:active={isActive} class="menu-item group" on:click={handleItemClick}>
+  <div
+    class:bg-zinc-300={isActive || isParentOpen}
+    class:dark:bg-zinc-700={isActive || isParentOpen}
+    class="ui-menu-item group"
+    on:click={handleItemClick}>
     <div class="flex items-center">
       <!-- icon -->
       <div
-        class:invisible={!showIcon}
-        class:text-red-600={isActive}
-        class:dark:text-red-300={isActive}
-        class="{item.icon} min-w-[25px] text-2xl text-zinc-700 group-hover:text-red-600 dark:text-zinc-400 dark:group-hover:text-red-300" />
+        class:invisible={false}
+        class:text-red-600={isActive || isParentOpen}
+        class:dark:text-red-300={isActive || isParentOpen}
+        class="{item.icon} min-w-[25px] text-2xl text-zinc-700 dark:text-zinc-400 transform transition-transform duration-200 ease group-hover:(text-red-600 rotate-20 scale-110) dark:group-hover:(text-red-300)" />
 
       <!-- text -->
       <span class="ml-[1.1rem] text-sm" class:font-semibold={isParentOpen}>{item.name}</span>
 
       <!-- badge -->
       {#if item.badge}
-        <span class="badge badge-{item.badge.type} ml-3">{item.badge.text}</span>
+        <span class="badge badge-{item.badge.color} ml-3">{item.badge.text}</span>
       {/if}
     </div>
 
     <!-- arrow -->
     {#if isParent}
-      <div class="i-ic:round-keyboard-arrow-right transition-transform duration-100 ease-in-out" class:rotate-90={isParentOpen} />
+      <div
+        class="i-ic:round-keyboard-arrow-right transition-transform duration-100 ease-in-out"
+        class:rotate-90={isParentOpen} />
     {/if}
   </div>
 {:else}
-  <a href={item.path} class:active={isActive} class="menu-item group" on:click={handleItemClick}>
+  <a
+    href={item.path}
+    class:bg-zinc-300={isActive}
+    class:dark:bg-zinc-700={isActive}
+    class="ui-menu-item group"
+    on:click={handleItemClick}>
     <div class="flex items-center">
       <!-- icon -->
       <div
-        class:invisible={!showIcon}
-        class:text-red-600={isActive}
-        class:dark:text-red-300={isActive}
-        class="{item.icon} min-w-[25px] text-2xl text-zinc-700 group-hover:text-red-600 dark:text-zinc-400 dark:group-hover:text-red-300" />
+        class:invisible={false}
+        class:text-red-600={isActive || isParentOpen}
+        class:dark:text-red-300={isActive || isParentOpen}
+        class="{item.icon} min-w-[25px] text-2xl text-zinc-700 dark:text-zinc-400 transform transition-transform duration-200 ease group-hover:(text-red-600 rotate-20 scale-110) dark:group-hover:(text-red-300)" />
 
       <!-- text -->
       <span class="ml-[1.1rem] text-sm" class:font-semibold={isParentOpen}>{item.name}</span>
 
       <!-- badge -->
       {#if item.badge}
-        <span class="badge badge-{item.badge.type} ml-3">{item.badge.text}</span>
+        <span class="badge badge-{item.badge.color} ml-3">{item.badge.text}</span>
       {/if}
     </div>
 
     <!-- arrow -->
     {#if isParent}
-      <div class="i-ic:round-keyboard-arrow-right transition-transform duration-100 ease-in-out" class:rotate-90={isParentOpen} />
+      <div
+        class="i-ic:round-keyboard-arrow-right transition-transform duration-100 ease-in-out"
+        class:rotate-90={isParentOpen} />
     {/if}
   </a>
 {/if}
-
-<style lang="postcss">
-  .menu-item {
-    @apply flex items-center justify-between;
-    @apply font-default font-thin;
-    @apply text-left;
-    @apply min-w-[50px];
-    @apply rounded-lg;
-    @apply px-2 py-[0.40rem] pl-[0.6rem];
-    @apply whitespace-nowrap;
-  }
-
-  .menu-item:hover,
-  .menu-item.active {
-    @apply bg-zinc-300 dark:bg-zinc-700;
-  }
-</style>

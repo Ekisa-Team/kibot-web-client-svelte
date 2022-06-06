@@ -17,7 +17,7 @@
         <pre>{JSON.stringify(chatbot, null, 2)}</pre>
 
         <div class="flex items-center mt-4 space-x-2">
-          <a href="/channels/whatsapp" class="btn btn-primary" on:click={() => chatbotStore.select(chatbot)}> Edit </a>
+          <a href="/channels/whatsapp" class="btn btn-blue" on:click={() => chatbotStore.select(chatbot)}> Edit </a>
 
           <button class="btn btn-secondary" disabled>Delete</button>
         </div>

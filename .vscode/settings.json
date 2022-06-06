@@ -1,3 +1,4 @@
 {
-  "explorer.compactFolders": true
+  "explorer.compactFolders": true,
+  "css.validate": false
 }

@@ -1,0 +1,35 @@
+/* Valid */
+.form.valid label {
+  @apply text-green-700;
+}
+.form.valid .field {
+  @apply bg-green-50;
+  @apply border-green-600;
+}
+.form.valid .checkbox,
+.form.valid .radio {
+  @apply border-green-600;
+}
+.form.valid .validation-item {
+  @apply text-green-600;
+  @apply text-sm;
+  @apply mt-1 p-0;
+}
+
+/* Invalid */
+.form.invalid label {
+  @apply text-red-700;
+}
+.form.invalid .field {
+  @apply bg-red-50;
+  @apply border-red-600;
+}
+.form.invalid .checkbox,
+.form.invalid .radio {
+  @apply border-red-600;
+}
+.form.invalid .validation-item {
+  @apply text-red-600;
+  @apply text-sm;
+  @apply mt-1 p-0;
+}

@@ -20,7 +20,7 @@
         <div class="flex items-center mt-4 space-x-2">
           <a
             href="applications/{client.id}/chatbots"
-            class="btn btn-primary"
+            class="btn btn-blue truncate"
             on:click={() => clientApplicationStore.select(client)}>
             Edit
           </a>

@@ -8,21 +8,21 @@
   export let isNested = false;
 </script>
 
-<ul class:with-separator={showSeparator} class="space-y-1">
+<ul class:separator={showSeparator} class="space-y-1">
   {#each menu as item}
     <li>
       {#if item.children}
         <SidebarItemMenu item={item} />
       {:else}
-        <SidebarItem item={item} showIcon={true} />
+        <SidebarItem item={item} showIcon={!isNested} />
       {/if}
     </li>
   {/each}
 </ul>
 
 <style lang="postcss">
-  ul.with-separator {
-    @apply border-t border-zinc-200 dark:border-zinc-800;
+  ul.separator {
+    @apply border-t ui-border-base;
     @apply mt-4 pt-4;
   }
 </style>

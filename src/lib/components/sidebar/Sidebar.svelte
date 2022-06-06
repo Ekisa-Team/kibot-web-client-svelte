@@ -45,7 +45,7 @@
       {
         name: 'Integrations',
         icon: 'i-ph:plugs-connected-thin',
-        badge: { type: 'success', text: 'New' },
+        badge: { color: 'green', text: 'New' },
         isDisclosed: false,
         children: [
           {
@@ -97,10 +97,10 @@
   };
 </script>
 
-<aside aria-label="Sidebar" class="bg-white/40 backdrop-blur-md dark:bg-zinc-900/90">
+<aside aria-label="Sidebar" class="ui-sidebar">
   <!-- overlay -->
   {#if $sidebarStore.isOpen}
-    <button class="overlay" on:click={handleOverlayClick} />
+    <button class="ui-overlay md:hidden" on:click={handleOverlayClick} />
   {/if}
 
   <!-- wrapper -->
@@ -115,8 +115,8 @@
 
     <!-- bottom options -->
     <div class="bottom-options">
-      <span class="badge badge-warning mb-6 inline-block">
-        Parámetros
+      <span class="badge badge-yellow mb-6 inline-block">
+        Referencias
         <div class="i-ph:arrow-elbow-right-down" />
       </span>
 
@@ -146,11 +146,6 @@
   }
 
   aside {
-    @apply border-r border-zinc-200 dark:border-red-500;
-    @apply fixed md:relative;
-    @apply h-full;
-    @apply top-0 left-0;
-    @apply z-10;
     grid-area: sidebar;
     width: var(--size-sidebar-width);
     will-change: width;
@@ -170,12 +165,7 @@
     @apply overflow-x-hidden;
   }
 
-  .overlay {
-    @apply bg-black/30 backdrop-blur-sm dark:bg-black/80;
-    @apply cursor-default;
-    @apply fixed md:hidden;
-    @apply h-full w-screen;
-    @apply z-50;
+  .ui-overlay {
     left: var(--size-sidebar-width);
   }
 

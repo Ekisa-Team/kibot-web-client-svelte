@@ -62,7 +62,7 @@
     @apply space-x-1;
   }
 
-  a {
-    @apply hover:underline;
+  a:hover {
+    @apply underline;
   }
 </style>

@@ -1,19 +1,14 @@
+@import '@unocss/reset/sanitize/reduce-motion.css';
+@import '@unocss/reset/tailwind.css';
+
 /* base */
-@import './tailwindcss/base.css';
-@import './01-base/font.css';
-@import './01-base/theme.css';
-@import './01-base/document.css';
-@import './01-base/heading.css';
+@import './base/font.css';
+@import './base/theme.css';
+@import './base/document.css';
+@import './base/heading.css';
 
 /* components */
-@import './tailwindcss/components.css';
-@import './02-components/badge.css';
-@import './02-components/button.css';
-@import './02-components/dropdown.css';
-@import './02-components/form.css';
-@import './02-components/field.css';
-@import './02-components/boolean.css';
-@import './02-components/switch.css';
-
-/* utilities */
-@import './tailwindcss/utilities.css';
+@import './components/form.css';
+@import './components/field.css';
+@import './components/dropdown.css';
+@import './components/boolean.css';
