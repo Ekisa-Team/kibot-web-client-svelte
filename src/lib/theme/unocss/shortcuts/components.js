@@ -7,11 +7,10 @@ export const componentsShortcuts = [
     'btn',
     `
     w-full md:w-auto
-    border border-transparent 
+    border border-transparent rounded-lg outline-none               
     h-10 min-w-[80px] py-2 px-3
     relative inline-flex items-center justify-center               
-    text-sm text-center font-medium leading-none
-    outline-none rounded-lg               
+    text-sm text-center font-medium leading-none    
     select-none cursor-pointer 
     disabled:(opacity-80 cursor-not-allowed)
     hover:(bg-opacity-80):not(:disabled)

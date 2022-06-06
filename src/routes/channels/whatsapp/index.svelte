@@ -56,7 +56,7 @@
 
       <div slot="content" class="w-64">
         <span>
-          El modo desarrollo se saltará las validaciones de URL y le permitirá configurar el <strong
+          El modo desarrollo omite las validaciones de URL y le permite configurar el <strong
             class="font-semibold">localhost</strong> como URL de retorno.
         </span>
       </div>

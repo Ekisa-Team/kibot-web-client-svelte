@@ -31,20 +31,17 @@
 </div>
 
 {#if isHovered}
-  <div style="top: {y}px; left: {x}px;" class="tooltip bg-white dark:bg-zinc-800">
+  <div
+    style="top: {y}px; left: {x}px;"
+    ui-absolute
+    ui-rounded-xl
+    ui-shadow-2xl
+    ui-z10
+    ui-p="y1 x2"
+    ui-bg="white dark:zinc-800"
+    ui-border="1 zinc-300 dark:zinc-500">
     <slot name="content">
       {title}
     </slot>
   </div>
 {/if}
-
-<style>
-  .tooltip {
-    @apply absolute;
-    @apply p-2 py-1;
-    @apply border border-zinc-500;
-    @apply rounded-lg;
-    @apply shadow-2xl;
-    @apply z-10;
-  }
-</style>
