@@ -45,7 +45,7 @@
       {
         name: 'Integrations',
         icon: 'i-ph:plugs-connected-thin',
-        badge: { color: 'yellow', text: 'New' },
+        badge: { color: 'yellow', text: 'Alpha' },
         isDisclosed: false,
         children: [
           {
