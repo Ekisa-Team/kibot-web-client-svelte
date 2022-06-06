@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Field } from 'svelte-forms/types';
 
-  export let field: Field<string> | Field<number> | Field<boolean> | Field<Date>;
+  export let field: Field<string> | Field<number> | Field<boolean> | Field<Date> | Field<undefined>;
 
   const messages = new Map([
     ['required', 'El campo es requerido.'],
@@ -14,8 +14,10 @@
   ]);
 </script>
 
-<div>
-  {#each field.errors as error}
-    <p class="text-sm text-red-500 dark:text-red-400">{messages.get(error)}</p>
-  {/each}
-</div>
+{#if field}
+  <div>
+    {#each field.errors as error}
+      <p class="text-sm text-red-500 dark:text-red-400">{messages.get(error)}</p>
+    {/each}
+  </div>
+{/if}

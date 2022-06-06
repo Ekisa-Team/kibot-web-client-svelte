@@ -5,7 +5,7 @@
   import { chatbotStore } from '$lib/stores/chatbot';
   import { messagingProviderStore } from '$lib/stores/messaging-provider';
   import { Switch } from '@rgossiaux/svelte-headlessui';
-  import Form from './Form.svelte';
+  import Form, { clearForm } from './Form.svelte';
   import { channelsStore } from './store';
 
   $: chatbotId = $chatbotStore.selectedChatbot?.id || 0;
@@ -14,14 +14,16 @@
   let isDevModeEnabled = false;
 
   const fetchData = (chatbotId: number) => {
-    return Promise.all([channelsStore.fetch(chatbotId), messagingProviderStore.fetch()]);
+    return Promise.all([channelsStore.fetchChannel(chatbotId), messagingProviderStore.fetch()]);
   };
 
   const handleDisconnect = (event: CustomEvent<Channel['id']>) => {
     channelsStore
-      .delete(chatbotId, event.detail)
+      .deleteChannel(chatbotId, event.detail)
       .then(() => {
+        // TODO: i18n
         success('Channel was disconnected successfully');
+        clearForm();
       })
       .catch((error: Error) => failure(error.message));
   };
@@ -29,9 +31,18 @@
   const handleSave = (event: CustomEvent<Channel>) => {
     if (event.detail.id) {
       channelsStore
-        .update(chatbotId, event.detail.id, event.detail)
+        .updateChannel(chatbotId, event.detail.id, event.detail)
         .then(() => {
+          // TODO: i18n
           success('Channel was updated successfully');
+        })
+        .catch((error: Error) => failure(error.message));
+    } else {
+      channelsStore
+        .createChannel(chatbotId, event.detail)
+        .then(() => {
+          // TODO: i18n
+          success('Channel was created successfully');
         })
         .catch((error: Error) => failure(error.message));
     }
@@ -50,6 +61,11 @@
       <span class="badge badge-green ml-2 align-middle">
         <div class="i-mdi:checkbox-multiple-outline" />
         Connected
+      </span>
+    {:else}
+      <span class="badge badge-red ml-2 align-middle">
+        <div class="i-fluent:plug-disconnected-28-regular" />
+        Disconnected
       </span>
     {/if}
   </h1>
@@ -91,5 +107,6 @@
     on:disconnect={handleDisconnect}
     on:save={handleSave} />
 {:catch error}
+  {console.log(error)}
   <p>Error: {error}</p>
 {/await}

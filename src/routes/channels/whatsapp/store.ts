@@ -1,34 +1,35 @@
 import { http } from '$lib/core/services/http';
 import type { Channel } from '$lib/models/app/channel';
-import type { ResponseWrapper } from '$lib/models/response-wrapper';
 import { writable } from 'svelte/store';
 
 function createChannelsStore() {
-  const { subscribe, set } = writable<Channel>();
+  const { subscribe, set, update } = writable<Channel | null>(null);
 
   return {
     subscribe,
+    set,
+    update,
 
-    fetch: async (chatbotId: number) => {
+    fetchChannel: async (chatbotId: number) => {
       const API_URL = `https://localhost:5001/api/v1/chatbots/${chatbotId}/channels`;
       const response = await http.get<Channel>(API_URL);
-      set(response.data);
+      set(response?.data || null);
     },
-    create: async (chatbotId: number, channel: Channel): Promise<ResponseWrapper<Channel>> => {
+    createChannel: async (chatbotId: number, channel: Channel) => {
       const API_URL = `https://localhost:5001/api/v1/chatbots/${chatbotId}/channels`;
-      return await http.post<Channel>(API_URL, channel);
+      const response = await http.post<Channel>(API_URL, channel);
+      set(response?.data || null);
+      return response;
     },
-    update: async (
-      chatbotId: number,
-      channelId: number,
-      channel: Channel
-    ): Promise<ResponseWrapper<Channel>> => {
+    updateChannel: async (chatbotId: number, channelId: number, channel: Channel) => {
       const API_URL = `https://localhost:5001/api/v1/chatbots/${chatbotId}/channels/${channelId}`;
       return await http.put<Channel>(API_URL, channel);
     },
-    delete: async (chatbotId: number, channelId: number): Promise<ResponseWrapper<Channel>> => {
+    deleteChannel: async (chatbotId: number, channelId: number) => {
       const API_URL = `https://localhost:5001/api/v1/chatbots/${chatbotId}/channels/${channelId}`;
-      return await http.del<Channel>(API_URL);
+      const response = await http.del<Channel>(API_URL);
+      set(null);
+      return response;
     }
   };
 }

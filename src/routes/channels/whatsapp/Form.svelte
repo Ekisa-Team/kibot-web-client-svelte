@@ -1,3 +1,11 @@
+<script lang="ts" context="module">
+  const elements = new Set<any>();
+
+  export function clearForm() {
+    elements.forEach((element) => element.clear());
+  }
+</script>
+
 <script lang="ts">
   import Alert from '$lib/components/Alert.svelte';
   import Clipboard from '$lib/components/Clipboard.svelte';
@@ -9,11 +17,11 @@
   import type { MessagingProvider } from '$lib/models/app/messaging-provider';
   import type { Datalist } from '$lib/types/datalist';
   import { nameof } from '$lib/utils/nameof';
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import * as sf from 'svelte-forms';
   import { pattern, required, url } from 'svelte-forms/validators';
 
-  export let channel: Channel;
+  export let channel: Channel | null;
   export let messagingProviders: MessagingProvider[];
   export let isChannelConnected: boolean;
   export let devModeEnabled: boolean;
@@ -25,25 +33,21 @@
     { value: 1, text: 'PUT' }
   ];
 
-  const platformPhoneNumber = sf.field(
-    nameof<Channel>('platformPhoneNumber'),
-    channel.platformPhoneNumber,
-    [required(), pattern(/^([0-9]{1,2})([0-9]{10,12})$/g)],
-    {
-      checkOnInit: true
-    }
-  );
-  const platformAccountSid = sf.field(nameof<Channel>('platformAccountSid'), channel.platformAccountSid, [
+  const platformPhoneNumber = sf.field(nameof<Channel>('platformPhoneNumber'), channel?.platformPhoneNumber, [
+    required(),
+    pattern(/^([0-9]{1,2})([0-9]{10,12})$/g)
+  ]);
+  const platformAccountSid = sf.field(nameof<Channel>('platformAccountSid'), channel?.platformAccountSid, [
     required()
   ]);
-  const platformAuthToken = sf.field(nameof<Channel>('platformAuthToken'), channel.platformAuthToken, [
+  const platformAuthToken = sf.field(nameof<Channel>('platformAuthToken'), channel?.platformAuthToken, [
     required()
   ]);
-  const httpMethodCode = sf.field(nameof<Channel>('httpMethodCode'), channel.httpMethodCode, [required()]);
-  const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel.callbackUrl, [required(), url()], {
+  const httpMethodCode = sf.field(nameof<Channel>('httpMethodCode'), channel?.httpMethodCode, [required()]);
+  const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel?.callbackUrl, [required(), url()], {
     checkOnInit: false
   });
-  const messagingProviderId = sf.field(nameof<Channel>('messagingProviderId'), channel.messagingProviderId, [
+  const messagingProviderId = sf.field(nameof<Channel>('messagingProviderId'), channel?.messagingProviderId, [
     required()
   ]);
   const formData = sf.form(
@@ -60,8 +64,13 @@
 
   let isViewSourceOpen = false;
 
+  onMount(() => {
+    elements.add(formData);
+    return () => elements.delete(formData);
+  });
+
   const handleDisconnect = async () => {
-    dispatch('disconnect' as any, channel.id);
+    dispatch('disconnect' as any, channel?.id);
   };
 
   const handleSubmit = async () => {

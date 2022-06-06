@@ -1,6 +1,10 @@
 import type { ResponseWrapper } from '$lib/models/response-wrapper';
 
-const handleResponse = async <T>(response: Response): Promise<ResponseWrapper<T>> => {
+const handleResponse = async <T>(response: Response): Promise<ResponseWrapper<T> | null> => {
+  if (response.status === 204) {
+    return null;
+  }
+
   const serviceResponse = (await response.json()) as ResponseWrapper<T>;
 
   if (!response.ok) {
@@ -29,7 +33,10 @@ const handleResponse = async <T>(response: Response): Promise<ResponseWrapper<T>
   return serviceResponse;
 };
 
-async function get<T>(url: string, httpHeaders?: HeadersInit | undefined): Promise<ResponseWrapper<T>> {
+async function get<T>(
+  url: string,
+  httpHeaders?: HeadersInit | undefined
+): Promise<ResponseWrapper<T> | null> {
   const response = await fetch(url, { headers: { ...httpHeaders } });
   return handleResponse(response);
 }
@@ -38,7 +45,7 @@ async function post<T>(
   url: string,
   body: T,
   httpHeaders?: HeadersInit | undefined
-): Promise<ResponseWrapper<T>> {
+): Promise<ResponseWrapper<T> | null> {
   const response = await fetch(url, {
     body: JSON.stringify(body),
     method: 'POST',
@@ -55,7 +62,7 @@ async function put<T>(
   url: string,
   body: T,
   httpHeaders?: HeadersInit | undefined
-): Promise<ResponseWrapper<T>> {
+): Promise<ResponseWrapper<T> | null> {
   const response = await fetch(url, {
     body: JSON.stringify(body),
     method: 'PUT',
@@ -72,7 +79,7 @@ async function patch<T>(
   url: string,
   body: T,
   httpHeaders?: HeadersInit | undefined
-): Promise<ResponseWrapper<T>> {
+): Promise<ResponseWrapper<T> | null> {
   const response = await fetch(url, {
     body: JSON.stringify(body),
     method: 'PATCH',
@@ -85,7 +92,10 @@ async function patch<T>(
   return handleResponse(response);
 }
 
-async function del<T>(url: string, httpHeaders?: HeadersInit | undefined): Promise<ResponseWrapper<T>> {
+async function del<T>(
+  url: string,
+  httpHeaders?: HeadersInit | undefined
+): Promise<ResponseWrapper<T> | null> {
   const response = await fetch(url, { method: 'DELETE', headers: { ...httpHeaders } });
   return handleResponse(response);
 }

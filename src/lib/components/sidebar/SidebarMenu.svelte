@@ -19,7 +19,7 @@
 
           <div
             class="overflow-hidden rounded border-l-2 border-dashed border-yellow-500 bg-zinc-200 dark:border-yellow-700 dark:bg-zinc-800">
-            <svelte:self menu={item.children} />
+            <svelte:self menu={item.children} hasSeparator={false} />
           </div>
         </details>
       {/if}
