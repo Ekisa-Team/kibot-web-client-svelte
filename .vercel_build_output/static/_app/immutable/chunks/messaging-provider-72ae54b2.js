@@ -1,0 +1,1 @@
+import{h as o}from"./http-90371e68.js";import{w as a}from"./index-f4e83c97.js";function i(){const{subscribe:t,set:s}=a([]);return{subscribe:t,fetch:async()=>{const e="https://localhost:5001/api/v1/messaging_providers",r=await o.get(e);s(r.data)}}}const p=i();export{p as m};

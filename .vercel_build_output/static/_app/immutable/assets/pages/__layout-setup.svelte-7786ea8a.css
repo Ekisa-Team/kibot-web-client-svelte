@@ -1,0 +1,1 @@
+.layout.svelte-1yk8ctf{display:grid;grid-template-columns:1fr;grid-template-rows:var(--size-navbar-height) 1fr var(--size-footer-height);gap:0;grid-template-areas:"navbar" "main" "footer";height:100vh}main.svelte-1yk8ctf{grid-area:main;padding:1rem}
