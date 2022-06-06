@@ -45,7 +45,7 @@
       {
         name: 'Integrations',
         icon: 'i-ph:plugs-connected-thin',
-        badge: { color: 'green', text: 'New' },
+        badge: { color: 'yellow', text: 'New' },
         isDisclosed: false,
         children: [
           {
@@ -115,7 +115,7 @@
 
     <!-- bottom options -->
     <div class="bottom-options">
-      <span class="badge badge-yellow mb-6 inline-block">
+      <span class="badge badge-yellow mb-6 inline-block whitespace-nowrap">
         Referencias
         <div class="i-ph:arrow-elbow-right-down" />
       </span>
@@ -137,12 +137,12 @@
 <style lang="postcss">
   :global(html.sidebar-collapsed) aside {
     --size-sidebar-width: 0;
-    transition: width 100ms ease;
+    transition: width 300ms ease;
   }
 
   :global(html.sidebar-opened) aside {
     --size-sidebar-width: 17rem;
-    transition: width 100ms ease;
+    transition: width 300ms ease;
   }
 
   aside {
@@ -173,5 +173,6 @@
     @apply mt-auto;
     @apply w-full;
     @apply relative;
+    @apply overflow-hidden;
   }
 </style>

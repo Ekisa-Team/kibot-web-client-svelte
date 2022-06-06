@@ -5,7 +5,7 @@ export const layoutShortcuts = [
   [
     'ui-navbar',
     `
-    bg-white/20 dark:bg-zinc-900/90 backdrop-blur-lg
+    bg-white/20 dark:bg-zinc-900/40 backdrop-blur-lg
     fixed inset-x-auto top-0
     border-b ui-border-base
     w-full px-2.5
