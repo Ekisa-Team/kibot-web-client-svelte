@@ -35,16 +35,18 @@
   const text = textMap.get(type);
 </script>
 
-<div role="alert" class="flex w-full items-center rounded-full  bg-gradient-to-r p-2 leading-none {bg}">
+<div
+  role="alert"
+  class="flex flex-col gap-3 p-2 rounded-lg md:(flex-row p-4 rounded-full) w-full items-center bg-gradient-to-r leading-none {bg}">
   <!-- icon -->
-  <span class="mr-3 flex rounded-full px-2 py-1 text-3xl font-bold uppercase text-white {bgAccent}">
+  <span class="flex rounded-full px-2 py-1 text-3xl font-bold uppercase text-white {bgAccent}">
     <slot name="icon">
       <div class={icon} />
     </slot>
   </span>
 
   <!-- text -->
-  <span class="mr-2 flex-auto text-left text-sm {text}">
+  <span class="flex-auto text-left text-sm {text}">
     <slot />
   </span>
 </div>

@@ -29,7 +29,7 @@
       <div class="i-ph:arrow-circle-left-duotone text-xl text-blue-400" />
       <span class="hidden md:inline">Referencias</span>
     </a>
-    <LangToggle showLanguage={false} />
+    <LangToggle />
     <ThemeToggle />
   </div>
 </nav>

@@ -157,14 +157,14 @@
   </form>
 </HighlightBox>
 
-<Modal bind:isOpen={isViewSourceOpen}>
+<Modal bind:isOpen={isViewSourceOpen} size="md">
   <span slot="title">Source</span>
   <div slot="content">
-    <pre>
-      {JSON.stringify($formData.summary, null, 2)}
-    </pre>
+    <span class="break-all">
+      {window.btoa(JSON.stringify($formData.summary))}
+    </span>
 
-    <div class="actions-group">
+    <div class="actions-group mt-12">
       <button class="btn btn-secondary" on:click={() => (isViewSourceOpen = false)}>
         <div class="i-carbon:close mr-2 lg" />
         Close

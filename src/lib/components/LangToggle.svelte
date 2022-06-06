@@ -41,7 +41,7 @@
     {/if}
 
     {#if showLanguage}
-      <span>{selectedLanguage.text}</span>
+      <span class="hidden md:inline">{selectedLanguage.text}</span>
     {/if}
   </ListboxButton>
 

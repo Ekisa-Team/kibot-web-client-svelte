@@ -4,7 +4,13 @@
   import { appTheme } from '$lib/stores/app-theme';
   import { t } from '$lib/translations';
   import type { Datalist, DataListItem } from '$lib/types/datalist';
-  import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@rgossiaux/svelte-headlessui';
+  import {
+    Listbox,
+    ListboxButton,
+    ListboxOption,
+    ListboxOptions,
+    Transition
+  } from '@rgossiaux/svelte-headlessui';
 
   export let showThemeIcon = true;
   export let showThemeName = true;
@@ -37,13 +43,13 @@
 
 <Listbox value={selectedTheme} on:change={handleThemeChange} let:open class="relative">
   <!-- menu button -->
-  <ListboxButton class="btn btn-secondary space-x-2">
+  <ListboxButton class="btn btn-secondary btn-fit space-x-2">
     {#if showThemeIcon}
       <div class={selectedTheme.icon} />
     {/if}
 
     {#if showThemeName}
-      <span>{selectedTheme.text}</span>
+      <span class="hidden md:inline">{selectedTheme.text}</span>
     {/if}
   </ListboxButton>
 
