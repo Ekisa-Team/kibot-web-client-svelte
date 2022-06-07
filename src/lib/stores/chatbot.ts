@@ -21,7 +21,7 @@ function createChatbotStore() {
     update,
 
     fetch: async () => {
-      const API_URL = 'https://localhost:5001/api/v1/client_applications/1/chatbots';
+      const API_URL = 'https://kibot.azurewebsites.net/api/v1/client_applications/1/chatbots';
       const response = await http.get<Chatbot[]>(API_URL);
       update((state) => ({ ...state, chatbots: response.data }));
     },

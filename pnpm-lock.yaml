@@ -20,6 +20,7 @@ specifiers:
   eslint: ^8.16.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-svelte3: ^4.0.0
+  highlight.js: ^11.5.1
   postcss: ^8.4.14
   postcss-load-config: ^3.1.4
   prettier: ^2.6.2
@@ -27,6 +28,7 @@ specifiers:
   svelte: ^3.48.0
   svelte-check: ^2.7.1
   svelte-forms: ^2.3.1
+  svelte-highlight: ^6.0.1
   svelte-preprocess: ^4.10.7
   sveltekit-i18n: ^2.2.2
   tslib: ^2.4.0
@@ -56,12 +58,14 @@ devDependencies:
   eslint: 8.16.0
   eslint-config-prettier: 8.5.0_eslint@8.16.0
   eslint-plugin-svelte3: 4.0.0_eslint@8.16.0+svelte@3.48.0
+  highlight.js: 11.5.1
   postcss: 8.4.14
   postcss-load-config: 3.1.4_postcss@8.4.14
   prettier: 2.6.2
   prettier-plugin-svelte: 2.7.0_prettier@2.6.2+svelte@3.48.0
   svelte: 3.48.0
   svelte-check: 2.7.1_0d8b80d879b3164ac8135cc9abf0d616
+  svelte-highlight: 6.0.1
   svelte-preprocess: 4.10.7_6c54e50e2322b376d55fd779bd3e30d4
   sveltekit-i18n: 2.2.2_svelte@3.48.0
   tslib: 2.4.0
@@ -1559,6 +1563,16 @@ packages:
       function-bind: 1.1.1
     dev: true
 
+  /highlight.js/11.5.0:
+    resolution: {integrity: sha512-SM6WDj5/C+VfIY8pZ6yW6Xa0Fm1tniYVYWYW1Q/DcMnISZFrC3aQAZZZFAAZtybKNrGId3p/DNbFTtcTXXgYBw==}
+    engines: {node: '>=12.0.0'}
+    dev: true
+
+  /highlight.js/11.5.1:
+    resolution: {integrity: sha512-LKzHqnxr4CrD2YsNoIf/o5nJ09j4yi/GcH5BnYz9UnVpZdS4ucMgvP61TDty5xJcFGRjnH4DpujkS9bHT3hq0Q==}
+    engines: {node: '>=12.0.0'}
+    dev: true
+
   /https-proxy-agent/5.0.1:
     resolution: {integrity: sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==}
     engines: {node: '>= 6'}
@@ -2510,6 +2524,12 @@ packages:
     dependencies:
       is-promise: 4.0.0
     dev: false
+
+  /svelte-highlight/6.0.1:
+    resolution: {integrity: sha512-FOe0ePVoP59VO7e0cAXZ7OMooXEuC/lh0FK4Zr++3qRzNWm14a/ljICBTGZXqD+/l3mAIB5EzkVu3Nc/TZEyuA==}
+    dependencies:
+      highlight.js: 11.5.0
+    dev: true
 
   /svelte-hmr/0.14.12_svelte@3.48.0:
     resolution: {integrity: sha512-4QSW/VvXuqVcFZ+RhxiR8/newmwOCTlbYIezvkeN6302YFRE8cXy0naamHcjz8Y9Ce3ITTZtrHrIL0AGfyo61w==}

@@ -21,7 +21,7 @@ function createApplicationStore() {
     update,
 
     fetch: async () => {
-      const API_URL = 'https://localhost:5001/api/v1/client_applications';
+      const API_URL = 'https://kibot.azurewebsites.net/api/v1/client_applications';
       const response = await http.get<ClientApplication[]>(API_URL);
       update((state) => ({ ...state, clients: response.data }));
     },

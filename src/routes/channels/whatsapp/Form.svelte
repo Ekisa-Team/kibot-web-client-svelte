@@ -9,6 +9,7 @@
 <script lang="ts">
   import Alert from '$lib/components/Alert.svelte';
   import Clipboard from '$lib/components/Clipboard.svelte';
+  import CodeBox from '$lib/components/CodeBox.svelte';
   import HighlightBox from '$lib/components/HighlightBox.svelte';
   import Modal from '$lib/components/Modal.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
@@ -20,6 +21,9 @@
   import { createEventDispatcher, onMount } from 'svelte';
   import * as sf from 'svelte-forms';
   import { pattern, required, url } from 'svelte-forms/validators';
+  import Highlight from 'svelte-highlight';
+  import jsonLang from 'svelte-highlight/languages/json';
+  import 'svelte-highlight/styles/synth-midnight-terminal-dark.css';
 
   export let channel: Channel | null;
   export let messagingProviders: MessagingProvider[];
@@ -165,12 +169,12 @@
   </form>
 </HighlightBox>
 
-<Modal bind:isOpen={isViewSourceOpen} size="md">
+<Modal bind:isOpen={isViewSourceOpen} size="5xl">
   <span slot="title">Source</span>
   <div slot="content">
-    <span class="break-all">
-      {window.btoa(JSON.stringify($formData.summary))}
-    </span>
+    <CodeBox>
+      <Highlight language={jsonLang} code={JSON.stringify($formData.summary, null, 2)} />
+    </CodeBox>
 
     <div class="actions-group mt-12">
       <button class="btn btn-secondary" on:click={() => (isViewSourceOpen = false)}>

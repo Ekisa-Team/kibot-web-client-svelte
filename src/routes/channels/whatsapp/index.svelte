@@ -1,5 +1,6 @@
 <script lang="ts">
   import Loader from '$lib/components/Loader.svelte';
+  import PageHeader from '$lib/components/PageHeader.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import { failure, success } from '$lib/core/services/toasts';
   import type { Channel } from '$lib/models/app/channel';
@@ -54,7 +55,7 @@
   <title>WhatsApp Channel</title>
 </svelte:head>
 
-<div class="mb-6 flex flex-col items-start justify-between md:flex-row">
+<PageHeader>
   <h1 class="h3">
     WhatsApp Channel
 
@@ -71,7 +72,7 @@
     {/if}
   </h1>
 
-  <div class="flex items-center space-x-3">
+  <div slot="actions" class="flex items-center space-x-3">
     <Tooltip offset={[20, -200]}>
       <label slot="target" for="isDevModeEnabled">
         Enable dev mode
@@ -95,7 +96,7 @@
       <span class="toggle" class:toggle-on={isDevModeEnabled} class:toggle-off={!isDevModeEnabled} />
     </Switch>
   </div>
-</div>
+</PageHeader>
 
 {#await fetchData(chatbotId)}
   <Loader />

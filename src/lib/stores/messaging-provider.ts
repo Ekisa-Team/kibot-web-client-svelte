@@ -9,7 +9,7 @@ function createMessagingProviderStore() {
     subscribe,
 
     fetch: async () => {
-      const API_URL = 'https://localhost:5001/api/v1/messaging_providers';
+      const API_URL = 'https://kibot.azurewebsites.net/api/v1/messaging_providers';
       const response = await http.get<MessagingProvider[]>(API_URL);
       set(response.data);
     }

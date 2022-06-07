@@ -1,4 +1,5 @@
 <script lang="ts">
+  import PageHeader from '$lib/components/PageHeader.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
   import { failure } from '$lib/core/services/toasts';
   import type { MessagePayload } from '$lib/models/message-payload';
@@ -7,7 +8,7 @@
   import { toast } from '@zerodevx/svelte-toast';
   import * as sf from 'svelte-forms';
   import { max, required } from 'svelte-forms/validators';
-  import { messageStore } from './store';
+  import { messagesStore } from './store';
 
   $: chatbotId = $chatbotStore.selectedChatbot?.id || 0;
 
@@ -25,7 +26,7 @@
       return;
     }
 
-    messageStore
+    messagesStore
       .sendMessage(chatbotId, $formData.summary as MessagePayload)
       .then(() => {
         toast.push(`Message was sent to ${$to.value}`);
@@ -37,10 +38,12 @@
 </script>
 
 <svelte:head>
-  <title>Sandbox</title>
+  <title>Sandbox :: => Messages</title>
 </svelte:head>
 
-<h1 class="h3">Sandbox</h1>
+<PageHeader>
+  <h1 class="h3">Sandbox => <span class="badge badge-blue align-middle">Messages</span></h1>
+</PageHeader>
 
 <form class="form" on:submit|preventDefault={handleSubmit}>
   <div class="form-group">

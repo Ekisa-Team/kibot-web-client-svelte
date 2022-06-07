@@ -18,35 +18,43 @@
             type: 'link',
             path: '/channels/whatsapp',
             name: 'WhatsApp',
-            icon: 'i-ph:whatsapp-logo-thin'
+            icon: 'i-ph:whatsapp-logo-duotone'
           },
           {
             type: 'link',
             path: '/channels/messenger',
             name: 'Messenger',
-            icon: 'i-ph:messenger-logo-thin',
+            icon: 'i-ph:messenger-logo-duotone',
             badge: { color: 'yellow', text: 'WIP' }
           },
           {
             type: 'link',
             path: '/channels/instagram',
             name: 'Instagram',
-            icon: 'i-ph:instagram-logo-thin',
+            icon: 'i-ph:instagram-logo-duotone',
             badge: { color: 'yellow', text: 'WIP' }
           }
         ]
       },
       {
-        type: 'link',
-        path: '/sandbox',
+        type: 'group',
         name: 'Sandbox',
-        icon: 'i-ph:codepen-logo-thin'
-      },
-      {
-        type: 'link',
-        path: '/templates',
-        name: $t('layout.sidebar.templates'),
-        icon: 'i-ph:stack-thin'
+        icon: 'i-ph:codepen-logo-thin',
+        badge: { color: 'yellow', text: 'Beta' },
+        children: [
+          {
+            type: 'link',
+            path: '/sandbox/messages',
+            name: 'Messages',
+            icon: 'i-ph:chat-circle-dots-duotone'
+          },
+          {
+            type: 'link',
+            path: '/sandbox/templates',
+            name: $t('layout.sidebar.templates'),
+            icon: 'i-ph:stack-duotone'
+          }
+        ]
       },
       {
         type: 'group',
