@@ -6,13 +6,13 @@
   import PageHeader from '$lib/components/PageHeader.svelte';
   import { info } from '$lib/core/services/toasts';
   import type { Template } from '$lib/models/app/template';
-  import { chatbotStore } from '$lib/stores/chatbot';
+  import { chatbotsStore } from '$lib/stores/chatbots';
   import { Highlight } from 'svelte-highlight';
   import jsonLang from 'svelte-highlight/languages/json';
   import 'svelte-highlight/styles/synth-midnight-terminal-dark.css';
   import { templatesStore } from './store';
 
-  $: chatbotId = $chatbotStore.selectedChatbot?.id || 0;
+  $: chatbotId = $chatbotsStore.selectedChatbot?.id || 0;
 
   let isPreparingTemplate = false;
   let selectedTemplate: Partial<Template> & { messageClone: string } = { message: '', messageClone: '' };
@@ -42,7 +42,7 @@
 </svelte:head>
 
 <PageHeader>
-  <h1 class="h3">Sandbox => <span class="badge badge-blue align-middle">Templates</span></h1>
+  <h1 class="h3">Sandbox => <badge class="badge-blue align-middle">Templates</badge></h1>
 </PageHeader>
 
 {#await templatesStore.fetchTemplates(chatbotId)}
@@ -62,7 +62,7 @@
           <div slot="actions">
             <Clipboard text={code} let:copy on:copy={() => info('Copied!', { duration: 800 })}>
               <button class="btn btn-secondary" on:click={copy}>
-                <div class="i-carbon:copy mr-2 text-lg" />
+                <icon-carbon:copy mr-2 text-lg />
                 Copy
               </button>
             </Clipboard>
@@ -72,7 +72,7 @@
         <!-- actions -->
         <div class="flex items-center mt-4 space-x-2">
           <button type="submit" class="btn btn-blue" on:click={() => handlePrepare(template)}>
-            <div class="i-mdi:progress-upload mr-2 text-2xl" />
+            <icon-mdi:progress-upload mr-2 text-2xl />
             Prepare
           </button>
         </div>
@@ -100,11 +100,11 @@
 
         <div class="actions-group mt-12">
           <button class="btn btn-secondary" on:click={() => (isPreparingTemplate = false)}>
-            <div class="i-carbon:close mr-2 lg" />
+            <icon-carbon:close ui-text-lg ui-mr-2 />
             Close
           </button>
           <button class="btn btn-blue" on:click={() => null}>
-            <div class="i-carbon:send-alt mr-2 text-2xl" />
+            <icon-carbon:send-alt ui-text-2xl ui-mr-2 />
             Send
           </button>
         </div>

@@ -11,27 +11,27 @@
       {
         type: 'group',
         name: $t('layout.sidebar.channels'),
-        icon: 'i-ph:line-segments-thin',
+        icon: 'icon-ph:line-segments-thin',
         isDisclosed: false,
         children: [
           {
             type: 'link',
             path: '/channels/whatsapp',
             name: 'WhatsApp',
-            icon: 'i-ph:whatsapp-logo-duotone'
+            icon: 'icon-ph:whatsapp-logo-duotone'
           },
           {
             type: 'link',
             path: '/channels/messenger',
             name: 'Messenger',
-            icon: 'i-ph:messenger-logo-duotone',
+            icon: 'icon-ph:messenger-logo-duotone',
             badge: { color: 'yellow', text: 'WIP' }
           },
           {
             type: 'link',
             path: '/channels/instagram',
             name: 'Instagram',
-            icon: 'i-ph:instagram-logo-duotone',
+            icon: 'icon-ph:instagram-logo-duotone',
             badge: { color: 'yellow', text: 'WIP' }
           }
         ]
@@ -39,27 +39,27 @@
       {
         type: 'group',
         name: 'Sandbox',
-        icon: 'i-ph:codepen-logo-thin',
+        icon: 'icon-ph:codepen-logo-thin',
         badge: { color: 'yellow', text: 'Beta' },
         children: [
           {
             type: 'link',
             path: '/sandbox/messages',
             name: 'Messages',
-            icon: 'i-ph:chat-circle-dots-duotone'
+            icon: 'icon-ph:chat-circle-dots-duotone'
           },
           {
             type: 'link',
             path: '/sandbox/templates',
             name: $t('layout.sidebar.templates'),
-            icon: 'i-ph:stack-duotone'
+            icon: 'icon-ph:stack-duotone'
           }
         ]
       },
       {
         type: 'group',
         name: 'Integrations',
-        icon: 'i-ph:plugs-connected-thin',
+        icon: 'icon-ph:plugs-connected-thin',
         badge: { color: 'yellow', text: 'Alpha' },
         isDisclosed: false,
         children: [
@@ -67,13 +67,13 @@
             type: 'link',
             path: '/integrations/quiron',
             name: 'Quiron',
-            icon: 'i-ph:fire-duotone'
+            icon: 'icon-ph:fire-duotone'
           },
           {
             type: 'link',
             path: '/integrations/tempus',
             name: 'Tempus',
-            icon: 'i-ph:fire-duotone',
+            icon: 'icon-ph:fire-duotone',
             badge: { color: 'yellow', text: 'WIP' }
           }
         ]
@@ -84,13 +84,13 @@
         type: 'link',
         path: '/documentation',
         name: $t('layout.sidebar.documentation'),
-        icon: 'i-ph:scroll-thin'
+        icon: 'icon-ph:scroll-thin'
       },
       {
         type: 'link',
         path: '/help',
         name: $t('layout.sidebar.help'),
-        icon: 'i-ph:lifebuoy-thin'
+        icon: 'icon-ph:lifebuoy-thin'
       }
     ]
   ];

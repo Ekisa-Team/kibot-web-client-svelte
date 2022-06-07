@@ -3,14 +3,14 @@
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
   import { failure } from '$lib/core/services/toasts';
   import type { MessagePayload } from '$lib/models/message-payload';
-  import { chatbotStore } from '$lib/stores/chatbot';
+  import { chatbotsStore } from '$lib/stores/chatbots';
   import { nameof } from '$lib/utils/nameof';
   import { toast } from '@zerodevx/svelte-toast';
   import * as sf from 'svelte-forms';
   import { max, required } from 'svelte-forms/validators';
   import { messagesStore } from './store';
 
-  $: chatbotId = $chatbotStore.selectedChatbot?.id || 0;
+  $: chatbotId = $chatbotsStore.selectedChatbot?.id || 0;
 
   const to = sf.field(nameof<MessagePayload>('to'), '', [required()]);
   const message = sf.field(nameof<MessagePayload>('message'), '', [required(), max(200)]);
@@ -42,7 +42,7 @@
 </svelte:head>
 
 <PageHeader>
-  <h1 class="h3">Sandbox => <span class="badge badge-blue align-middle">Messages</span></h1>
+  <h1 class="h3">Sandbox => <badge class="badge-blue align-middle">Messages</badge></h1>
 </PageHeader>
 
 <form class="form" on:submit|preventDefault={handleSubmit}>
@@ -65,12 +65,12 @@
   </div>
 
   <div class="actions-group">
-    <button type="button" class="btn btn-secondary" on:click={() => formData.clear()}>
-      <div class="i-fluent:broom-16-regular mr-2 text-2xl" />
+    <button type="button" ui-btn ui-btn-secondary on:click={() => formData.clear()}>
+      <icon-fluent:broom-16-regular ui-text-2xl ui-mr-2 />
       Clear
     </button>
-    <button type="submit" class="btn btn-blue" disabled={!canSend}>
-      <div class="i-carbon:send-alt mr-2 text-2xl" />
+    <button type="submit" ui-btn ui-btn-blue disabled={!canSend}>
+      <icon-carbon:send-alt ui-text-2xl ui-mr-2 />
       Send
     </button>
   </div>

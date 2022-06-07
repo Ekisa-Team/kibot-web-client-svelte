@@ -12,12 +12,12 @@
     {
       value: 'en',
       text: 'English',
-      icon: 'i-emojione:flag-for-united-kingdom text-xl'
+      icon: 'icon-emojione:flag-for-united-kingdom text-xl'
     },
     {
       value: 'es',
       text: 'Español',
-      icon: 'i-emojione:flag-for-colombia text-xl'
+      icon: 'icon-emojione:flag-for-colombia text-xl'
     }
   ];
 

@@ -19,17 +19,17 @@
     {
       value: Theme.Light,
       text: $t('layout.navbar.themePicker.light'),
-      icon: 'i-carbon:light text-xl'
+      icon: 'icon-carbon:light text-xl'
     },
     {
       value: Theme.Dark,
       text: $t('layout.navbar.themePicker.dark'),
-      icon: 'i-carbon:moon text-xl'
+      icon: 'icon-carbon:moon text-xl'
     },
     {
       value: Theme.System,
       text: $t('layout.navbar.themePicker.system'),
-      icon: 'i-carbon:screen text-xl'
+      icon: 'icon-carbon:screen text-xl'
     }
   ];
 

@@ -42,31 +42,37 @@
 <svelte:element
   this={isParent ? 'div' : 'a'}
   href={isParent ? null : item.path}
-  class:bg-zinc-300={isActive}
-  class:dark:bg-zinc-700={isActive}
-  class="ui-menu-item group w-full"
+  class="ui-menu-item group w-full {isActive ? 'bg-zinc-300 dark:bg-zinc-700' : ''}"
   on:click={handleItemClick}>
   <div class="flex items-center">
     <!-- icon -->
     <div
+      ui-min-w="25px"
+      ui-text="2xl zinc-700 dark:zinc-400"
+      ui-transition-transform
+      ui-duration-200
+      ui-ease
+      ui-group-hover="text-red-600 rotate-20 scale-110 dark:text-red-300"
       class:invisible={false}
       class:text-red-600={isActive || isParentOpen}
       class:dark:text-red-300={isActive || isParentOpen}
-      class="{item.icon} min-w-[25px] text-2xl text-zinc-700 dark:text-zinc-400 transform transition-transform duration-200 ease group-hover:(text-red-600 rotate-20 scale-110) dark:group-hover:(text-red-300)" />
+      class={item.icon} />
 
     <!-- text -->
     <span class="ml-[1.1rem] text-sm" class:font-semibold={isParentOpen}>{item.name}</span>
 
     <!-- badge -->
     {#if item.badge}
-      <span class="badge badge-{item.badge.color} ml-3">{item.badge.text}</span>
+      <badge class="badge-{item.badge.color}" ui-ml-3>{item.badge.text}</badge>
     {/if}
   </div>
 
   <!-- arrow -->
   {#if isParent}
-    <div
-      class="i-ic:round-keyboard-arrow-right transition-transform duration-100 ease-in-out"
+    <icon-ic:round-keyboard-arrow-right
+      ui-transition-transform
+      ui-duration-100
+      ui-ease-in-out
       class:rotate-90={isParentOpen} />
   {/if}
 </svelte:element>

@@ -8,7 +8,7 @@
   import { setupTheming } from '$lib/core/services/theme';
   import { setupTranslations } from '$lib/core/services/translate';
   import { SvelteToast } from '@zerodevx/svelte-toast';
-  
+
   import 'uno.css';
   import '$lib/theme/styles.css';
 
@@ -21,7 +21,7 @@
   setupTheming();
 
   const breadcrumbItems: BreadcrumbItems = [
-    { icon: 'i-fa-solid:terminal', text: 'Applications', path: '/applications' },
+    { icon: 'icon-fa-solid:terminal', text: 'Applications', path: '/applications' },
     { text: 'Chatbots', path: '/chatbots' },
     { text: 'Messages' }
   ];

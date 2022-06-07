@@ -20,7 +20,7 @@
   setupTheming();
 
   const breadcrumbItems: BreadcrumbItems = [
-    { icon: 'i-fa-solid:terminal', text: 'Applications', path: '/applications' },
+    { icon: 'icon-fa-solid:terminal', text: 'Applications', path: '/applications' },
     { text: 'Chatbots', path: '/chatbots' }
   ];
 </script>

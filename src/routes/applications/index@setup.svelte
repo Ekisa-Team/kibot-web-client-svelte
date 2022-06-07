@@ -1,6 +1,6 @@
 <script lang="ts">
   import { t } from '$lib/translations';
-  import { clientApplicationStore } from '../../lib/stores/client-application';
+  import { clientApplicationsStore } from '../../lib/stores/client-applications';
 </script>
 
 <svelte:head>
@@ -9,11 +9,11 @@
 
 <h1 class="h3">{$t('layout.sidebar.applications')}</h1>
 
-{#await clientApplicationStore.fetch()}
+{#await clientApplicationsStore.fetchApplications()}
   <p>Waiting...</p>
 {:then}
   <div class="grid grid-cols-1 md:grid-cols-3">
-    {#each $clientApplicationStore.clients as client}
+    {#each $clientApplicationsStore.clients as client}
       <div>
         <pre>{JSON.stringify(client, null, 2)}</pre>
 
@@ -21,7 +21,7 @@
           <a
             href="applications/{client.id}/chatbots"
             class="btn btn-blue truncate"
-            on:click={() => clientApplicationStore.select(client)}>
+            on:click={() => clientApplicationsStore.selectApplication(client)}>
             Edit
           </a>
 

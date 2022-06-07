@@ -11,7 +11,7 @@
         {#if i < items.length - 1}
           <a href={path} class="font-semibold">
             {#if i > 0}
-              <div class="i-mdi:slash-forward" />
+              <icon-mdi:slash-forward />
             {/if}
 
             {#if icon}
@@ -24,14 +24,14 @@
           </a>
         {:else}
           <span>
-            <div class="i-mdi:slash-forward" />
+            <icon-mdi:slash-forward />
 
             {#if icon}
               <div class={icon} />
             {/if}
 
             {#if text}
-              <span class="font-thin">{text}</span>
+              <span ui-font-thin>{text}</span>
             {/if}
           </span>
         {/if}

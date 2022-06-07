@@ -4,6 +4,7 @@ import sveltePreprocess from 'svelte-preprocess';
 import {
   presetAttributify,
   presetIcons,
+  presetTagify,
   presetUno,
   transformerDirectives,
   transformerVariantGroup
@@ -33,19 +34,20 @@ const config = {
           shortcuts: [...defaultShortcuts, ...layoutShortcuts, ...componentsShortcuts, ...utilitiesShortcuts],
           presets: [
             presetIcons({
-              prefix: 'i-',
+              prefix: 'icon-',
               extraProperties: {
                 display: 'inline-block',
                 'vertical-align': 'middle'
               },
-              scale: 1.2
+              scale: 1.1
             }),
             presetUno(),
             presetAttributify({
               prefix: 'ui-',
               prefixedOnly: true,
               strict: true
-            })
+            }),
+            presetTagify()
           ]
         })
       ],

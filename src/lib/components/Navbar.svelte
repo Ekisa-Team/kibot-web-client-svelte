@@ -14,9 +14,9 @@
   <div class="flex items-center space-x-5">
     <button type="button" class="btn btn-secondary btn-fit" on:click={toggleSidebar}>
       {#if $sidebarStore.isOpen}
-        <div class="i-ph:caret-double-left-duotone text-xl" />
+        <icon-ph:caret-double-left-duotone ui-text-xl />
       {:else}
-        <div class="i-icon-park-twotone:hamburger text-xl" />
+        <icon-icon-park-twotone:hamburger ui-text-xl />
       {/if}
     </button>
 
@@ -26,7 +26,7 @@
   <!-- right -->
   <div class="flex items-center space-x-3">
     <a href="/applications" class="btn btn-secondary btn-fit space-x-2">
-      <div class="i-ph:arrow-circle-left-duotone text-xl text-blue-400" />
+      <icon-ph:arrow-circle-left-duotone ui-text-xl ui-text-blue-400 />
       <span class="hidden md:inline">Referencias</span>
     </a>
     <LangToggle />

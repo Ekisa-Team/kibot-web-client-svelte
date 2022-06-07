@@ -2,10 +2,10 @@
   export let type: 'info' | 'success' | 'warning' | 'danger' = 'info';
 
   const iconMap = new Map([
-    ['info', 'i-mdi:robot-happy'],
-    ['success', 'i-ph:smiley-fill'],
-    ['warning', 'i-clarity:neutral-face-solid'],
-    ['danger', 'i-raphael:skull']
+    ['info', 'icon-mdi:robot-happy'],
+    ['success', 'icon-ph:smiley-fill'],
+    ['warning', 'icon-clarity:neutral-face-solid'],
+    ['danger', 'icon-raphael:skull']
   ]);
 
   const bgMap = new Map([
