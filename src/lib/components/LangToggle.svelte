@@ -46,7 +46,7 @@
   </ListboxButton>
 
   <!-- menu items -->
-  <ListboxOptions class="dropdown dropdown-bottom-left">
+  <ListboxOptions class="dropdown dropdown-bottom-left border-yellow-400">
     {#each languages as lang (lang.value)}
       <ListboxOption value={lang} let:active let:selected>
         <div

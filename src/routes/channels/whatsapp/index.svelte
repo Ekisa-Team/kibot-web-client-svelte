@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Loader from '$lib/components/Loader.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
   import { failure, success } from '$lib/core/services/toasts';
   import type { Channel } from '$lib/models/app/channel';
@@ -9,7 +10,7 @@
   import { channelsStore } from './store';
 
   $: chatbotId = $chatbotStore.selectedChatbot?.id || 0;
-  $: isChannelConnected = !!$channelsStore;
+  $: isChannelConnected = !!$channelsStore.data;
 
   let isDevModeEnabled = false;
 
@@ -97,10 +98,10 @@
 </div>
 
 {#await fetchData(chatbotId)}
-  <p>Waiting...</p>
+  <Loader />
 {:then}
   <Form
-    channel={$channelsStore}
+    channel={$channelsStore.data}
     messagingProviders={$messagingProviderStore}
     devModeEnabled={isDevModeEnabled}
     isChannelConnected={isChannelConnected}

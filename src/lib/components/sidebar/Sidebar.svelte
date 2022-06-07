@@ -24,13 +24,15 @@
             type: 'link',
             path: '/channels/messenger',
             name: 'Messenger',
-            icon: 'i-ph:messenger-logo-thin'
+            icon: 'i-ph:messenger-logo-thin',
+            badge: { color: 'yellow', text: 'WIP' }
           },
           {
             type: 'link',
             path: '/channels/instagram',
             name: 'Instagram',
-            icon: 'i-ph:instagram-logo-thin'
+            icon: 'i-ph:instagram-logo-thin',
+            badge: { color: 'yellow', text: 'WIP' }
           }
         ]
       },
@@ -63,7 +65,8 @@
             type: 'link',
             path: '/integrations/tempus',
             name: 'Tempus',
-            icon: 'i-ph:fire-duotone'
+            icon: 'i-ph:fire-duotone',
+            badge: { color: 'yellow', text: 'WIP' }
           }
         ]
       }

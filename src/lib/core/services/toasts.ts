@@ -9,6 +9,7 @@ export const info = (message: string, options?: SvelteToastOptions) =>
     duration: DEFAULT_DURATION,
     pausable: IS_PAUSABLE,
     dismissable: IS_DISMISSABLE,
+
     ...options
   });
 

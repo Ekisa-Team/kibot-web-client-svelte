@@ -33,23 +33,19 @@
     { value: 1, text: 'PUT' }
   ];
 
-  const platformPhoneNumber = sf.field(nameof<Channel>('platformPhoneNumber'), channel?.platformPhoneNumber, [
-    required(),
-    pattern(/^([0-9]{1,2})([0-9]{10,12})$/g)
-  ]);
-  const platformAccountSid = sf.field(nameof<Channel>('platformAccountSid'), channel?.platformAccountSid, [
-    required()
-  ]);
-  const platformAuthToken = sf.field(nameof<Channel>('platformAuthToken'), channel?.platformAuthToken, [
-    required()
-  ]);
+  // prettier-ignore
+  const platformPhoneNumber = sf.field(nameof<Channel>('platformPhoneNumber'), channel?.platformPhoneNumber, [required(),pattern(/^([0-9]{1,2})([0-9]{10,12})$/g)]);
+  // prettier-ignore
+  const platformAccountSid = sf.field(nameof<Channel>('platformAccountSid'), channel?.platformAccountSid, [required()]);
+  // prettier-ignore
+  const platformAuthToken = sf.field(nameof<Channel>('platformAuthToken'), channel?.platformAuthToken, [required()]);
+  // prettier-ignore
   const httpMethodCode = sf.field(nameof<Channel>('httpMethodCode'), channel?.httpMethodCode, [required()]);
-  const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel?.callbackUrl, [required(), url()], {
-    checkOnInit: false
-  });
-  const messagingProviderId = sf.field(nameof<Channel>('messagingProviderId'), channel?.messagingProviderId, [
-    required()
-  ]);
+  // prettier-ignore
+  const callbackUrl = sf.field(nameof<Channel>('callbackUrl'), channel?.callbackUrl, [required(), url()]);
+  // prettier-ignore
+  const messagingProviderId = sf.field(nameof<Channel>('messagingProviderId'), channel?.messagingProviderId, [required()]);
+
   const formData = sf.form(
     platformPhoneNumber,
     platformAccountSid,

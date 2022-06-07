@@ -50,7 +50,7 @@ export const componentsShortcuts = [
     bg-white dark:bg-zinc-800
     overflow-hidden
     py-1.5
-    ring-1 ring-black ring-opacity-5
+    ring-1 ring-black dark:ring-zinc-700 ring-opacity-5
     rounded-xl shadow-2xl
     z-10
     focus:outline-none              

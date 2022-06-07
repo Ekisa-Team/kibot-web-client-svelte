@@ -2,8 +2,13 @@ import { http } from '$lib/core/services/http';
 import type { Channel } from '$lib/models/app/channel';
 import { writable } from 'svelte/store';
 
+type ChannelState = {
+  data: Channel | null;
+  loading: boolean;
+};
+
 function createChannelsStore() {
-  const { subscribe, set, update } = writable<Channel | null>(null);
+  const { subscribe, set, update } = writable<ChannelState>({ data: null, loading: false });
 
   return {
     subscribe,
@@ -11,24 +16,32 @@ function createChannelsStore() {
     update,
 
     fetchChannel: async (chatbotId: number) => {
+      update((state) => ({ ...state, loading: true }));
       const API_URL = `https://localhost:5001/api/v1/chatbots/${chatbotId}/channels`;
       const response = await http.get<Channel>(API_URL);
-      set(response?.data || null);
+      console.log(response);
+      set({ data: response?.data || null, loading: false });
+      return response;
     },
     createChannel: async (chatbotId: number, channel: Channel) => {
+      update((state) => ({ ...state, loading: true }));
       const API_URL = `https://localhost:5001/api/v1/chatbots/${chatbotId}/channels`;
       const response = await http.post<Channel>(API_URL, channel);
-      set(response?.data || null);
+      set({ data: response?.data || null, loading: false });
       return response;
     },
     updateChannel: async (chatbotId: number, channelId: number, channel: Channel) => {
+      update((state) => ({ ...state, loading: true }));
       const API_URL = `https://localhost:5001/api/v1/chatbots/${chatbotId}/channels/${channelId}`;
-      return await http.put<Channel>(API_URL, channel);
+      const response = await http.put<Channel>(API_URL, channel);
+      update((state) => ({ ...state, loading: false }));
+      return response;
     },
     deleteChannel: async (chatbotId: number, channelId: number) => {
+      update((state) => ({ ...state, loading: true }));
       const API_URL = `https://localhost:5001/api/v1/chatbots/${chatbotId}/channels/${channelId}`;
       const response = await http.del<Channel>(API_URL);
-      set(null);
+      set({ data: null, loading: false });
       return response;
     }
   };
