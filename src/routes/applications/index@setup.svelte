@@ -1,5 +1,6 @@
 <script lang="ts">
   import { t } from '$lib/translations';
+  import { variables } from '$lib/variables';
   import { clientApplicationsStore } from '../../lib/stores/client-applications';
 </script>
 
@@ -8,6 +9,9 @@
 </svelte:head>
 
 <h1 class="h3">{$t('layout.sidebar.applications')}</h1>
+
+{variables.kibotCoreApiUrl}
+{variables.kibotMiddlewareQuironApiUrl}
 
 {#await clientApplicationsStore.fetchApplications()}
   <p>Waiting...</p>
