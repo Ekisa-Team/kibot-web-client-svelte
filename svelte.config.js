@@ -26,6 +26,9 @@ const config = {
     adapter: adapter(),
 
     vite: {
+      define: {
+        'process.env': process.env
+      },
       plugins: [
         UnoCss({
           extractors: [extractorSvelte],
