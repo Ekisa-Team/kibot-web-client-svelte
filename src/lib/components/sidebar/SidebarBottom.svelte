@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { clientApplicationsStore } from '$lib/stores/applications';
   import { chatbotsStore } from '$lib/stores/chatbots';
-  import { clientApplicationsStore } from '$lib/stores/client-applications';
   import Alert from '../Alert.svelte';
 </script>
 

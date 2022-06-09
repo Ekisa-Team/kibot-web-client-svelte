@@ -1,27 +1,30 @@
 <script context="module" lang="ts">
+  // i18n
+  export const load: import('@sveltejs/kit').Load = async ({ url }) => {
+    return setupTranslations(url.pathname);
+  };
+</script>
+
+<script lang="ts">
   import Breadcrumb from '$lib/components/breadcrumb/Breadcrumb.svelte';
   import type { BreadcrumbItems } from '$lib/components/breadcrumb/types';
   import Breakpoints from '$lib/components/Breakpoints.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import Navbar from '$lib/components/Navbar.svelte';
-  import { setupTheming } from '$lib/core/services/theme';
-  import { setupTranslations } from '$lib/core/services/translate';
+  import { setupTheming } from '$lib/services/theme';
+  import { setupTranslations } from '$lib/services/translate';
   import { SvelteToast } from '@zerodevx/svelte-toast';
-
   import 'uno.css';
+  // prettier-ignore
   import '$lib/theme/styles.css';
-
-  // i18n
-  export const load: import('@sveltejs/kit').Load = async ({ url }) => {
-    return setupTranslations(url.pathname);
-  };
 
   // Application theme
   setupTheming();
 
   const breadcrumbItems: BreadcrumbItems = [
     { icon: 'icon-fa-solid:terminal', text: 'Applications', path: '/applications' },
-    { text: 'Chatbots', path: '/chatbots' }
+    { text: 'Chatbots', path: '/chatbots' },
+    { text: 'Messages' }
   ];
 </script>
 

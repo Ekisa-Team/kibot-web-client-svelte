@@ -1,6 +1,6 @@
 import { browser } from '$app/env';
 import { Theme } from '$lib/enums/theme';
-import { appTheme } from '$lib/stores/app-theme';
+import { themeStore } from '$lib/stores/theme';
 import { getItem, LocalStorageItem, setItem } from '$lib/utils/local-storage';
 
 const mediaQuery = browser && window.matchMedia('(prefers-color-scheme: dark)');
@@ -72,11 +72,11 @@ function setTheme(theme: Theme) {
  *
  */
 function setupTheming() {
-  appTheme.subscribe((theme) => {
+  themeStore.subscribe((state) => {
     if (!browser) return;
 
     listenForMediaChanges();
-    setTheme(theme);
+    setTheme(state.theme);
   });
 }
 

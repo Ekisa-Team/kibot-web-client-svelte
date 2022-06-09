@@ -1,5 +1,5 @@
-import { http } from '$lib/core/services/http';
 import type { MessagingProvider } from '$lib/models/app/messaging-provider';
+import { messagingProvidersService } from '$lib/services/messaging-providers';
 import { writable } from 'svelte/store';
 
 type MessagingProvidersState = {
@@ -17,8 +17,7 @@ function createMessagingProvidersStore() {
 
     fetchMessagingProviders: async () => {
       update((state) => ({ ...state, loading: true }));
-      const API_URL = 'https://kibot.azurewebsites.net/api/v1/messaging_providers';
-      const response = await http.get<MessagingProvider[]>(API_URL);
+      const response = await messagingProvidersService.getMessagingProviders();
       update((state) => ({ ...state, loading: false, data: response?.data || [] }));
     }
   };

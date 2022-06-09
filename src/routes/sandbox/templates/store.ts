@@ -1,6 +1,6 @@
-import { http } from '$lib/core/services/http';
 import type { Template } from '$lib/models/app/template';
 import { writable } from 'svelte/store';
+import { templatesService } from './service';
 
 type TemplatesState = {
   data: Template[];
@@ -17,8 +17,7 @@ function createTemplatesStore() {
 
     fetchTemplates: async (chatbotId: number) => {
       update((state) => ({ ...state, loading: true }));
-      const API_URL = `https://kibot.azurewebsites.net/api/v1/chatbots/${chatbotId}/templates`;
-      const response = await http.get<Template[]>(API_URL);
+      const response = await templatesService.fetchTemplates(chatbotId);
       set({ data: response?.data || [], loading: false });
       return response;
     }

@@ -3,7 +3,13 @@
   import type { Datalist, DataListItem } from '$lib/types/datalist';
   import type { SupportedLanguage } from '$lib/types/supported-language';
   import { LocalStorageItem, setItem } from '$lib/utils/local-storage';
-  import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@rgossiaux/svelte-headlessui';
+  import {
+    Listbox,
+    ListboxButton,
+    ListboxOption,
+    ListboxOptions,
+    Transition
+  } from '@rgossiaux/svelte-headlessui';
 
   export let showCountryFlag = true;
   export let showLanguage = true;
@@ -46,17 +52,26 @@
   </ListboxButton>
 
   <!-- menu items -->
-  <ListboxOptions class="dropdown dropdown-bottom-left border-yellow-400">
-    {#each languages as lang (lang.value)}
-      <ListboxOption value={lang} let:active let:selected>
-        <div
-          class="dropdown-item whitespace-nowrap"
-          class:dropdown-item-active={active}
-          class:dropdown-item-selected={selected}>
-          <div class={lang.icon} />
-          <span class="ml-3 text-sm font-semibold">{lang.text}</span>
-        </div>
-      </ListboxOption>
-    {/each}
-  </ListboxOptions>
+  <Transition
+    show={open}
+    enter="transition duration-100 ease-out"
+    enterFrom="transform scale-95 opacity-0"
+    enterTo="transform scale-100 opacity-100"
+    leave="transition duration-75 ease-out"
+    leaveFrom="transform scale-100 opacity-100"
+    leaveTo="transform scale-95 opacity-0">
+    <ListboxOptions class="dropdown dropdown-bottom-left border-yellow-400">
+      {#each languages as lang (lang.value)}
+        <ListboxOption value={lang} let:active let:selected>
+          <div
+            class="dropdown-item whitespace-nowrap"
+            class:dropdown-item-active={active}
+            class:dropdown-item-selected={selected}>
+            <div class={lang.icon} />
+            <span class="ml-3 text-sm font-semibold">{lang.text}</span>
+          </div>
+        </ListboxOption>
+      {/each}
+    </ListboxOptions>
+  </Transition>
 </Listbox>

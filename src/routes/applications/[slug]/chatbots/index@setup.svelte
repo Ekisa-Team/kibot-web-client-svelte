@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import { chatbotsStore } from '../../../../lib/stores/chatbots';
+
+  const applicationId = Number($page.params['slug']);
 </script>
 
 <svelte:head>
@@ -8,7 +11,7 @@
 
 <h1 class="h3">Chatbots</h1>
 
-{#await chatbotsStore.fetchChatbots()}
+{#await chatbotsStore.fetchChatbots(applicationId)}
   <p>Waiting...</p>
 {:then}
   <div class="grid grid-cols-1 md:grid-cols-3">

@@ -1,6 +1,6 @@
 import { browser } from '$app/env';
-import { http } from '$lib/core/services/http';
 import type { ClientApplication } from '$lib/models/app/client-application';
+import { applicationsService } from '$lib/services/applications';
 import { getItem, LocalStorageItem, setItem } from '$lib/utils/local-storage';
 import { writable } from 'svelte/store';
 
@@ -24,8 +24,7 @@ function createApplicationsStore() {
 
     fetchApplications: async () => {
       update((state) => ({ ...state, loading: true }));
-      const API_URL = 'https://kibot.azurewebsites.net/api/v1/client_applications';
-      const response = await http.get<ClientApplication[]>(API_URL);
+      const response = await applicationsService.getApplications();
       update((state) => ({ ...state, loading: false, clients: response?.data || [] }));
     },
     selectApplication(client: ClientApplication) {

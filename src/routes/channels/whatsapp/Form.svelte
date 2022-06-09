@@ -13,9 +13,9 @@
   import HighlightBox from '$lib/components/HighlightBox.svelte';
   import Modal from '$lib/components/Modal.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
-  import { info } from '$lib/core/services/toasts';
   import type { Channel } from '$lib/models/app/channel';
   import type { MessagingProvider } from '$lib/models/app/messaging-provider';
+  import { info } from '$lib/services/toasts';
   import type { Datalist } from '$lib/types/datalist';
   import { nameof } from '$lib/utils/nameof';
   import { createEventDispatcher, onMount } from 'svelte';

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { t } from '$lib/translations';
   import { variables } from '$lib/variables';
-  import { clientApplicationsStore } from '../../lib/stores/client-applications';
+  import { clientApplicationsStore } from '../../lib/stores/applications';
 </script>
 
 <svelte:head>

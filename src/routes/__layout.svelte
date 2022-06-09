@@ -5,11 +5,12 @@
   import Footer from '$lib/components/Footer.svelte';
   import Navbar from '$lib/components/Navbar.svelte';
   import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
-  import { setupTheming } from '$lib/core/services/theme';
-  import { setupTranslations } from '$lib/core/services/translate';
+  import { setupTheming } from '$lib/services/theme';
+  import { setupTranslations } from '$lib/services/translate';
   import { SvelteToast } from '@zerodevx/svelte-toast';
 
   import 'uno.css';
+  // prettier-ignore
   import '$lib/theme/styles.css';
 
   // i18n

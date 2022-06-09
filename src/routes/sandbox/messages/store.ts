@@ -1,6 +1,6 @@
-import { http } from '$lib/core/services/http';
 import type { MessagePayload } from '$lib/models/message-payload';
 import { writable } from 'svelte/store';
+import { messagesService } from './service';
 
 type MessagesState = {
   loading: boolean;
@@ -15,8 +15,7 @@ function createMessagesStore() {
     update,
 
     async sendMessage(chatbotId: number, payload: MessagePayload) {
-      const API_URL = `https://kibot.azurewebsites.net/api/v1/chatbots/${chatbotId}/messages`;
-      return http.post(API_URL, payload);
+      return messagesService.sendMessage(chatbotId, payload);
     }
   };
 }

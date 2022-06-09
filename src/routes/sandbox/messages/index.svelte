@@ -1,8 +1,8 @@
 <script lang="ts">
   import PageHeader from '$lib/components/PageHeader.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
-  import { failure } from '$lib/core/services/toasts';
   import type { MessagePayload } from '$lib/models/message-payload';
+  import { failure } from '$lib/services/toasts';
   import { chatbotsStore } from '$lib/stores/chatbots';
   import { nameof } from '$lib/utils/nameof';
   import { toast } from '@zerodevx/svelte-toast';

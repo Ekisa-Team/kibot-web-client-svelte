@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { getCurrentBreakpoint } from '$lib/core/services/screen';
+  import { getCurrentBreakpoint } from '$lib/services/screen';
   import type { MenuItem } from '$lib/types/menu';
   import { sidebarStore } from './store';
 

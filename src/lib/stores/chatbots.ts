@@ -1,6 +1,6 @@
 import { browser } from '$app/env';
-import { http } from '$lib/core/services/http';
 import type { Chatbot } from '$lib/models/app/chatbot';
+import { chatbotsService } from '$lib/services/chatbots';
 import { getItem, LocalStorageItem, setItem } from '$lib/utils/local-storage';
 import { writable } from 'svelte/store';
 
@@ -22,10 +22,9 @@ function createChatbotsStore() {
     set,
     update,
 
-    fetchChatbots: async () => {
+    fetchChatbots: async (applicationId: number) => {
       update((state) => ({ ...state, loading: true }));
-      const API_URL = 'https://kibot.azurewebsites.net/api/v1/client_applications/1/chatbots';
-      const response = await http.get<Chatbot[]>(API_URL);
+      const response = await chatbotsService.getChatbots(applicationId);
       update((state) => ({
         ...state,
         loading: false,

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { getTheme } from '$lib/core/services/theme';
   import { Theme } from '$lib/enums/theme';
-  import { appTheme } from '$lib/stores/app-theme';
+  import { getTheme } from '$lib/services/theme';
+  import { themeStore } from '$lib/stores/theme';
   import { t } from '$lib/translations';
   import type { Datalist, DataListItem } from '$lib/types/datalist';
   import {
@@ -37,7 +37,7 @@
 
   const handleThemeChange = (event: CustomEvent<DataListItem<Theme>>) => {
     selectedTheme = event.detail;
-    appTheme.update(() => selectedTheme.value);
+    themeStore.change(selectedTheme.value);
   };
 </script>
 

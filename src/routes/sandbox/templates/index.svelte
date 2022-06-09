@@ -4,8 +4,8 @@
   import Loader from '$lib/components/Loader.svelte';
   import Modal from '$lib/components/Modal.svelte';
   import PageHeader from '$lib/components/PageHeader.svelte';
-  import { info } from '$lib/core/services/toasts';
   import type { Template } from '$lib/models/app/template';
+  import { info } from '$lib/services/toasts';
   import { chatbotsStore } from '$lib/stores/chatbots';
   import { Highlight } from 'svelte-highlight';
   import jsonLang from 'svelte-highlight/languages/json';
@@ -61,8 +61,8 @@
           <!-- actions -->
           <div slot="actions">
             <Clipboard text={code} let:copy on:copy={() => info('Copied!', { duration: 800 })}>
-              <button class="btn btn-secondary" on:click={copy}>
-                <icon-carbon:copy mr-2 text-lg />
+              <button type="button" ui-btn ui-btn-secondary on:click={copy}>
+                <icon-carbon:copy ui-mr-2 ui-text-lg />
                 Copy
               </button>
             </Clipboard>
@@ -71,8 +71,8 @@
 
         <!-- actions -->
         <div class="flex items-center mt-4 space-x-2">
-          <button type="submit" class="btn btn-blue" on:click={() => handlePrepare(template)}>
-            <icon-mdi:progress-upload mr-2 text-2xl />
+          <button type="button" ui-btn ui-btn-blue on:click={() => handlePrepare(template)}>
+            <icon-mdi:progress-upload ui-mr-2 ui-text-2xl />
             Prepare
           </button>
         </div>

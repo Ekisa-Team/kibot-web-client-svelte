@@ -2,8 +2,8 @@
   import Loader from '$lib/components/Loader.svelte';
   import PageHeader from '$lib/components/PageHeader.svelte';
   import Tooltip from '$lib/components/Tooltip.svelte';
-  import { failure, success } from '$lib/core/services/toasts';
   import type { Channel } from '$lib/models/app/channel';
+  import { failure, success } from '$lib/services/toasts';
   import { chatbotsStore } from '$lib/stores/chatbots';
   import { messagingProvidersStore } from '$lib/stores/messaging-providers';
   import { Switch } from '@rgossiaux/svelte-headlessui';
