@@ -7,3 +7,15 @@ export type Template = BaseModel<number> & {
   language: string;
   chatbotId: number;
 };
+
+export type TemplatePayload = {
+  to: string;
+  parameters: string[];
+};
+
+export type TemplateParameter = {
+  key: string;
+  value: string;
+  inputValue: string;
+  position: number;
+};

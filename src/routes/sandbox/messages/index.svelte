@@ -2,10 +2,9 @@
   import PageHeader from '$lib/components/PageHeader.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
   import type { MessagePayload } from '$lib/models/message-payload';
-  import { failure } from '$lib/services/toasts';
+  import { failure, success } from '$lib/services/toasts';
   import { chatbotsStore } from '$lib/stores/chatbots';
   import { nameof } from '$lib/utils/nameof';
-  import { toast } from '@zerodevx/svelte-toast';
   import * as sf from 'svelte-forms';
   import { max, required } from 'svelte-forms/validators';
   import { messagesStore } from './store';
@@ -29,7 +28,7 @@
     messagesStore
       .sendMessage(chatbotId, $formData.summary as MessagePayload)
       .then(() => {
-        toast.push(`Message was sent to ${$to.value}`);
+        success(`Message was sent to ${$to.value}`);
       })
       .catch((error: Error) => {
         failure(error.message);

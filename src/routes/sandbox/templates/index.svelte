@@ -4,36 +4,77 @@
   import Loader from '$lib/components/Loader.svelte';
   import Modal from '$lib/components/Modal.svelte';
   import PageHeader from '$lib/components/PageHeader.svelte';
-  import type { Template } from '$lib/models/app/template';
-  import { info } from '$lib/services/toasts';
+  import type { Template, TemplatePayload } from '$lib/models/app/template';
+  import { failure, info, success, warning } from '$lib/services/toasts';
   import { chatbotsStore } from '$lib/stores/chatbots';
   import { Highlight } from 'svelte-highlight';
   import jsonLang from 'svelte-highlight/languages/json';
   import 'svelte-highlight/styles/synth-midnight-terminal-dark.css';
+  import { templatesService } from './service';
   import { templatesStore } from './store';
 
   $: chatbotId = $chatbotsStore.selectedChatbot?.id || 0;
 
-  let isPreparingTemplate = false;
-  let selectedTemplate: Partial<Template> & { messageClone: string } = { message: '', messageClone: '' };
+  let isLoaded = false;
 
-  let parameters: { key: string; value: string }[] = [];
+  let selectedTemplate: Template;
+  let templateRecipient: string;
+  let templateParameters: string[] = [];
+  let templateParametersValues: Record<string, string> = {};
 
-  const handlePrepare = (template: Template) => {
-    selectedTemplate = { ...template, messageClone: template.message };
-    parameters = selectedTemplate.message?.match(/{{.}}/g)?.map((p) => ({ key: p.at(2)!, value: '' })) || [];
-    isPreparingTemplate = true;
+  /**
+   * Load selected template & extract parameters into a dynamic text
+   * @param template selected template to be loaded
+   */
+  const handleLoading = (template: Template) => {
+    // Clean up old entries
+    templateParameters = [];
+    templateParametersValues = {};
+
+    // Clone template to be loaded
+    selectedTemplate = structuredClone(template);
+
+    // Extract parameters from template text & return text with HTML elements
+    const { parameters, dynamicText } = templatesService.extractParameters(selectedTemplate.message);
+    templateParameters = parameters;
+    selectedTemplate.message = dynamicText;
+
+    isLoaded = true;
   };
 
-  const handleParameterChange = ({ key, value }: { key: string; value: string }) => {
-    const search = new RegExp(
-      `({{(${key})}}-%${value}%)|({{(${key})}}-%%)|({{(${key})}}-)|({{(${key})}})`,
-      'g'
-    );
+  /**
+   * Replace parameter placeholders with the user input value
+   * @param parameter parameter being edited at runtime
+   */
+  const handleParameterChange = (parameter: string) => {
+    // Get parameter tag to be processed
+    const paramID = templatesService.extractParameterAsID(parameter, 'p');
+    const paramElement = document.getElementById(paramID);
+    if (!paramElement) {
+      return;
+    }
 
-    const replaceValue = value ? `{{${key}}}-%${value}%` : `{{${key}}}`;
-    console.log(selectedTemplate.messageClone, search, replaceValue);
-    selectedTemplate.message = selectedTemplate.message?.replace(search, replaceValue);
+    paramElement.textContent = templateParametersValues[parameter] || parameter;
+  };
+
+  const handleSending = () => {
+    const entries = Object.values(templateParametersValues);
+
+    if (entries.length < templateParameters.length) {
+      warning('You must fill in all parameters before sending it.'); // TODO: i18n
+      return;
+    }
+
+    const payload: TemplatePayload = { to: templateRecipient, parameters: entries };
+    templatesStore
+      .sendTemplate(chatbotId, selectedTemplate.id, payload)
+      .then(() => {
+        success(`Template message was sent to ${templateRecipient}`);
+        isLoaded = false;
+      })
+      .catch((error: Error) => {
+        failure(error.message);
+      });
   };
 </script>
 
@@ -71,9 +112,9 @@
 
         <!-- actions -->
         <div class="flex items-center mt-4 space-x-2">
-          <button type="button" ui-btn ui-btn-blue on:click={() => handlePrepare(template)}>
+          <button type="button" ui-btn ui-btn-blue on:click={() => handleLoading(template)}>
             <icon-mdi:progress-upload ui-mr-2 ui-text-2xl />
-            Prepare
+            Load
           </button>
         </div>
       </div>
@@ -81,29 +122,41 @@
   </div>
 
   {#if selectedTemplate}
-    <Modal bind:isOpen={isPreparingTemplate} size="5xl">
+    <Modal bind:isOpen={isLoaded} size="5xl">
       <span slot="title">{selectedTemplate?.name}</span>
 
       <div slot="content">
-        <p>{@html selectedTemplate.message}</p>
+        <!-- template message -->
+        <div ui-max-h="250px" ui-overflow-auto ui-bg="zinc-200 dark:zinc-900" ui-p2 ui-mb-8 ui-rounded-xl>
+          <pre><p class="template-message whitespace-pre-wrap">{@html selectedTemplate.message}</p></pre>
+        </div>
 
-        {#each parameters as parameter}
-          <div class="mb-2">
+        <!-- recipient -->
+        <div class="mb-2">
+          <label for="to">To</label>
+          <input type="text" bind:value={templateRecipient} class="field" />
+        </div>
+
+        <!-- parameters -->
+        <div class="mb-2">
+          <label for="to">Parameters</label>
+          {#each templateParameters as parameter}
             <input
               type="text"
-              placeholder={parameter.key}
-              class="field"
-              bind:value={parameter.value}
-              on:change={() => handleParameterChange(parameter)} />
-          </div>
-        {/each}
+              placeholder={parameter}
+              class="field mb-2"
+              bind:value={templateParametersValues[parameter]}
+              on:keyup={() => handleParameterChange(parameter)} />
+          {/each}
+        </div>
 
+        <!-- actions -->
         <div class="actions-group mt-12">
-          <button class="btn btn-secondary" on:click={() => (isPreparingTemplate = false)}>
+          <button class="btn btn-secondary" on:click={() => (isLoaded = false)}>
             <icon-carbon:close ui-text-lg ui-mr-2 />
             Close
           </button>
-          <button class="btn btn-blue" on:click={() => null}>
+          <button class="btn btn-blue" on:click={handleSending}>
             <icon-carbon:send-alt ui-text-2xl ui-mr-2 />
             Send
           </button>
@@ -114,3 +167,13 @@
 {:catch error}
   <p>Error: {error}</p>
 {/await}
+
+<style>
+  .template-message :global(span) {
+    color: #7f8100;
+  }
+
+  :global(.dark) .template-message :global(span) {
+    color: #b8d802;
+  }
+</style>

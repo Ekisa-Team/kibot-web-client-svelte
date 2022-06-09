@@ -7,6 +7,7 @@
     Transition,
     TransitionChild
   } from '@rgossiaux/svelte-headlessui';
+  import { createEventDispatcher } from 'svelte';
 
   export let isOpen = false;
   export let size:
@@ -23,11 +24,19 @@
     | '7xl'
     | 'full'
     | null = null;
+
+  const dispatch = createEventDispatcher();
+
+  const handleClose = () => {
+    console.log('¿');
+    isOpen = false;
+    dispatch('close');
+  };
 </script>
 
 <Transition appear show={isOpen}>
   <!-- dialog -->
-  <Dialog as="div" class="fixed inset-0 z-20" open={isOpen} on:close={() => (isOpen = false)}>
+  <Dialog as="div" class="fixed inset-0 z-20" open={isOpen} on:close={handleClose}>
     <!-- overlay -->
     <TransitionChild
       enter="ease-out duration-300"

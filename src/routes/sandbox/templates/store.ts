@@ -1,4 +1,4 @@
-import type { Template } from '$lib/models/app/template';
+import type { Template, TemplatePayload } from '$lib/models/app/template';
 import { writable } from 'svelte/store';
 import { templatesService } from './service';
 
@@ -19,6 +19,12 @@ function createTemplatesStore() {
       update((state) => ({ ...state, loading: true }));
       const response = await templatesService.fetchTemplates(chatbotId);
       set({ data: response?.data || [], loading: false });
+      return response;
+    },
+    sendTemplate: async (chatbotId: number, templateId: number, payload: TemplatePayload) => {
+      update((state) => ({ ...state, loading: true }));
+      const response = await templatesService.sendTemplate(chatbotId, templateId, payload);
+      update((state) => ({ ...state, loading: false }));
       return response;
     }
   };
