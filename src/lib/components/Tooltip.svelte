@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let title = '';
+  export let tip = '';
   export let offset: [number, number] = [5, 5];
 
   let isHovered = false;
@@ -41,7 +41,7 @@
     ui-bg="white dark:zinc-800"
     ui-border="1 zinc-300 dark:zinc-500">
     <slot name="content">
-      {title}
+      {tip}
     </slot>
   </div>
 {/if}

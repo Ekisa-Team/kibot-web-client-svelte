@@ -3,7 +3,7 @@
   "tabWidth": 2,
   "singleQuote": true,
   "trailingComma": "none",
-  "printWidth": 110,
+  "printWidth": 120,
   "overrides": [
     {
       "files": "*.svelte",

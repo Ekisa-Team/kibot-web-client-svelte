@@ -144,25 +144,25 @@
 
     <div class="mt-12 actions-group">
       <button type="button" class="btn btn-secondary" on:click={() => (isViewSourceOpen = true)}>
-        <icon-ph:code ui-text-lg ui-mr-2 />
+        <icon-ph:code ui-text-xl ui-mr-2 />
         View source
       </button>
       <button type="button" class="btn btn-secondary" on:click={() => formData.clear()}>
-        <icon-fluent:broom-16-regular ui-text-lg ui-mr-2 />
+        <icon-fluent:broom-16-regular ui-text-xl ui-mr-2 />
         Clear
       </button>
       <button type="button" class="btn btn-secondary" on:click={() => formData.reset()}>
-        <icon-ion:arrow-undo-outline ui-text-lg ui-mr-2 />
+        <icon-ion:arrow-undo-outline ui-text-xl ui-mr-2 />
         Reset
       </button>
       {#if isChannelConnected}
         <button type="button" class="btn btn-red" on:click={handleDisconnect}>
-          <icon-codicon:debug-disconnect ui-text-lg ui-mr-2 />
+          <icon-codicon:debug-disconnect ui-text-xl ui-mr-2 />
           Disconnect
         </button>
       {/if}
       <button type="submit" class="btn btn-green" disabled={!canSave}>
-        <icon-iconoir:save-floppy-disk ui-text-lg ui-mr-2 />
+        <icon-iconoir:save-floppy-disk ui-text-xl ui-mr-2 />
         Save
       </button>
     </div>
@@ -178,7 +178,7 @@
 
     <div class="actions-group mt-12">
       <button class="btn btn-secondary" on:click={() => (isViewSourceOpen = false)}>
-        <icon-carbon:close ui-mr-2 ui-text-lg />
+        <icon-carbon:close ui-text-xl ui-mr-2 />
         Close
       </button>
 
@@ -187,7 +187,7 @@
         let:copy
         on:copy={() => info('Copied!', { duration: 800 })}>
         <button class="btn btn-blue" on:click={copy}>
-          <icon-carbon:copy ui-mr-2 ui-text-lg />
+          <icon-carbon:copy ui-text-xl ui-mr-2 />
           Copy
         </button>
       </Clipboard>

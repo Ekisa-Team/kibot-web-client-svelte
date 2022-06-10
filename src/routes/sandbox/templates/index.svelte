@@ -4,6 +4,7 @@
   import Loader from '$lib/components/Loader.svelte';
   import Modal from '$lib/components/Modal.svelte';
   import PageHeader from '$lib/components/PageHeader.svelte';
+  import PostmanLink from '$lib/components/PostmanLink.svelte';
   import type { Template, TemplatePayload } from '$lib/models/app/template';
   import { failure, info, success, warning } from '$lib/services/toasts';
   import { chatbotsStore } from '$lib/stores/chatbots';
@@ -28,6 +29,7 @@
    */
   const handleLoading = (template: Template) => {
     // Clean up old entries
+    templateRecipient = '';
     templateParameters = [];
     templateParametersValues = {};
 
@@ -103,7 +105,7 @@
           <div slot="actions">
             <Clipboard text={code} let:copy on:copy={() => info('Copied!', { duration: 800 })}>
               <button type="button" ui-btn ui-btn-secondary on:click={copy}>
-                <icon-carbon:copy ui-mr-2 ui-text-lg />
+                <icon-carbon:copy ui-text-xl ui-mr-2 />
                 Copy
               </button>
             </Clipboard>
@@ -111,9 +113,11 @@
         </CodeBox>
 
         <!-- actions -->
-        <div class="flex items-center mt-4 space-x-2">
+        <div ui-actions-group ui-mt-4>
+          <PostmanLink />
+
           <button type="button" ui-btn ui-btn-blue on:click={() => handleLoading(template)}>
-            <icon-mdi:progress-upload ui-mr-2 ui-text-2xl />
+            <icon-mdi:progress-upload ui-text-xl ui-mr-2 />
             Load
           </button>
         </div>
@@ -153,11 +157,11 @@
         <!-- actions -->
         <div class="actions-group mt-12">
           <button class="btn btn-secondary" on:click={() => (isLoaded = false)}>
-            <icon-carbon:close ui-text-lg ui-mr-2 />
+            <icon-carbon:close ui-text-xl ui-mr-2 />
             Close
           </button>
           <button class="btn btn-blue" on:click={handleSending}>
-            <icon-carbon:send-alt ui-text-2xl ui-mr-2 />
+            <icon-carbon:send-alt ui-text-xl ui-mr-2 />
             Send
           </button>
         </div>

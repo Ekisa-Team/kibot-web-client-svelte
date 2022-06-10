@@ -1,5 +1,6 @@
 <script lang="ts">
   import { browser } from '$app/env';
+  import { constants } from '$lib/constants';
   import { t } from '$lib/translations';
   import type { Menu } from '$lib/types/menu';
   import SidebarBottom from './SidebarBottom.svelte';
@@ -46,7 +47,7 @@
         type: 'group',
         name: 'Integrations',
         icon: 'icon-ph:plugs-connected-thin',
-        badge: { color: 'yellow', text: 'Alpha' },
+        badge: { color: 'yellow', text: 'Beta' },
         isDisclosed: false,
         children: [
           {
@@ -61,7 +62,7 @@
     [
       {
         type: 'link',
-        path: '/documentation',
+        path: constants.documentationURL,
         name: $t('layout.sidebar.documentation'),
         icon: 'icon-ph:scroll-thin'
       },

@@ -1,5 +1,6 @@
 <script>
   import Logo from '$lib/components/Logo.svelte';
+  import { constants } from '$lib/constants';
   import { t } from '$lib/translations';
   const currentYear = new Date().getFullYear();
 </script>
@@ -11,7 +12,7 @@
 
     <ul class="flex flex-wrap items-center space-x-3">
       <li>
-        <a href="documentation" class="text-sm hover:underline">
+        <a href={constants.documentationURL} class="text-sm hover:underline">
           {$t('layout.footer.documentation')}
         </a>
       </li>

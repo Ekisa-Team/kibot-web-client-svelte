@@ -4,3 +4,7 @@ html {
   @apply font-default;
   @apply font-light;
 }
+
+strong {
+  @apply font-semibold;
+}
