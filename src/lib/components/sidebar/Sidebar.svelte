@@ -19,20 +19,6 @@
             path: '/channels/whatsapp',
             name: 'WhatsApp',
             icon: 'icon-ph:whatsapp-logo-duotone'
-          },
-          {
-            type: 'link',
-            path: '/channels/messenger',
-            name: 'Messenger',
-            icon: 'icon-ph:messenger-logo-duotone',
-            badge: { color: 'yellow', text: 'WIP' }
-          },
-          {
-            type: 'link',
-            path: '/channels/instagram',
-            name: 'Instagram',
-            icon: 'icon-ph:instagram-logo-duotone',
-            badge: { color: 'yellow', text: 'WIP' }
           }
         ]
       },
@@ -68,13 +54,6 @@
             path: '/integrations/quiron',
             name: 'Quiron',
             icon: 'icon-ph:fire-duotone'
-          },
-          {
-            type: 'link',
-            path: '/integrations/tempus',
-            name: 'Tempus',
-            icon: 'icon-ph:fire-duotone',
-            badge: { color: 'yellow', text: 'WIP' }
           }
         ]
       }

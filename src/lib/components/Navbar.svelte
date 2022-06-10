@@ -1,6 +1,5 @@
 <script lang="ts">
   import Logo from '$lib/components/Logo.svelte';
-  import LangToggle from './LangToggle.svelte';
   import { sidebarStore } from './sidebar/store';
   import ThemeToggle from './ThemeToggle.svelte';
 
@@ -29,7 +28,7 @@
       <icon-ph:arrow-circle-left-duotone ui-text-xl ui-text-blue-400 />
       <span class="hidden md:inline">Referencias</span>
     </a>
-    <LangToggle />
+    <!-- <LangToggle /> -->
     <ThemeToggle />
   </div>
 </nav>
