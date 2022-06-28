@@ -2,6 +2,7 @@ import type { QuironReplyToken } from '$lib/models/reply-token';
 
 export const getReplyTokenSuggestions = (token: QuironReplyToken): string[] => {
   const replyTokens: Record<QuironReplyToken, string[]> = {
+    'Transaction.Assigned': ['✅ Su cita ha sido *asignada* correctamente.', '¡Cita asignada exitosamente!'],
     'Transaction.Confirmed': [
       '✅ Su cita ha sido *confirmada* correctamente.',
       '¡Cita confirmada exitosamente!',

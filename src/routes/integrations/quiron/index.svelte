@@ -18,6 +18,10 @@
   $: chatbotId = $chatbotsStore.selectedChatbot?.id || 0;
 
   const replyTokens: Record<QuironReplyToken, { hint: string; suggestions: string[] }> = {
+    'Transaction.Assigned': {
+      hint: '☝️ Respuesta al usuario cuando asigna su cita correctamente',
+      suggestions: getReplyTokenSuggestions('Transaction.Assigned')
+    },
     'Transaction.Confirmed': {
       hint: '☝️ Respuesta al usuario cuando confirma una cita',
       suggestions: getReplyTokenSuggestions('Transaction.Confirmed')
