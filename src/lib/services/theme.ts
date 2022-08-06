@@ -9,8 +9,7 @@ const mediaQuery = browser && window.matchMedia('(prefers-color-scheme: dark)');
  * Get theme based on user's preference
  *
  */
-const getSystemTheme = (): Theme.Light | Theme.Dark =>
-  mediaQuery && mediaQuery.matches ? Theme.Dark : Theme.Light;
+const getSystemTheme = (): Theme.Light | Theme.Dark => (mediaQuery && mediaQuery.matches ? Theme.Dark : Theme.Light);
 
 /**
  * Listen for theme changes on user's system
@@ -44,7 +43,7 @@ const clearThemes = () => {
  */
 function getTheme(): Theme | null {
   if (!browser) return null;
-  return getItem<Theme>(LocalStorageItem.Theme);
+  return getItem<Theme>(LocalStorageItem?.Theme);
 }
 
 /**

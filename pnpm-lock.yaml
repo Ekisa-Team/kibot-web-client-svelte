@@ -29,6 +29,7 @@ specifiers:
   svelte-check: ^2.7.1
   svelte-forms: ^2.3.1
   svelte-highlight: ^6.0.1
+  svelte-imask: ^1.2.0
   svelte-preprocess: ^4.10.7
   sveltekit-i18n: ^2.2.2
   tslib: ^2.4.0
@@ -38,6 +39,7 @@ specifiers:
 dependencies:
   '@zerodevx/svelte-toast': 0.7.2
   svelte-forms: 2.3.1
+  svelte-imask: 1.2.0
 
 devDependencies:
   '@iconify/json': 2.1.56
@@ -1606,6 +1608,11 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /imask/6.4.2:
+    resolution: {integrity: sha512-xvEgbTdk6y2dW2UAysq0NRPmO6PuaXM5NHIt4TXEJEwXUHj26M0p/fXqyrSJdNXFaGVOtqYjPRnNdrjQQhDuuA==}
+    engines: {npm: '>=4.0.0'}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -2539,6 +2546,12 @@ packages:
     dependencies:
       svelte: 3.48.0
     dev: true
+
+  /svelte-imask/1.2.0:
+    resolution: {integrity: sha512-5LNUhokQ3rG3jkjIxewI2VIxoOYdrBCcnLIUddA9qmIO9dhDH+Qs2FkKm7wRsZy3x6WbwOjB4EvEoTMR8KrFqg==}
+    dependencies:
+      imask: 6.4.2
+    dev: false
 
   /svelte-preprocess/4.10.7_6c54e50e2322b376d55fd779bd3e30d4:
     resolution: {integrity: sha512-sNPBnqYD6FnmdBrUmBCaqS00RyCsCpj2BG58A1JBswNF7b0OKviwxqVrOL/CKyJrLSClrSeqQv5BXNg2RUbPOw==}

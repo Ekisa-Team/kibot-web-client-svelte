@@ -1,12 +1,14 @@
 <script lang="ts">
   import PageHeader from '$lib/components/PageHeader.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
+  import { masks } from '$lib/masks';
   import type { MessagePayload } from '$lib/models/message-payload';
   import { failure, success } from '$lib/services/toasts';
   import { chatbotsStore } from '$lib/stores/chatbots';
   import { nameof } from '$lib/utils/nameof';
   import * as sf from 'svelte-forms';
   import { max, required } from 'svelte-forms/validators';
+  import { MaskedInput } from 'svelte-imask';
   import { messagesStore } from './store';
 
   $: chatbotId = $chatbotsStore.selectedChatbot?.id || 0;
@@ -15,16 +17,12 @@
   const message = sf.field(nameof<MessagePayload>('message'), '', [required(), max(200)]);
   const formData = sf.form(to, message);
 
-  let canSend: boolean;
-  $: canSend = $formData.valid;
+  let canSend = false;
+  $: {
+    canSend = $formData.valid && $to.value.length === 12;
+  }
 
   const handleSubmit = async () => {
-    await formData.validate();
-
-    if (!$formData.valid) {
-      return;
-    }
-
     messagesStore
       .sendMessage(chatbotId, $formData.summary as MessagePayload)
       .then(() => {
@@ -48,7 +46,12 @@
   <div class="form-group">
     <div class="form-item">
       <label for="to">To</label>
-      <input type="text" id="to" bind:value={$to.value} class="field" />
+      <MaskedInput
+        type="tel"
+        options={masks.phone}
+        placeholder="+57 (000) 000-0000"
+        bind:value={$to.value}
+        class="field" />
       <ValidatorContainer field={$to} />
     </div>
 

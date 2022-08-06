@@ -13,6 +13,7 @@
   import HighlightBox from '$lib/components/HighlightBox.svelte';
   import Modal from '$lib/components/Modal.svelte';
   import ValidatorContainer from '$lib/components/ValidatorContainer.svelte';
+  import { masks } from '$lib/masks';
   import type { Channel } from '$lib/models/app/channel';
   import type { MessagingProvider } from '$lib/models/app/messaging-provider';
   import { info } from '$lib/services/toasts';
@@ -24,6 +25,7 @@
   import Highlight from 'svelte-highlight';
   import jsonLang from 'svelte-highlight/languages/json';
   import 'svelte-highlight/styles/synth-midnight-terminal-dark.css';
+  import { MaskedInput } from 'svelte-imask';
 
   export let channel: Channel | null;
   export let messagingProviders: MessagingProvider[];
@@ -85,10 +87,10 @@
     <div class="form-group form-cols-2 mb-8">
       <div class="form-item">
         <label for="platformPhoneNumber">Platform phone number</label>
-        <input
-          type="text"
-          id="platformPhoneNumber"
-          placeholder={`^([0-9]{1,2})([0-9]{10,12})$/g`}
+        <MaskedInput
+          type="tel"
+          options={masks.phone}
+          placeholder="+57 (000) 000-0000"
           bind:value={$platformPhoneNumber.value}
           class="field" />
         <ValidatorContainer field={$platformPhoneNumber} />

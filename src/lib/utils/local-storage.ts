@@ -7,7 +7,7 @@ export enum LocalStorageItem {
 }
 
 function getItem<T>(item: LocalStorageItem, shouldParse = true): T | null {
-  const data = localStorage.getItem(item.toString());
+  const data = localStorage.getItem(item?.toString());
   return data && shouldParse ? JSON.parse(data || '{}') : data;
 }
 

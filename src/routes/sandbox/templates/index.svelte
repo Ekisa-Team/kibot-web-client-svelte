@@ -5,12 +5,14 @@
   import Modal from '$lib/components/Modal.svelte';
   import PageHeader from '$lib/components/PageHeader.svelte';
   import PostmanLink from '$lib/components/PostmanLink.svelte';
+  import { masks } from '$lib/masks';
   import type { Template, TemplatePayload } from '$lib/models/app/template';
-  import { failure, info, success, warning } from '$lib/services/toasts';
+  import { failure, info, success } from '$lib/services/toasts';
   import { chatbotsStore } from '$lib/stores/chatbots';
   import { Highlight } from 'svelte-highlight';
   import jsonLang from 'svelte-highlight/languages/json';
   import 'svelte-highlight/styles/synth-midnight-terminal-dark.css';
+  import { MaskedInput } from 'svelte-imask';
   import { templatesService } from './service';
   import { templatesStore } from './store';
 
@@ -22,6 +24,14 @@
   let templateRecipient: string;
   let templateParameters: string[] = [];
   let templateParametersValues: Record<string, string> = {};
+
+  let canSendTemplate = false;
+  $: {
+    const parameters = Object.values(templateParametersValues);
+    const phoneNumberIsValid = templateRecipient?.length === 12;
+    const paramsAreFullfilled = parameters.length === templateParameters.length && parameters.every((v) => v);
+    canSendTemplate = phoneNumberIsValid && paramsAreFullfilled;
+  }
 
   /**
    * Load selected template & extract parameters into a dynamic text
@@ -44,6 +54,10 @@
     isLoaded = true;
   };
 
+  const handleComplete = (event: any) => {
+    console.log(event);
+  };
+
   /**
    * Replace parameter placeholders with the user input value
    * @param parameter parameter being edited at runtime
@@ -60,19 +74,13 @@
   };
 
   const handleSending = () => {
-    const entries = Object.values(templateParametersValues);
+    const parameters = Object.values(templateParametersValues);
 
-    if (entries.length < templateParameters.length) {
-      warning('You must fill in all parameters before sending it.'); // TODO: i18n
-      return;
-    }
-
-    const payload: TemplatePayload = { to: templateRecipient, parameters: entries };
+    const payload: TemplatePayload = { to: templateRecipient, parameters };
     templatesStore
       .sendTemplate(chatbotId, selectedTemplate.id, payload)
       .then(() => {
         success(`Template message was sent to ${templateRecipient}`);
-        isLoaded = false;
       })
       .catch((error: Error) => {
         failure(error.message);
@@ -138,7 +146,12 @@
         <!-- recipient -->
         <div class="mb-2">
           <label for="to">To</label>
-          <input type="text" bind:value={templateRecipient} class="field" />
+          <MaskedInput
+            type="tel"
+            options={masks.phone}
+            placeholder="+57 (000) 000-0000"
+            bind:value={templateRecipient}
+            class="field" />
         </div>
 
         <!-- parameters -->
@@ -160,7 +173,7 @@
             <icon-carbon:close ui-text-xl ui-mr-2 />
             Close
           </button>
-          <button class="btn btn-blue" on:click={handleSending}>
+          <button class="btn btn-blue" on:click={handleSending} disabled={!canSendTemplate}>
             <icon-carbon:send-alt ui-text-xl ui-mr-2 />
             Send
           </button>
