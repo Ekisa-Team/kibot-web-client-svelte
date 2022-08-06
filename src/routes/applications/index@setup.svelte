@@ -69,41 +69,48 @@
 {#await clientApplicationsStore.fetchApplications()}
   <p>Loading...</p>
 {:then}
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-    {#each $clientApplicationsStore.clients as client}
-      {@const code = JSON.stringify(client, null, 2)}
+  {#if $clientApplicationsStore.clients.length}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      {#each $clientApplicationsStore.clients as client}
+        {@const code = JSON.stringify(client, null, 2)}
 
-      <div>
-        <!-- codebox -->
-        <CodeBox>
-          <!-- highlight -->
-          <Highlight language={jsonLang} code={code} />
+        <div>
+          <!-- codebox -->
+          <CodeBox>
+            <!-- highlight -->
+            <Highlight language={jsonLang} code={code} />
+
+            <!-- actions -->
+            <div slot="actions">
+              <Clipboard text={code} let:copy on:copy={() => info('Copied!', { duration: 800 })}>
+                <button type="button" ui-btn ui-btn-secondary on:click={copy}>
+                  <icon-carbon:copy ui-text-xl ui-mr-2 />
+                  Copy
+                </button>
+              </Clipboard>
+            </div>
+          </CodeBox>
 
           <!-- actions -->
-          <div slot="actions">
-            <Clipboard text={code} let:copy on:copy={() => info('Copied!', { duration: 800 })}>
-              <button type="button" ui-btn ui-btn-secondary on:click={copy}>
-                <icon-carbon:copy ui-text-xl ui-mr-2 />
-                Copy
-              </button>
-            </Clipboard>
+          <div ui-actions-group ui-mt-4>
+            <a
+              href="applications/{client.id}/chatbots"
+              ui-btn
+              ui-btn-blue
+              on:click={() => clientApplicationsStore.selectApplication(client)}>
+              <icon-carbon:settings ui-text-xl ui-mr-2 />
+              Configure
+            </a>
           </div>
-        </CodeBox>
-
-        <!-- actions -->
-        <div ui-actions-group ui-mt-4>
-          <a
-            href="applications/{client.id}/chatbots"
-            ui-btn
-            ui-btn-blue
-            on:click={() => clientApplicationsStore.selectApplication(client)}>
-            <icon-carbon:settings ui-text-xl ui-mr-2 />
-            Configure
-          </a>
         </div>
-      </div>
-    {/each}
-  </div>
+      {/each}
+    </div>
+  {:else}
+    <div class="flex flex-col items-center gap-4 mt-36">
+      <icon-material-symbols:inbox-outline-sharp ui-text-4xl ui-mr-2 />
+      <p>No client applications were found</p>
+    </div>
+  {/if}
 {:catch error}
   <p>Error: {error}</p>
 {/await}

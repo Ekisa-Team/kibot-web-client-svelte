@@ -20,17 +20,17 @@
 
   let isModalVisible = false;
 
-  const applicationId = Number($page.params['slug']);
+  const clientId = Number($page.params['slug']);
   const name = sf.field(nameof<Chatbot>('name'), '', [required()]);
   const formData = sf.form(name);
 
   const handleDelete = (chatbotId: number) => {
     if (confirm('Are you sure?')) {
       chatbotsStore
-        .deleteChatbot(applicationId, chatbotId)
+        .deleteChatbot(clientId, chatbotId)
         .then(() => {
           success('Chatbot was deleted successfully');
-          chatbotsStore.fetchChatbots(applicationId);
+          chatbotsStore.fetchChatbots(clientId);
         })
         .catch((error: Error) => failure(error.message));
     }
@@ -44,11 +44,11 @@
     }
 
     chatbotsStore
-      .createChatbot(applicationId, $formData.summary as Chatbot)
+      .createChatbot(clientId, $formData.summary as Chatbot)
       .then(() => {
         isModalVisible = false;
         success('Chatbot was created successfully');
-        chatbotsStore.fetchChatbots(applicationId);
+        chatbotsStore.fetchChatbots(clientId);
       })
       .catch((error: Error) => failure(error.message));
   };
@@ -76,44 +76,51 @@
   </div>
 </PageHeader>
 
-{#await chatbotsStore.fetchChatbots(applicationId)}
+{#await chatbotsStore.fetchChatbots(clientId)}
   <p>Cargando...</p>
 {:then}
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-    {#each $chatbotsStore.chatbots as chatbot}
-      {@const code = JSON.stringify(chatbot, null, 2)}
+  {#if $chatbotsStore.chatbots.length}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      {#each $chatbotsStore.chatbots as chatbot}
+        {@const code = JSON.stringify(chatbot, null, 2)}
 
-      <div>
-        <!-- codebox -->
-        <CodeBox>
-          <!-- highlight -->
-          <Highlight language={jsonLang} code={code} />
+        <div>
+          <!-- codebox -->
+          <CodeBox>
+            <!-- highlight -->
+            <Highlight language={jsonLang} code={code} />
+
+            <!-- actions -->
+            <div slot="actions">
+              <Clipboard text={code} let:copy on:copy={() => info('Copied!', { duration: 800 })}>
+                <button type="button" ui-btn ui-btn-secondary on:click={copy}>
+                  <icon-carbon:copy ui-text-xl ui-mr-2 />
+                  Copiar
+                </button>
+              </Clipboard>
+            </div>
+          </CodeBox>
 
           <!-- actions -->
-          <div slot="actions">
-            <Clipboard text={code} let:copy on:copy={() => info('Copied!', { duration: 800 })}>
-              <button type="button" ui-btn ui-btn-secondary on:click={copy}>
-                <icon-carbon:copy ui-text-xl ui-mr-2 />
-                Copiar
-              </button>
-            </Clipboard>
+          <div ui-actions-group ui-mt-4>
+            <button type="button" ui-btn ui-btn-red on:click={() => handleDelete(chatbot.id)}>
+              <icon-carbon:trash-can ui-text-xl ui-mr-2 />
+              Delete
+            </button>
+            <a href="/channels/whatsapp" ui-btn ui-btn-blue on:click={() => chatbotsStore.selectChatbot(chatbot)}>
+              <icon-carbon:settings ui-text-xl ui-mr-2 />
+              Configure
+            </a>
           </div>
-        </CodeBox>
-
-        <!-- actions -->
-        <div ui-actions-group ui-mt-4>
-          <button type="button" ui-btn ui-btn-red on:click={() => handleDelete(chatbot.id)}>
-            <icon-carbon:trash-can ui-text-xl ui-mr-2 />
-            Delete
-          </button>
-          <a href="/channels/whatsapp" ui-btn ui-btn-blue on:click={() => chatbotsStore.selectChatbot(chatbot)}>
-            <icon-carbon:settings ui-text-xl ui-mr-2 />
-            Configure
-          </a>
         </div>
-      </div>
-    {/each}
-  </div>
+      {/each}
+    </div>
+  {:else}
+    <div class="flex flex-col items-center gap-4 mt-36">
+      <icon-material-symbols:inbox-outline-sharp ui-text-4xl ui-mr-2 />
+      <p>No chatbots were found for client {clientId}</p>
+    </div>
+  {/if}
 {:catch error}
   <p>Error: {error.message}</p>
 {/await}

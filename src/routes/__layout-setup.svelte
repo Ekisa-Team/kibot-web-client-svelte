@@ -6,8 +6,6 @@
 </script>
 
 <script lang="ts">
-  import Breadcrumb from '$lib/components/breadcrumb/Breadcrumb.svelte';
-  import type { BreadcrumbItems } from '$lib/components/breadcrumb/types';
   import Breakpoints from '$lib/components/Breakpoints.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import Navbar from '$lib/components/Navbar.svelte';
@@ -20,12 +18,6 @@
 
   // Application theme
   setupTheming();
-
-  const breadcrumbItems: BreadcrumbItems = [
-    { icon: 'icon-fa-solid:terminal', text: 'Applications', path: '/applications' },
-    { text: 'Chatbots', path: '/chatbots' },
-    { text: 'Messages' }
-  ];
 </script>
 
 <SvelteToast
@@ -37,7 +29,6 @@
 <div class="layout">
   <Navbar />
   <main class="container mx-auto w-full">
-    <Breadcrumb items={breadcrumbItems} />
     <slot />
   </main>
   <Footer />
