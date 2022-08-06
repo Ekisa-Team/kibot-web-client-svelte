@@ -2,15 +2,8 @@
   import { Theme } from '$lib/enums/theme';
   import { getTheme } from '$lib/services/theme';
   import { themeStore } from '$lib/stores/theme';
-  import { t } from '$lib/translations';
   import type { Datalist, DataListItem } from '$lib/types/datalist';
-  import {
-    Listbox,
-    ListboxButton,
-    ListboxOption,
-    ListboxOptions,
-    Transition
-  } from '@rgossiaux/svelte-headlessui';
+  import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@rgossiaux/svelte-headlessui';
 
   export let showThemeIcon = true;
   export let showThemeName = true;
@@ -18,17 +11,17 @@
   const themes: Datalist<Theme> = [
     {
       value: Theme.Light,
-      text: $t('layout.navbar.themePicker.light'),
+      text: 'Light',
       icon: 'icon-carbon:light text-xl'
     },
     {
       value: Theme.Dark,
-      text: $t('layout.navbar.themePicker.dark'),
+      text: 'Dark',
       icon: 'icon-carbon:moon text-xl'
     },
     {
       value: Theme.System,
-      text: $t('layout.navbar.themePicker.system'),
+      text: 'OS',
       icon: 'icon-carbon:screen text-xl'
     }
   ];

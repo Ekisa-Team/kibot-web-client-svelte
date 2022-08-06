@@ -54,10 +54,6 @@
     isLoaded = true;
   };
 
-  const handleComplete = (event: any) => {
-    console.log(event);
-  };
-
   /**
    * Replace parameter placeholders with the user input value
    * @param parameter parameter being edited at runtime

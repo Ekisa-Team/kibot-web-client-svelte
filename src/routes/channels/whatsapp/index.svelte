@@ -16,10 +16,7 @@
   let isDevModeEnabled = false;
 
   const fetchData = (chatbotId: number) => {
-    return Promise.all([
-      channelsStore.fetchChannel(chatbotId),
-      messagingProvidersStore.fetchMessagingProviders()
-    ]);
+    return Promise.all([channelsStore.fetchChannel(chatbotId), messagingProvidersStore.fetchMessagingProviders()]);
   };
 
   const handleDisconnect = (event: CustomEvent<Channel['id']>) => {
@@ -84,8 +81,8 @@
 
       <div slot="content" class="w-64">
         <span>
-          El modo desarrollo omite las validaciones de URL y le permite configurar el <strong
-            class="font-semibold">localhost</strong> como URL de retorno.
+          El modo desarrollo omite las validaciones de URL y le permite configurar el <strong class="font-semibold"
+            >localhost</strong> como webhook.
         </span>
       </div>
     </Tooltip>

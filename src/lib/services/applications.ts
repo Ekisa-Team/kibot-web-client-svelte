@@ -6,4 +6,7 @@ const BASE_URL = variables.kibotCoreApiUrl;
 
 const getApplications = async () => await http.get<ClientApplication[]>(`${BASE_URL}/client_applications`);
 
-export const applicationsService = { getApplications };
+const createApplication = async (client: ClientApplication) =>
+  await http.post<ClientApplication>(`${BASE_URL}/client_applications`, client);
+
+export const applicationsService = { getApplications, createApplication };

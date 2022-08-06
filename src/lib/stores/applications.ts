@@ -1,7 +1,7 @@
 import { browser } from '$app/env';
 import type { ClientApplication } from '$lib/models/app/client-application';
 import { applicationsService } from '$lib/services/applications';
-import { getItem, LocalStorageItem, setItem } from '$lib/utils/local-storage';
+import { getItem, LocalStorageItem, removeItem, setItem } from '$lib/utils/local-storage';
 import { writable } from 'svelte/store';
 
 type ClientApplicationsState = {
@@ -22,15 +22,25 @@ function createApplicationsStore() {
     set,
     update,
 
+    createApplication: async (client: ClientApplication) => {
+      update((state) => ({ ...state, loading: true }));
+      const response = await applicationsService.createApplication(client);
+      if (response?.data) {
+        update((state) => ({ ...state, loading: false, clients: [...state.clients, response.data] }));
+      } else {
+        update((state) => ({ ...state, loading: false }));
+      }
+      return response;
+    },
     fetchApplications: async () => {
       update((state) => ({ ...state, loading: true }));
       const response = await applicationsService.getApplications();
       update((state) => ({ ...state, loading: false, clients: response?.data || [] }));
     },
-    selectApplication(client: ClientApplication) {
+    selectApplication(client: ClientApplication | null) {
       if (browser) {
         update((state) => ({ ...state, selectedClient: client }));
-        setItem(LocalStorageItem.SelectedClientApp, client);
+        client ? setItem(LocalStorageItem.SelectedClientApp, client) : removeItem(LocalStorageItem.SelectedClientApp);
       }
     }
   };

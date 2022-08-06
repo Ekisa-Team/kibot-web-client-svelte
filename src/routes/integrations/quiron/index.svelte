@@ -250,7 +250,7 @@
 
       <!-- field -->
       <div class="form-item mt-6">
-        <label for="message">Message</label>
+        <label for="message">Mensaje</label>
         <textarea id="message" bind:value={$message.value} class="field max-h-[250px]" />
         <div class="flex py-2 text-sm">
           <span class:text-red-400={$message.value.length > 500}>{$message.value.length}</span>
@@ -259,7 +259,7 @@
         <ValidatorContainer field={$message} />
       </div>
 
-      <h5 class="h6 mt-6">Respuestas predefinidas</h5>
+      <h5 class="h6 mt-6">Sugerencias</h5>
       <div ui-flex ui-flex-wrap ui-gap-2>
         {#each selection.suggestions as suggestion}
           <button ui-btn ui-btn-secondary on:click={() => message.set(suggestion)}>
