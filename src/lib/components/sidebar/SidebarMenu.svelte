@@ -26,23 +26,3 @@
     </li>
   {/each}
 </ul>
-
-<style lang="postcss">
-  details[open] summary + div {
-    animation-name: sweep;
-    animation-duration: 200ms;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
-  }
-
-  @keyframes sweep {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>

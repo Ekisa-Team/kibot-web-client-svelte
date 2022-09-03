@@ -21,18 +21,21 @@
     setTimeout(() => {
       const menus = $sidebarStore.menus.map((menu) =>
         menu.map((menuItem) => {
+          console.log(item.name, menuItem.name);
           // Close other groups
           if (menuItem.name !== item.name) {
             return { ...menuItem, isDisclosed: false };
           }
 
-          return menuItem;
+          return { ...menuItem, isDisclosed: true };
         })
       );
 
+      console.log(menus);
+
       sidebarStore.update((state) => ({
         ...state,
-        isOpen: shouldCloseSidebar === false,
+        isOpen: !shouldCloseSidebar,
         menus
       }));
     });
